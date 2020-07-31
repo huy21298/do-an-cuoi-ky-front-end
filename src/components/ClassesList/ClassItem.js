@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,29 +12,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
 import classnames from "classnames";
-import clsx from 'clsx';
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      cursor: "pointer",
-      "&.disabled": {
-        opacity: ".3"
-      }
-    },
-    "loading-root": {
-      display: "flex",
-      alignItems: "center",
-    },
-    wrapper: {
-      margin: theme.spacing(1),
-      position: "relative",
-    },
-  })
-);
+
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
-  const history = useHistory();
-  const classes = useStyles();
   const [isLoadingLoadData, setIsLoadingLoadData] = useState(false);
 
   const goToClassRoomDetail = () => {
