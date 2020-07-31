@@ -1,0 +1,145 @@
+@import "./color.scss";
+
+.profile-page {
+  margin: {
+    top: 1.5em !important;
+    bottom: 1.8em !important;
+  }
+  padding: 20px;
+  max-width: 100%;
+  background: $light-color;
+  border-radius: 8px;
+}
+
+.profile-title {
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 2.25rem;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  word-break: break-word;
+  word-wrap: break-word;
+  color: #202124;
+  margin: 0 0 8px 0;
+  padding: 0;
+  text-align: center;
+}
+
+.profile {
+  &-detail {
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: {
+      left: 1.2em;
+      right: 1.2em;
+      bottom: 1.2em;
+    }
+    &-title {
+      flex-shrink: 0;
+      font-family: "Google Sans", Roboto, Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.5rem;
+      margin-block-start: 0.83em;
+      margin-block-end: 0.83em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+    }
+    &-item {
+      display: flex !important;
+      align-items: center;
+      padding: 15px 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:not(:last-child) {
+        border-bottom: 1px solid #dadce0;
+      }
+      &:hover {
+        background: rgba(187, 187, 187, 0.418);
+      }
+      h3 {
+        letter-spacing: 0.07272727em;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 0.7rem;
+        font-weight: 500;
+        line-height: 1rem;
+        text-transform: uppercase;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        word-break: break-word;
+        word-wrap: break-word;
+        color: #5f6368;
+        margin: 0;
+        width: 100%;
+      }
+      .profile-item-content {
+        letter-spacing: 0.00625em;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5rem;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        word-break: break-word;
+        word-wrap: break-word;
+        color: #202124;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+      .icon {
+        text-align: right;
+        color: #a09e9e;
+      }
+    }
+  }
+}
+
+.profile-item-edit {
+  input {
+    width: 100%;
+    margin-right: 10px;
+  }
+}
+
+.profile-detail-save {
+  margin-top: 1.1em;
+  text-align: right;
+}
+
+.avatar-upload {
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  &:hover > .icon-photo {
+    opacity: .85;
+  }
+  img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+  }
+  .icon-photo {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: rgb(131, 131, 131);
+    border-radius: 50%;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all .2s ease;
+    .icon {
+      opacity: .65;
+      font-size: 100px;
+    }
+  }
+}

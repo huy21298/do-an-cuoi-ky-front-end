@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,36 +11,67 @@ import GroupIcon from "@material-ui/icons/Group";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
-import Divider from '@material-ui/core/Divider';
-
+import Divider from "@material-ui/core/Divider";
+import classnames from "classnames";
+import clsx from 'clsx';
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       cursor: "pointer",
-    }
+      "&.disabled": {
+        opacity: ".3"
+      }
+    },
+    "loading-root": {
+      display: "flex",
+      alignItems: "center",
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: "relative",
+    },
   })
 );
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
   const history = useHistory();
   const classes = useStyles();
+  const [isLoadingLoadData, setIsLoadingLoadData] = useState(false);
 
   const goToClassRoomDetail = () => {
-    if (!isLoading) {
-      history.push(`/lop-hoc/bai-thi/${classItem._id}`);
-    }
+    console.log("test");
+    setIsLoadingLoadData(true);
   };
 
+  const classesLoader = {
+    loader: true,
+    active: isLoadingLoadData,
+  };
+
+  const classesItem = {
+    "class-item": true,
+    disabled: isLoadingLoadData
+  }
+
   return (
-    <Grid item xs={12} sm={6} md={3} lg={3} onClick={goToClassRoomDetail}>
-      <Card className={classes.root} elevation={2}>
+    <Grid item xs={12} sm={6} md={4} lg={4} onClick={goToClassRoomDetail}>
+      <Card className={classnames(classesItem)} elevation={2}>
         <CardHeader
           avatar={getAvatar(isLoading)}
           title={getTitle(isLoading)}
           subheader={getSubTitle(isLoading)}
         />
         <Divider />
-        <CardActions disableSpacing>{getButtonsAction(isLoading)}</CardActions>
+        <Grid container>
+          <Grid item md={10}>
+            <CardActions disableSpacing>
+              {getButtonsAction(isLoading)}
+            </CardActions>
+          </Grid>
+          <Grid item md={2} component="article" className="loading-wrapper">
+            <div className={classnames(classesLoader)}></div>
+          </Grid>
+        </Grid>
       </Card>
     </Grid>
   );

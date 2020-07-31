@@ -6,12 +6,11 @@
 
 .class-item {
   cursor: pointer;
-}
-
-.disabled {
-  opacity: .6 !important;
-  cursor: not-allowed;
-  pointer-events: none;
+  &.disabled {
+    opacity: .6 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }
 
 .loading-wrapper {

@@ -4,6 +4,8 @@ import Grid from "@material-ui/core/Grid";
 import ClassItem from "../components/ClassesList/ClassItem";
 import AxiosService from "../services/axios.service";
 
+import "../styles/class-room.scss";
+
 const classItem = {
   id: "",
   title: "",
@@ -12,8 +14,15 @@ const classItem = {
 };
 
 const ClassRoomPage = () => {
-  const [classes, setClasses] = useState([classItem]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [classes, setClasses] = useState([
+    classItem,
+    classItem,
+    classItem,
+    classItem,
+    classItem,
+    classItem,
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
   // useEffect(() => {
 
   //   (async function getClassRooms(): Promise<void> {
@@ -23,15 +32,19 @@ const ClassRoomPage = () => {
 
   // }, [])
   return (
-    <div className="class-room">
-      <Grid container spacing={5} className="grid-custom">
-        <Grid item xs={12}>
-          <Grid container spacing={6}>
-            {mapDataClasses(classes, isLoading)}
+    <Grid container className="class-room" component="section">
+      <Grid item md={2} />
+      <Grid item md={8}>
+        <Grid container spacing={5} className="grid-custom">
+          <Grid item xs={12}>
+            <Grid container spacing={6}>
+              {mapDataClasses(classes, isLoading)}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </div>
+      <Grid item md={2} />
+    </Grid>
   );
 };
 
