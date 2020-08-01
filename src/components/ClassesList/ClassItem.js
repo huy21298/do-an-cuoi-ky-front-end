@@ -22,19 +22,19 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
     setIsLoadingLoadData(true);
   };
 
-  const classesLoader = {
-    loader: true,
-    active: isLoadingLoadData,
-  };
+  // const classesLoader = {
+  //   loader: true,
+  //   active: isLoadingLoadData,
+  // };
 
-  const classesItem = {
-    "class-item": true,
-    disabled: isLoadingLoadData
-  }
+  // const classesItem = {
+  //   "class-item": true,
+  //   disabled: isLoadingLoadData
+  // }
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={4} onClick={goToClassRoomDetail}>
-      <Card className={classnames(classesItem)} elevation={2}>
+      <Card className="class-item" elevation={2}>
         <CardHeader
           avatar={getAvatar(isLoading)}
           title={getTitle(isLoading)}
@@ -47,9 +47,9 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
               {getButtonsAction(isLoading)}
             </CardActions>
           </Grid>
-          <Grid item md={2} component="article" className="loading-wrapper">
+          {/* <Grid item md={2} component="article" className="loading-wrapper">
             <div className={classnames(classesLoader)}></div>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Card>
     </Grid>

@@ -17,7 +17,7 @@ class AxiosService {
   }
 
   handleError(err) {
-    return Promise.reject(err);
+    return Promise.reject(err.response);
   }
 
   get(endpoint) {
@@ -25,7 +25,7 @@ class AxiosService {
   }
 
   post(endpoint, data) {
-
+    return this._instance.post(endpoint, data)
   }
 }
 

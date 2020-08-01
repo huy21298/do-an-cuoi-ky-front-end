@@ -14,6 +14,8 @@ import "../styles/common.scss";
 const ClassDetailPage = () => {
   // const { alias, id } = useParams();
   const alias = "bai-thi";
+  // const alias = "bai-tap";
+  // const alias = "danh-sach-sinh-vien";
   return (
     <Container className="class-detail">
       <ClassHeader />
