@@ -17,8 +17,6 @@ import {
 } from "../../actions/message-login.action";
 import { actGetLoading } from "../../actions/loading.action";
 
-import { actGetAuthenticate } from '../../actions/authenticate.action';
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -58,7 +56,6 @@ const useStyles = makeStyles((theme) =>
 const FormLogin = (props) => {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
-  const authenticate = useSelector((state) => state.authenticate);
   const errorMessages = useSelector((state) => state.messageLogin);
   const isLoading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
@@ -67,8 +64,7 @@ const FormLogin = (props) => {
     dispatch(actGetTokenFromLocal());
     dispatch(actGetMessages());
     dispatch(actGetLoading());
-    dispatch(actGetAuthenticate());
-  }, [authenticate]);
+  }, []);
 
   const handleSubmitLogin = (values) => {
     dispatch(actSetTokenToLocalReq(values));
@@ -86,7 +82,7 @@ const FormLogin = (props) => {
     <>
       <div className="title">Welcome</div>
       <div className="intro">
-        Đăng nhập để sử dụng <span className="title-logo">Navilearn</span>
+        Đăng nhập để tham gia <span className="title-logo">Navilearn</span>
       </div>
       <form action="" method="POST">
         <TextField

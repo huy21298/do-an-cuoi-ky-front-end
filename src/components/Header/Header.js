@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  fade,
-  makeStyles,
-  createStyles,
-} from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { fade, makeStyles, createStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -26,6 +22,10 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { TabsNavigation } from "./TabsNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpAddClass from "./PopUpAddClass";
+
+import { useSelector, useDispatch } from "react-redux";
+import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     drawerHeader: {
@@ -111,6 +111,15 @@ export default function Header() {
   const [state, setState] = React.useState(false);
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const displayTabNavigation = useSelector(
+    (state) => state.displayTabNavigation
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(actGetIsDisplayTab());
+  }, []);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -286,7 +295,7 @@ export default function Header() {
             </IconButton>
           </div>
         </Toolbar>
-        <TabsNavigation />
+        {displayTabNavigation && <TabsNavigation />}
       </AppBar>
       {renderMobileMenu}
       {renderMenu}

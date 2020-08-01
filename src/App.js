@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
+import Routes from "./routes";
+import { BrowserRouter as Router } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Header from './components/Header/Header';
-import LoginPage from './pages/LoginPage';
-import ClassesListPage from './pages/ClassesListPage';
-import ClassRoomPage from './pages/ClassRoomPage';
+
 
 import { actGetAuthenticate } from './actions/authenticate.action';
 
@@ -15,12 +15,12 @@ function App() {
     dispatch(actGetAuthenticate())
   }, [])
   return (
-    <div className="App">
-      {authenticate && <Header />}
-     <LoginPage />
-     {/* <ClassesListPage /> */}
-     {/* <ClassRoomPage /> */}
-    </div>
+    <Router>
+      <div className="App">
+        {authenticate && <Header />}
+        <Routes />
+      </div>
+    </Router>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
@@ -11,29 +11,19 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
-import classnames from "classnames";
-
+import { useDispatch } from "react-redux";
+import { actSetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
-  const [isLoadingLoadData, setIsLoadingLoadData] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const goToClassRoomDetail = () => {
-    console.log("test");
-    setIsLoadingLoadData(true);
+  const goToClassRoom = () => {
+    history.push(`/lop-hoc/1/bai-thi`);
   };
 
-  // const classesLoader = {
-  //   loader: true,
-  //   active: isLoadingLoadData,
-  // };
-
-  // const classesItem = {
-  //   "class-item": true,
-  //   disabled: isLoadingLoadData
-  // }
-
   return (
-    <Grid item xs={12} sm={6} md={4} lg={4} onClick={goToClassRoomDetail}>
+    <Grid item xs={12} sm={6} md={4} lg={4} onClick={goToClassRoom}>
       <Card className="class-item" elevation={2}>
         <CardHeader
           avatar={getAvatar(isLoading)}
@@ -47,9 +37,6 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
               {getButtonsAction(isLoading)}
             </CardActions>
           </Grid>
-          {/* <Grid item md={2} component="article" className="loading-wrapper">
-            <div className={classnames(classesLoader)}></div>
-          </Grid> */}
         </Grid>
       </Card>
     </Grid>
