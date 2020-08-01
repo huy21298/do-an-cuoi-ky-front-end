@@ -1,5 +1,3 @@
-import AxiosService from "../services/axios.service";
-
 export const GET_LOADING = "GET_LOADING";
 export const SET_LOADING = "SET_LOADING";
 

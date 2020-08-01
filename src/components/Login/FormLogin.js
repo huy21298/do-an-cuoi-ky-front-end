@@ -5,17 +5,19 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   actGetTokenFromLocal,
   actSetTokenToLocalReq,
-} from "../../actions/authenticate.action";
+} from "../../actions/token.action";
 import {
   actGetMessages,
   actSetMessages,
 } from "../../actions/message-login.action";
 import { actGetLoading } from "../../actions/loading.action";
+
+import { actGetAuthenticate } from '../../actions/authenticate.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -56,7 +58,6 @@ const useStyles = makeStyles((theme) =>
 const FormLogin = (props) => {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
-  // const [isLoading, setIsLoading] = React.useState(false);
   const authenticate = useSelector((state) => state.authenticate);
   const errorMessages = useSelector((state) => state.messageLogin);
   const isLoading = useSelector((state) => state.loading);
@@ -66,7 +67,8 @@ const FormLogin = (props) => {
     dispatch(actGetTokenFromLocal());
     dispatch(actGetMessages());
     dispatch(actGetLoading());
-  }, []);
+    dispatch(actGetAuthenticate());
+  }, [authenticate]);
 
   const handleSubmitLogin = (values) => {
     dispatch(actSetTokenToLocalReq(values));
@@ -78,7 +80,6 @@ const FormLogin = (props) => {
         },
       ])
     );
-    console.log('authenticate', authenticate)
   };
 
   return (

@@ -1,27 +1,27 @@
-import { GET_IS_AUTHENTICATE, SET_IS_AUTHENTICATE } from '../actions/authenticate.action';
+import { GET_TOKEN, SET_TOKEN } from '../actions/token.action';
 
-export const initLoading = false;
+export const initToken = {
+  token: "",
+  type: "Bearer",
+  expires: new Date(),
+  timeout: new Date(),
+};
 
-export const authenticateReducer = (state = initLoading, { type, authenticate }) => {
+export const tokenReducer = (state = initToken, { type, authenticate }) => {
   switch (type) {
-    case GET_IS_AUTHENTICATE: {
+    case GET_TOKEN: {
+      console.log('hello')
       state = getTokenFromLocal();
       return state;
     }
-    case SET_IS_AUTHENTICATE: {
-      state = authenticate;
+    case SET_TOKEN: {
+      setTokenToLocal(authenticate);
+      state = getTokenFromLocal();
       return state;
     }
     default:
       return state;
   }
-};
-
-const initToken = {
-  token: "",
-  type: "Bearer",
-  expires: new Date(),
-  timeout: new Date(),
 };
 
 const setTokenToLocal = (data) => {
@@ -40,8 +40,8 @@ const getTokenFromLocal = () => {
   const currentDate = new Date();
   const compareTwoDate = timeout.getTime() > currentDate.getTime();
   if (compareTwoDate) {
-    return true;
+    return authenticate;
   }
   setTokenToLocal(initToken);
-  return false;
+  return initToken;
 };

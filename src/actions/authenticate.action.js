@@ -1,26 +1,9 @@
-import AxiosService from "../services/axios.service";
-import { actSetMessages } from './message-login.action';
-import { actSetLoading } from './loading.action';
+export const GET_IS_AUTHENTICATE = "GET_IS_AUTHENTICATE";
+export const SET_IS_AUTHENTICATE = "SET_IS_AUTHENTICATE";
 
-export const GET_TOKEN = "GET_TOKEN";
-export const SET_TOKEN = "SET_TOKEN";
+export const actGetAuthenticate = () => ({ type: GET_IS_AUTHENTICATE });
 
-export const actGetTokenFromLocal = () => ({ type: GET_TOKEN });
-
-export const actSetTokenToLocal = (authenticate) => ({
-  type: SET_TOKEN,
+export const actSetAuthenticate = (authenticate) => ({
+  type: SET_IS_AUTHENTICATE,
   authenticate,
 });
-
-export const actSetTokenToLocalReq = (payload) => (dispatch) => {
-  dispatch(actSetLoading(true));
-  AxiosService.post("/v1/dang-nhap", payload)
-  .then((res) => {
-    dispatch(actSetTokenToLocal(res.data));
-    dispatch(actSetLoading(false));
-  })
-  .catch((error) => {
-    dispatch(actSetMessages(error.data.errors));
-    dispatch(actSetLoading(false));
-  });
-}
