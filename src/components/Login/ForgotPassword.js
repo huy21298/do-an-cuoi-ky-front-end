@@ -1,21 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
-import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 
-import {
-  actGetTokenFromLocal,
-  actSetTokenToLocalReq,
-} from "../../actions/token.action";
-import {
-  actGetMessages,
-  actSetMessages,
-} from "../../actions/message-login.action";
-import { actGetLoading, actSetLoading } from "../../actions/loading.action";
+import AxiosService from "../../services/axios.service";
 
 import "../../styles/forgot-pwd.scss";
 
@@ -55,51 +47,45 @@ export const useStyles = makeStyles((theme) =>
   })
 );
 
-const ForgotPassword = (props) => {
+const ForgotPassword = ({ changeForm }) => {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit, errors, setError } = useForm();
-  const errorMessages = useSelector((state) => state.messageLogin);
-  const isLoading = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    dispatch(actGetLoading());
-  }, []);
-
-  const handleSubmitLogin = (values) => {
-    dispatch(actSetTokenToLocalReq(values));
-    dispatch(
-      actSetMessages([
-        {
-          msg: "",
-          param: "",
-        },
-      ])
-    );
+  const handleSubmitSendMail = (values) => {
+    setIsLoading(true);
+    AxiosService.post("/v1/password/quen-mat-khau", values)
+      .then((res) => {
+        setIsLoading(false);
+        if (res.data.success) {
+          changeForm('send-mail')
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError("email", { message: error.data.msg });
+      });
   };
 
   return (
     <>
-      <div className="title forgot-pwd" style={{"marginTop": "60px"}}>Quên mật khẩu?</div>
+      <div className="title forgot-pwd" style={{ marginTop: "60px" }}>
+        Quên mật khẩu?
+      </div>
       <div className="intro">
         Vui lòng nhập email mà bạn đã đăng ký trước đó và kiểm tra hộp thư
       </div>
       <form action="" method="POST">
         <TextField
-          error={
-            errors.email?.message.length > 0 ||
-            errorMessages[0].param === "email"
-          }
+          error={errors.email?.message.length > 0}
           fullWidth
           label="Email"
           id="outlined-start-adornment"
           className={clsx(classes.margin, classes.marginBottom)}
           variant="outlined"
           name="email"
-          helperText={
-            errors.email?.message ||
-            (errorMessages[0].param === "email" && errorMessages[0].msg)
-          }
+          helperText={errors.email?.message}
           inputRef={register({
             required: "Email không để trống",
             pattern: {
@@ -116,9 +102,9 @@ const ForgotPassword = (props) => {
             size="large"
             color="primary"
             disableElevation
-            onClick={handleSubmit(handleSubmitLogin)}
+            onClick={handleSubmit(handleSubmitSendMail)}
             type="submit"
-            style={{"marginTop": "15px"}}
+            style={{ marginTop: "15px" }}
           >
             Tiếp tục
             <CircularProgress
@@ -132,7 +118,7 @@ const ForgotPassword = (props) => {
           </Button>
         </div>
         <footer className="footer-forgot-password">
-          Đăng nhập
+          <Link to="/dang-nhap">Đăng nhập</Link>
         </footer>
       </form>
     </>

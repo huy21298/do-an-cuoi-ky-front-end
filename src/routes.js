@@ -46,7 +46,7 @@ const routes = [
     render: () => <ForgotPwdPage />,
   },
   {
-    path: "/lam-moi-mat-khau/:code",
+    path: "/lam-moi-mat-khau/:code/:email",
     exact: true,
     authen: false,
     render: () => <ResetPwdPage />,
