@@ -43,7 +43,7 @@ class AxiosService {
   postAuth(endpoint, data, token) {
     return this._instance.post(endpoint, data, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
