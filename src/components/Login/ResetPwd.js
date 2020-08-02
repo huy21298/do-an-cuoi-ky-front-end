@@ -6,7 +6,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 import {
   actGetTokenFromLocal,
@@ -16,7 +15,9 @@ import {
   actGetMessages,
   actSetMessages,
 } from "../../actions/message-login.action";
-import { actGetLoading } from "../../actions/loading.action";
+import { actGetLoading, actSetLoading } from "../../actions/loading.action";
+
+import "../../styles/forgot-pwd.scss";
 
 export const useStyles = makeStyles((theme) =>
   createStyles({
@@ -54,7 +55,7 @@ export const useStyles = makeStyles((theme) =>
   })
 );
 
-const FormLogin = ({ changeForm }) => {
+const ResetPwd = (props) => {
   const classes = useStyles();
   const { register, handleSubmit, errors, setError } = useForm();
   const errorMessages = useSelector((state) => state.messageLogin);
@@ -62,23 +63,8 @@ const FormLogin = ({ changeForm }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actGetTokenFromLocal());
-    dispatch(actGetMessages());
     dispatch(actGetLoading());
   }, []);
-
-  useEffect(() => {
-    if (errorMessages[0].param === "email") {
-      setError("email", {
-        message: errorMessages[0].msg,
-      });
-    }
-    if (errorMessages[0].param === "mat_khau") {
-      setError("mat_khau", {
-        message: errorMessages[0].msg,
-      });
-    }
-  }, [errorMessages]);
 
   const handleSubmitLogin = (values) => {
     dispatch(actSetTokenToLocalReq(values));
@@ -94,20 +80,26 @@ const FormLogin = ({ changeForm }) => {
 
   return (
     <>
-      <div className="title">Welcome</div>
+      <div className="title forgot-pwd" style={{"marginTop": "20px"}}>Làm mới mật khẩu</div>
       <div className="intro">
-        Đăng nhập để tham gia <span className="title-logo">Navilearn</span>
+        Nhập mật khẩu mới để tiến hành làm mới mật khẩu
       </div>
       <form action="" method="POST">
         <TextField
-          error={errors.email?.message.length > 0}
+          error={
+            errors.email?.message.length > 0 ||
+            errorMessages[0].param === "email"
+          }
           fullWidth
           label="Email"
           id="outlined-start-adornment"
           className={clsx(classes.margin, classes.marginBottom)}
           variant="outlined"
           name="email"
-          helperText={errors.email?.message}
+          helperText={
+            errors.email?.message ||
+            (errorMessages[0].param === "email" && errorMessages[0].msg)
+          }
           inputRef={register({
             required: "Email không để trống",
             pattern: {
@@ -117,26 +109,28 @@ const FormLogin = ({ changeForm }) => {
           })}
         />
         <TextField
-          error={errors.mat_khau?.message.length > 0}
-          type="password"
+          error={
+            errors.email?.message.length > 0 ||
+            errorMessages[0].param === "email"
+          }
           fullWidth
-          label="Mật khẩu"
+          label="Email"
           id="outlined-start-adornment"
           className={clsx(classes.margin, classes.marginBottom)}
           variant="outlined"
-          name="mat_khau"
-          helperText={errors.mat_khau?.message}
+          name="email"
+          helperText={
+            errors.email?.message ||
+            (errorMessages[0].param === "email" && errorMessages[0].msg)
+          }
           inputRef={register({
-            required: "Mật khẩu không để trống",
-            minLength: { value: 6, message: "Mật khẩu tối thiểu 6 ký tự" },
-            maxLength: { value: 24, message: "Mật khẩu tối đa 24 ký tự" },
+            required: "Email không để trống",
+            pattern: {
+              value: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/,
+              message: "Email không đúng định dạng",
+            },
           })}
         />
-        <div className={clsx(classes.margin, "forgot-password")}>
-          <Link to="/quen-mat-khau" style={{ textDecoration: "none" }}>
-            Quên mật khẩu ?
-          </Link>
-        </div>
         <div className={classes.wrapper}>
           <Button
             disabled={isLoading}
@@ -147,8 +141,9 @@ const FormLogin = ({ changeForm }) => {
             disableElevation
             onClick={handleSubmit(handleSubmitLogin)}
             type="submit"
+            style={{"marginTop": "15px"}}
           >
-            Đăng nhập
+            Thay đổi mật khẩu
             <CircularProgress
               size={24}
               className={
@@ -159,9 +154,12 @@ const FormLogin = ({ changeForm }) => {
             />
           </Button>
         </div>
+        <footer className="footer-forgot-password">
+          Đăng nhập
+        </footer>
       </form>
     </>
   );
 };
 
-export default FormLogin;
+export default ResetPwd;

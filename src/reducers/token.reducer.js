@@ -10,7 +10,6 @@ export const initToken = {
 export const tokenReducer = (state = initToken, { type, authenticate }) => {
   switch (type) {
     case GET_TOKEN: {
-      console.log('hello')
       state = getTokenFromLocal();
       return state;
     }
@@ -24,7 +23,7 @@ export const tokenReducer = (state = initToken, { type, authenticate }) => {
   }
 };
 
-const setTokenToLocal = (data) => {
+export const setTokenToLocal = (data) => {
   const timeout = new Date();
   timeout.setSeconds(timeout.getSeconds() + data.expires);
   const authenticate = {
@@ -34,7 +33,7 @@ const setTokenToLocal = (data) => {
   localStorage.setItem("authenticate", JSON.stringify(authenticate));
 };
 
-const getTokenFromLocal = () => {
+export const getTokenFromLocal = () => {
   const authenticate = JSON.parse(localStorage.getItem("authenticate")) || initToken;
   const timeout = new Date(authenticate.timeout);
   const currentDate = new Date();

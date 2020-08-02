@@ -1,16 +1,7 @@
 import React, { FC, CSSProperties } from "react";
 
-interface BgProps {
-  background: string;
-  isMessage: boolean,
-  message: {
-    notice: string,
-    time?: string
-  }
-}
-
-const ClassRoomNotice: FC<BgProps> = ({ background, isMessage, message }: BgProps) => {
-  const bgLeftNotice: CSSProperties = {
+const ClassRoomNotice = ({ background, isMessage, message }: BgProps) => {
+  const bgLeftNotice = {
     background
   };
   return (

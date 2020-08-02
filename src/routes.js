@@ -1,46 +1,71 @@
-import React from 'react'
+import React from "react";
 
 import { Switch, Route } from "react-router-dom";
 
-import ClassesListPage from './pages/ClassesListPage';
-import ClassRoomPage from './pages/ClassRoomPage';
+import ClassesListPage from "./pages/ClassesListPage";
+import ClassRoomPage from "./pages/ClassRoomPage";
 // import ProfileStudentPage from './pages/ProfilePage';
 // import CountDownPage from './pages/CountDownPage';
 // import TheTestingPage from './pages/TestingPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from "./pages/LoginPage";
+import ForgotPwdPage from "./pages/ForgotPwdPage";
+import ResetPwdPage from "./pages/ResetPwdPage";
 
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 
 const routes = [
   {
     path: "/",
     exact: true,
-    render: () => <ClassesListPage />
+    authen: true,
+    render: () => <ClassesListPage />,
   },
   {
     path: "/lop-hoc/:id/:alias",
     exact: true,
-    render: () => <ClassRoomPage />
+    authen: true,
+    render: () => <ClassRoomPage />,
   },
   {
     path: "/danh-sach-lop-hoc",
     exact: true,
-    render: () => <ClassesListPage />
+    authen: true,
+    render: () => <ClassesListPage />,
   },
   {
     path: "/dang-nhap",
     exact: true,
-    render: () => <LoginPage />
-  }
+    authen: false,
+    render: () => <LoginPage />,
+  },
+  {
+    path: "/quen-mat-khau",
+    exact: true,
+    authen: false,
+    render: () => <ForgotPwdPage />,
+  },
+  {
+    path: "/lam-moi-mat-khau/:code",
+    exact: true,
+    authen: false,
+    render: () => <ResetPwdPage />,
+  },
 ];
 
-const showRoutes = ({ path, exact, render }, key) => (
-  <Route 
-    key={key} 
-    path={path} 
-    exact={exact} 
-    component={render} />
-);
+const showRoutes = ({ path, exact, render, authen }, key) => {
+  const RouteType = authen ? PrivateRoute : PublicRoute;
+  return (
+    <RouteType path={path} exact={exact} key={key}>
+      {render()}
+    </RouteType>
+  );
+};
 
 export default () => {
-  return <Switch>{routes.map(showRoutes)}</Switch>;
+  return (
+    <Switch>
+      {routes.map(showRoutes)}
+    </Switch>
+  );
 };

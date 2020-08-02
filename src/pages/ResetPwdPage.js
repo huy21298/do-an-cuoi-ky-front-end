@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import FormLogin from "../components/Login/FormLogin";
+import ResetPwd from "../components/Login/ResetPwd";
 import { actGetAuthenticate } from "../actions/authenticate.action";
 
 import "../styles/login-page.scss";
@@ -21,7 +21,7 @@ const LoginPage = () => {
     <Grid container className="login-page" component="article">
       <Grid item md={4} />
       <Grid item md={3} component="section" className="login-form">
-        <FormLogin />
+        <ResetPwd />
       </Grid>
       <Grid item md={4} />
     </Grid>

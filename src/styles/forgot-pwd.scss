@@ -1,0 +1,51 @@
+@import "./color.scss";
+
+.footer-forgot-password {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 15px 0;
+  border-top: 1px solid #c2c8d0;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  color: $primary-color;
+  &.send-mail {
+    color: black;
+    cursor: initial;
+    .recieve-mail {
+      color: $primary-color !important;
+      cursor: pointer;
+    }
+  }
+}
+
+.send-mail {
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    .description {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .icon-content {
+      text-align: center;
+      width: 100px;
+      height: 100px;
+      vertical-align: middle;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid $green-color;
+      border-radius: 50%;
+      .icon {
+        font-size: 60px;
+        color: $green-color;
+      }
+    }
+  }
+}

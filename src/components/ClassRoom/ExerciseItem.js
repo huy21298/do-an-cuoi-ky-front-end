@@ -34,13 +34,13 @@ const ClassRoomItem = ({ baiThi }) => {
           <div className="header-card"></div>
           <CardHeader
             avatar={<Avatar aria-label="recipe">R</Avatar>}
-            title="Bài tập Bài tập....."
-            subheader="22/22/20"
+            title="Bài tập về nhà 01"
+            subheader="31/07/2020"
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-              Bài thi hệ số 1 môn abc xyz, thời gian làm bài dự tính là
-              aaxxaaccasdasd
+              Bài tập nộp với định dạng <br />
+              MSSV - Họ tên
             </Typography>
           </CardContent>
           <Divider />

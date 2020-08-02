@@ -6,10 +6,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { useForm } from "react-hook-form";
 
 const PopUpAddClass = ({ open, onClosePopup }) => {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
+  const { register, handleSubmit, errors } = useForm();
   return (
     <div>
       <Dialog

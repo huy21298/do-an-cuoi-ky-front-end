@@ -2,31 +2,25 @@ import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 // import ClassItem from '../components/ClassesList/ClassItem';
 import ClassItem from "../components/ClassesList/ClassItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
+import { actGetClassesReq } from "../actions/classes.action";
+import { getTokenFromLocal } from '../reducers/token.reducer';
 
 import "../styles/class-room.scss";
 
-const classItem = {
-  id: "",
-  title: "",
-  teacherName: "",
-  avatar: "",
-};
+const classes1 = [{ a: "a"}];
 
 const ClassRoomPage = () => {
+  const classes = useSelector((state) => state.classes);
   const dispatch = useDispatch();
-  const [classes, setClasses] = useState([
-    classItem,
-    classItem,
-    classItem,
-    classItem,
-  ]);
+  const { token } = getTokenFromLocal();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    token.length > 0 && dispatch(actGetClassesReq(token));
     dispatch(actSetIsDisplayTab(false));
-  })
+  }, []);
 
   return (
     <Grid container className="class-room" component="section">
@@ -35,7 +29,7 @@ const ClassRoomPage = () => {
         <Grid container spacing={5} className="grid-custom">
           <Grid item xs={12}>
             <Grid container spacing={6}>
-              {mapDataClasses(classes, isLoading)}
+              {mapDataClasses(classes1, isLoading)}
             </Grid>
           </Grid>
         </Grid>

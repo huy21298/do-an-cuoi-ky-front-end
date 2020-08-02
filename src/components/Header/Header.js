@@ -266,8 +266,8 @@ export default function Header() {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-              <AddIcon onClick={onOpenPopup} />
+            <IconButton color="inherit" onClick={onOpenPopup}>
+              <AddIcon />
             </IconButton>
             <IconButton
               edge="end"

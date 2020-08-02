@@ -12,7 +12,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
 import { useDispatch } from "react-redux";
-import { actSetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
   const history = useHistory();
@@ -23,12 +22,13 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={4} onClick={goToClassRoom}>
+    <Grid item xs={12} sm={6} md={4} lg={4}>
       <Card className="class-item" elevation={2}>
         <CardHeader
           avatar={getAvatar(isLoading)}
           title={getTitle(isLoading)}
           subheader={getSubTitle(isLoading)}
+          onClick={goToClassRoom}
         />
         <Divider />
         <Grid container>

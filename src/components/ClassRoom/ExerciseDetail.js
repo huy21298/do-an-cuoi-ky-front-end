@@ -68,15 +68,13 @@ export default function ExerciseDetail({ open, handleClose }) {
                   <div className="sub-title">Tên giáo viên - ngày đăng</div>
                   <div className="sub-sub-title">
                     <div className="score">10 điểm</div>
-                    <div className="deadline">Đến hạn: 24 tháng 11, 2000</div>
+                    <div className="deadline">Đến hạn: 31 tháng 07, 2020</div>
                   </div>
                 </div>
                 <div className="border"></div>
                 <div className="content">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
-                  repellat vitae quo error pariatur ab modi, unde ipsam ut qui
-                  tempore, maxime accusantium alias totam dolorum nam corporis
-                  fugiat nulla.
+                Bài tập nộp với định dạng <br />
+              MSSV - Họ tên
                 </div>
               </Grid>
               <Grid item md={4}>

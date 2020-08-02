@@ -30,7 +30,7 @@ const ClassRoomItem = ({ baiThi }) => {
           <Avatar aria-label="recipe">
             R
           </Avatar>
-        } title="Bài thi Bài thi....." subheader="22/22/20" />
+        } title="Bài thi số 01" subheader="Ngày thi: 31/07/2020" />
         <CardActions disableSpacing>
           <Button size="large" color="primary">
             Đi đến bài thi
