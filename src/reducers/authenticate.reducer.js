@@ -36,6 +36,9 @@ const setTokenToLocal = (data) => {
 
 const getTokenFromLocal = () => {
   const authenticate = JSON.parse(localStorage.getItem("authenticate")) || initToken;
+  if (authenticate.token.length <= 0) {
+    return false;
+  }
   const timeout = new Date(authenticate.timeout);
   const currentDate = new Date();
   const compareTwoDate = timeout.getTime() > currentDate.getTime();

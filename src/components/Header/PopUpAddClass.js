@@ -9,6 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useForm } from "react-hook-form";
 
 import AxiosService from '../../services/axios.service';
+import {showToastSuccess} from '../../services/toast.service';
 import { getTokenFromLocal } from '../../reducers/token.reducer';
 
 const PopUpAddClass = ({ open, onClosePopup }) => {
@@ -16,7 +17,6 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
   const [maxWidth, setMaxWidth] = React.useState("sm");
   const [message, setMessage] = useState("Tham gia");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const { register, handleSubmit, errors, setError } = useForm();
 
   const token = getTokenFromLocal();
@@ -28,7 +28,11 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
       .then((response) => {
         setIsLoading(false);
         setMessage("Tham gia");
-        console.log('response', response);
+        const { success, msg } = response.data;
+        if (success) {
+          showToastSuccess({msg, position: "top-right", autoClose: 2000});
+          onClosePopup();
+        }
       })
       .catch((error) => {
         setIsLoading(false);
@@ -42,7 +46,7 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
     <div>
       <form action="" method="POST">
         <Dialog
-          open={true}
+          open={open}
           onClose={onClosePopup}
           aria-labelledby="form-dialog-title"
           fullWidth={fullWidth}

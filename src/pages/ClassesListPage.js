@@ -5,20 +5,16 @@ import ClassItem from "../components/ClassesList/ClassItem";
 import { useDispatch, useSelector } from "react-redux";
 import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
 import { actGetClassesReq } from "../actions/classes.action";
-import { getTokenFromLocal } from '../reducers/token.reducer';
 
 import "../styles/class-room.scss";
-
-const classes1 = [{ a: "a"}];
 
 const ClassRoomPage = () => {
   const classes = useSelector((state) => state.classes);
   const dispatch = useDispatch();
-  const { token } = getTokenFromLocal();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    token.length > 0 && dispatch(actGetClassesReq(token));
+    dispatch(actGetClassesReq());
     dispatch(actSetIsDisplayTab(false));
   }, []);
 
@@ -29,7 +25,7 @@ const ClassRoomPage = () => {
         <Grid container spacing={5} className="grid-custom">
           <Grid item xs={12}>
             <Grid container spacing={6}>
-              {mapDataClasses(classes1, isLoading)}
+              {mapDataClasses(classes, isLoading)}
             </Grid>
           </Grid>
         </Grid>
