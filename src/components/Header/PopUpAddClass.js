@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -7,37 +7,56 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
 
 import AxiosService from '../../services/axios.service';
-import {showToastSuccess} from '../../services/toast.service';
+import {showToastSuccess, showToastError} from '../../services/toast.service';
 import { getTokenFromLocal } from '../../reducers/token.reducer';
+import { actGetMessage } from '../../actions/error-message.action';
+import { actAddClass } from '../../actions/classes.action';
 
 const PopUpAddClass = ({ open, onClosePopup }) => {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState("sm");
-  const [message, setMessage] = useState("Tham gia");
+  const [messageBtn, setMessageBtn] = useState("Tham gia");
   const [isLoading, setIsLoading] = useState(false);
+  const errorMessage = useSelector(state => state.errorMessage);
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors, setError } = useForm();
 
   const token = getTokenFromLocal();
 
+  useEffect(() => {
+    dispatch(actGetMessage);
+  }, [])
+
+  useEffect(() => {
+    if (errorMessage.length > 0) {
+      showToastError("Có lỗi xảy ra, vui lòng thử lại sau")
+    }
+  }, [])
+
   const handleSubmitSendCode = (values) => {
     setIsLoading(true);
-    setMessage("Đang tải dữ liệu...");
+    setMessageBtn("Đang xác nhận mã...");
     AxiosService.postAuth("/v1/lop-hoc/tham-gia", values, token.token)
       .then((response) => {
+        const { lop_hoc } = response.data;
+        dispatch(actAddClass(lop_hoc));
         setIsLoading(false);
-        setMessage("Tham gia");
+        setMessageBtn("Tham gia");
+        console.log('response.data', response.data)
         const { success, msg } = response.data;
         if (success) {
-          showToastSuccess({msg, position: "top-right", autoClose: 2000});
+          showToastSuccess({msg});
           onClosePopup();
         }
       })
       .catch((error) => {
         setIsLoading(false);
-        setMessage("Tham gia");
+        setMessageBtn("Tham gia");
         if (error.status === 403) {
+          console.log('error', error);
           setError('code', { message: error.data.msg})
         }
       })
@@ -77,7 +96,7 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
                 type="submit"
                 color="primary"
               >
-                {message}
+                {messageBtn}
               </Button>
             <Button onClick={onClosePopup} color="primary">
               Hủy bỏ

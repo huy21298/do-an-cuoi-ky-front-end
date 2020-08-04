@@ -1,15 +1,14 @@
 import { GET_LOADING, SET_LOADING } from '../actions/loading.action';
 
-export const initLoading = false
+export const init = false
 
-export const loadingReducer = (state = initLoading, { type, loading }) => {
+export const loadingReducer = (state = init, { type, loading }) => {
   switch (type) {
     case GET_LOADING: {
       return state;
     }
     case SET_LOADING: {
-      state = loading;
-      return state;
+      return loading;
     }
     default:
       return state;

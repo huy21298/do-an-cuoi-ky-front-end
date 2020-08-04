@@ -5,17 +5,31 @@ import ClassItem from "../components/ClassesList/ClassItem";
 import { useDispatch, useSelector } from "react-redux";
 import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
 import { actGetClassesReq } from "../actions/classes.action";
+import { actGetLoading } from "../actions/loading.action";
+import { actGetMessage } from "../actions/error-message.action";
+
+import { showToastError } from '../services/toast.service';
 
 import "../styles/class-room.scss";
 
 const ClassRoomPage = () => {
   const classes = useSelector((state) => state.classes);
+  const loading = useSelector((state) => state.loading);
+  const errorMessage = useSelector((state) => state.errorMessage);
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-
+  console.log('classes', classes);
+  console.log('loading', loading);
   useEffect(() => {
+    dispatch(actGetLoading());
     dispatch(actGetClassesReq());
     dispatch(actSetIsDisplayTab(false));
+    dispatch(actGetMessage());
+  }, []);
+
+  useEffect(() => {
+    if (errorMessage.length > 0) {
+      showToastError(errorMessage);
+    }
   }, []);
 
   return (
@@ -25,7 +39,7 @@ const ClassRoomPage = () => {
         <Grid container spacing={5} className="grid-custom">
           <Grid item xs={12}>
             <Grid container spacing={6}>
-              {mapDataClasses(classes, isLoading)}
+              {mapDataClasses(classes, loading)}
             </Grid>
           </Grid>
         </Grid>
@@ -35,10 +49,10 @@ const ClassRoomPage = () => {
   );
 };
 
-const mapDataClasses = (classes, isLoading) => {
+const mapDataClasses = (classes, loading) => {
   if (classes.length <= 0) return [];
   return classes.map((item, index) => (
-    <ClassItem key={index} classItem={item} isLoading={isLoading} />
+    <ClassItem key={index} classItem={item} isLoading={loading} />
   ));
 };
 

@@ -15,20 +15,18 @@ import { useDispatch } from "react-redux";
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
-
-  const goToClassRoom = () => {
-    history.push(`/lop-hoc/1/bai-thi`);
+  const goToClassRoom = (id) => () => {
+    history.push(`/lop-hoc/${id}/bai-thi`);
   };
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={4}>
       <Card className="class-item" elevation={2}>
         <CardHeader
-          avatar={getAvatar(isLoading)}
-          title={getTitle(isLoading)}
-          subheader={getSubTitle(isLoading)}
-          onClick={goToClassRoom}
+          avatar={getAvatar(isLoading, classItem.danh_dai_dien)}
+          title={getTitle(isLoading, classItem.tieu_de_format)}
+          subheader={getSubTitle(isLoading, classItem.nguoi_tao_id.hoten)}
+          onClick={goToClassRoom(classItem.id)}
         />
         <Divider />
         <Grid container>
@@ -43,45 +41,45 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
   );
 };
 
-const getAvatar = (isLoading) => {
+const getAvatar = (isLoading, avatar) => {
   return isLoading ? (
     <Skeleton animation="wave" variant="circle" width={40} height={40} />
   ) : (
     <Avatar
       aria-label="recipe"
-      src="https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg"
+      src={avatar}
     />
   );
 };
 
-const getTitle = (isLoading) => {
+const getTitle = (isLoading, title) => {
   return isLoading ? (
     <Skeleton
       animation="wave"
-      height={10}
+      height={30}
       width="80%"
       style={{ marginBottom: 6 }}
     />
   ) : (
-    "Cấu trúc dữ liệu và thuật toán"
+    title
   );
 };
 
-const getSubTitle = (isLoading) => {
+const getSubTitle = (isLoading, teacherName) => {
   return isLoading ? (
-    <Skeleton animation="wave" height={10} width="40%" />
+    <Skeleton animation="wave" height={15} width="40%" />
   ) : (
-    "Vũ Đình Bảo"
+    teacherName
   );
 };
 
-const getButtonsAction = (isLoading) => {
+const getButtonsAction = (isLoading, _id) => {
   return isLoading ? (
     <React.Fragment>
-      <Skeleton animation="wave" height={15} width="15%" />
+      <Skeleton animation="wave" height={50} width="15%" />
       <Skeleton
         animation="wave"
-        height={15}
+        height={50}
         width="15%"
         style={{ marginLeft: 6 }}
       />

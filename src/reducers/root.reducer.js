@@ -5,6 +5,7 @@ import { loadingReducer as loading } from "./loading.reducer";
 import { authenticateReducer as authenticate} from './authenticate.reducer';
 import { displayTabNavigationReducer as displayTabNavigation} from './display-tab-navigation.reducer';
 import { classesReducer as classes} from './classes.reducer';
+import { errorMessageReducer as errorMessage } from './error-message.reducer';
 
 export default combineReducers({
   token,
@@ -12,5 +13,6 @@ export default combineReducers({
   loading,
   authenticate,
   displayTabNavigation,
-  classes
+  classes,
+  errorMessage
 });

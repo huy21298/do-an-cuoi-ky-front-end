@@ -11,7 +11,7 @@ export function showToastSuccess({ msg, position, autoClose }) {
   });
 }
 
-export function showToastError({ msg, position, autoClose }) {
+export function showToastError({ msg, position = "top-right", autoClose = 2000 }) {
   toast.error(msg, {
     position,
     autoClose,
