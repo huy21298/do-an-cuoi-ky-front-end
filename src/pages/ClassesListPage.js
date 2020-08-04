@@ -17,8 +17,6 @@ const ClassRoomPage = () => {
   const loading = useSelector((state) => state.loading);
   const errorMessage = useSelector((state) => state.errorMessage);
   const dispatch = useDispatch();
-  console.log('classes', classes);
-  console.log('loading', loading);
   useEffect(() => {
     dispatch(actGetLoading());
     dispatch(actGetClassesReq());

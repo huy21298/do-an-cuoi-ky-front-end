@@ -11,9 +11,9 @@ const ClassRoomItemsList = () => {
   const [tests, setTests] = useState([theTest]);
 
   useEffect(() => {
-    AxiosService.get(`/v1/lop-hoc/${"111"}/bai-thi`)
-      .then(({ data: response}) => setTests(response.data.dsBaiThi))
-      .catch((err) => console.log(err));
+    // AxiosService.get(`/v1/lop-hoc/${"111"}/bai-thi`)
+    //   .then(({ data: response}) => setTests(response.data.dsBaiThi))
+    //   .catch((err) => console.log(err));
   }, []);
 
   return (

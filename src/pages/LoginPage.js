@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import FormLogin from "../components/Login/FormLogin";
 import { actGetAuthenticate } from "../actions/authenticate.action";
@@ -11,12 +11,15 @@ import "../styles/login-page.scss";
 const LoginPage = () => {
   const authenticate = useSelector((state) => state.authenticate);
   const dispatch = useDispatch();
+  const { location } = useHistory();
+
+  console.log('history loginpage', location)
 
   useEffect(() => {
     dispatch(actGetAuthenticate());
   }, []);
   return authenticate ? (
-    <Redirect to="/danh-sach-lop-hoc" />
+    <Redirect to={location.state?.from?.pathname || "/"} />
   ) : (
     <Grid container className="login-page" component="article">
       <Grid item md={4} />

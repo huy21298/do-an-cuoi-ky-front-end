@@ -54,7 +54,7 @@ const routes = [
 ];
 
 const showRoutes = ({ path, exact, render, authen }, key) => {
-  const RouteType = authen ? PrivateRoute : PublicRoute;
+  const RouteType = authen ? PrivateRoute : Route;
   return (
     <RouteType path={path} exact={exact} key={key}>
       {render()}

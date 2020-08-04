@@ -14,12 +14,16 @@ function PrivateRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
-        authen ? (
-          children
-        ) : (
-          <Redirect to={{ pathname: "/dang-nhap", state: { from: location } }} />
-        )
+      render={({ location }) => {
+        console.log('children', children);
+        console.log('location', location);
+        console.log('authen', authen)
+          return authen ? (
+            children
+          ) : (
+            <Redirect to={{ pathname: "/dang-nhap", state: { from: location } }} />
+          )
+      }
       }
     />
   );

@@ -10,9 +10,9 @@ const ClassRoomItemsList = () => {
   const [exercises, setExercises] = useState([exercise]);
 
   useEffect(() => {
-    AxiosService.get(`/v1/lop-hoc/${"1"}/bai-thi`)
-      .then(({ data: response}) => setExercises(response.data.dsBaiThi))
-      .catch((err) => console.log(err));
+    // AxiosService.get(`/v1/lop-hoc/${"1"}/bai-thi`)
+    //   .then(({ data: response}) => setExercises(response.data.dsBaiThi))
+    //   .catch((err) => console.log(err));
   }, []);
 
   return (
