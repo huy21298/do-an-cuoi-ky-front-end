@@ -76,10 +76,14 @@ const ResetPwd = (props) => {
         }
       })
       .catch((error) => {
+        console.log('error :>> ', error);
         setIsLoading(false);
-        setMessage(error.data.errors[0].msg);
         setOpenDialog(true);
-        setMessage(error.data.errors[0].msg);
+        if (error.status === 403) {
+          setMessage(error.data.msg)
+        } else {
+          setMessage(error.data.errors[0].msg);
+        }
       });
   };
 

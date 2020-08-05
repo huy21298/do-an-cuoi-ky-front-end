@@ -16,6 +16,7 @@ const ClassRoomPage = () => {
   const classes = useSelector((state) => state.classes);
   const loading = useSelector((state) => state.loading);
   const errorMessage = useSelector((state) => state.errorMessage);
+  console.log('classes :>> ', classes);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actGetLoading());
