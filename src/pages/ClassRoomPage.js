@@ -17,9 +17,7 @@ import "../styles/common.scss";
 
 
 const ClassDetailPage = () => {
-  const { alias, id } = useParams();
-  console.log('alias', alias);
-  console.log('id', id);
+  const { alias } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actSetIsDisplayTab(true));

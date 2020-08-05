@@ -130,6 +130,11 @@ const FormLogin = ({ changeForm }) => {
             required: "Mật khẩu không để trống",
             minLength: { value: 6, message: "Mật khẩu tối thiểu 6 ký tự" },
             maxLength: { value: 24, message: "Mật khẩu tối đa 24 ký tự" },
+            pattern: {
+              value: /^(?=.*[0-9])(?=.*[A-Z]).{6,24}$/,
+              message:
+                "Mật khẩu tối thiểu 6 ký tự, tối đa 24 ký tự và có ít nhất một chữ viết hoa và số",
+            },
           })}
         />
         <div className={clsx(classes.margin, "forgot-password")}>

@@ -20,10 +20,9 @@ export function TabsNavigation() {
         onChange={handleChange}
         indicatorColor="secondary"
       >
-        <Tab label='Bài thi' component={Link} to="/lop-hoc/1/bai-thi" />
-        <Tab label='Bài tập' component={Link} to="/lop-hoc/1/bai-tap/" />
-        <Tab label='Bạn học cùng lớp' component={Link} to="/lop-hoc/1/danh-sach-sinh-vien" />
-        <Tab label='Thông tin cá nhân' component={Link} to="/lop-hoc/1/thong-tin" />
+        <Tab label='Bài thi' component={Link} to={`/lop-hoc/1/bai-thi`} />
+        <Tab label='Bài tập' component={Link} to={`/lop-hoc/1/bai-tap/`} />
+        <Tab label='Bạn học cùng lớp' component={Link} to={`/lop-hoc/1/danh-sach-sinh-vien`} />
       </Tabs>
     </>
   );

@@ -15,9 +15,6 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) => {
-        console.log('children', children);
-        console.log('location', location);
-        console.log('authen', authen)
           return authen ? (
             children
           ) : (

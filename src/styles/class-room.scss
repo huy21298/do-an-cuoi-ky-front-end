@@ -33,6 +33,22 @@
   }
 }
 
+.wrap-icon {
+  background: #b9b9b941;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.icon-exam {
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }

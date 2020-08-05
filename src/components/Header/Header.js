@@ -22,6 +22,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { TabsNavigation } from "./TabsNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpAddClass from "./PopUpAddClass";
+import { useParams } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
@@ -112,6 +113,9 @@ export default function Header() {
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const { id } = useParams();
+  console.log('id header', id)
+
   const displayTabNavigation = useSelector(
     (state) => state.displayTabNavigation
   );
@@ -171,8 +175,8 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Thông tin tài khoản</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Đăng xuất</MenuItem>
     </Menu>
   );
 

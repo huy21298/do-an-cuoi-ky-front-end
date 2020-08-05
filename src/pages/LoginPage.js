@@ -13,11 +13,10 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const { location } = useHistory();
 
-  console.log('history loginpage', location)
-
   useEffect(() => {
     dispatch(actGetAuthenticate());
   }, []);
+  
   return authenticate ? (
     <Redirect to={location.state?.from?.pathname || "/"} />
   ) : (

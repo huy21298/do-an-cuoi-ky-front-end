@@ -11,7 +11,6 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
-import { useDispatch } from "react-redux";
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
   const history = useHistory();

@@ -6,6 +6,10 @@ import { authenticateReducer as authenticate} from './authenticate.reducer';
 import { displayTabNavigationReducer as displayTabNavigation} from './display-tab-navigation.reducer';
 import { classesReducer as classes} from './classes.reducer';
 import { errorMessageReducer as errorMessage } from './error-message.reducer';
+import { examReducer as exam } from './exam.reducer';
+import { infoClassReducer as infoClass } from './info-class.reducer';
+import { scheduleReducer as schedule } from './schedule.reducer';
+import { exercisesReducer as exercises } from './exercises.reducer';
 
 export default combineReducers({
   token,
@@ -14,5 +18,9 @@ export default combineReducers({
   authenticate,
   displayTabNavigation,
   classes,
-  errorMessage
+  errorMessage,
+  exam,
+  infoClass,
+  schedule,
+  exercises
 });
