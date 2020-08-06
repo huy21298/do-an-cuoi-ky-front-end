@@ -23,12 +23,12 @@ export const actGetClassesReq = () => async (dispatch) => {
   } catch (error) {
     console.log('error', error);
     dispatch(actSetLoading(false));
-    if (error.status === 403) {
-      dispatch(actSetAuthenticate(false));
-      setTokenToLocal(initToken);
-      dispatch(actSetMessage(error?.data?.msg))
-    } else {
-      dispatch(actSetMessage(error?.data?.msg || error))
-    }
+    // if (error.status === 403) {
+    //   dispatch(actSetAuthenticate(false));
+    //   setTokenToLocal(initToken);
+    //   dispatch(actSetMessage(error?.data?.msg))
+    // } else {
+    //   dispatch(actSetMessage(error?.data?.msg || error))
+    // }
   }
 };

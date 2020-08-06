@@ -10,8 +10,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-// import { TransitionProps } from "@material-ui/core/transitions";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+
+import { useDispatch, useSelector } from 'react-redux';
+import {  } from '../../actions/info-class.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -32,9 +34,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ExerciseDetail({ open, handleClose }) {
+export default function ExerciseDetail({ open, handleClose, exercise }) {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const infoClass = useSelector(state => state.infoClass);
+  console.log('infoClass', infoClass);
   return (
     <div>
       <Dialog
@@ -54,7 +58,7 @@ export default function ExerciseDetail({ open, handleClose }) {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Tên lớp học
+              {infoClass.tieu_de}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -64,17 +68,16 @@ export default function ExerciseDetail({ open, handleClose }) {
             <Grid container spacing={4}>
               <Grid item md={8}>
                 <div className="header">
-                  <div className="title">Tiêu đề bài tập</div>
-                  <div className="sub-title">Tên giáo viên - ngày đăng</div>
+                  <div className="title">{exercise.tieu_de}</div>
+                  <div className="sub-title">{exercise.nguoi_tao_id?.hoten} - {exercise.createdAt}</div>
                   <div className="sub-sub-title">
-                    <div className="score">10 điểm</div>
-                    <div className="deadline">Đến hạn: 31 tháng 07, 2020</div>
+                    <div className="score">Đến hạn: {exercise.han_nop_bai}</div>
+                    <div className="deadline"></div>
                   </div>
                 </div>
                 <div className="border"></div>
                 <div className="content">
-                Bài tập nộp với định dạng <br />
-              MSSV - Họ tên
+                {exercise.noi_dung}
                 </div>
               </Grid>
               <Grid item md={4}>

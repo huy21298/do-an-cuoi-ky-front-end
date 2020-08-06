@@ -10,6 +10,7 @@ import { examReducer as exam } from './exam.reducer';
 import { infoClassReducer as infoClass } from './info-class.reducer';
 import { scheduleReducer as schedule } from './schedule.reducer';
 import { exercisesReducer as exercises } from './exercises.reducer';
+import { classIDReducer as classID } from './class-id.reducer';
 
 export default combineReducers({
   token,
@@ -22,5 +23,6 @@ export default combineReducers({
   exam,
   infoClass,
   schedule,
-  exercises
+  exercises,
+  classID
 });

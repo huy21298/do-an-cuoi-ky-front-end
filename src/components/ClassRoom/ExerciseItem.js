@@ -47,7 +47,7 @@ const ExerciseItem = ({ exercise, loading }) => {
           <Divider />
         </Card>
       </Grid>
-      <ExerciseDetail open={openExercise} handleClose={handleClose} />
+      <ExerciseDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
     </React.Fragment>
   );
 };

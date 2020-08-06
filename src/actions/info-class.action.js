@@ -1,6 +1,7 @@
 import AxiosService from "../services/axios.service";
 import { getTokenFromLocal } from "../reducers/token.reducer";
 import { actSetLoading } from "./loading.action";
+import { actSetIDClass } from "./class-id.action";
 
 export const GET_INFO = "GET_INFO";
 
@@ -17,6 +18,7 @@ export const actGetInfoClassReq = (id) => async (dispatch) => {
     );
     if (data.success) {
       dispatch(actGetInfoClass(data.lop_hoc));
+      dispatch(actSetIDClass(data.lop_hoc._id))
       dispatch(actSetLoading(false));
     }
   } catch {

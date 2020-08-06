@@ -4,7 +4,8 @@ export const init = [{
   _id: "",
   tieu_de: "",
   han_nop_bai: "",
-  noi_dung: ""
+  noi_dung: "",
+  anh_dai_dien: ""
 }]
 
 export const exercisesReducer = (state = init, { type, exercises }) => {

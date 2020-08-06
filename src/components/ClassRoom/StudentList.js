@@ -22,6 +22,28 @@ const ClassRoomNotice = () => {
           <article className="student-name">Nguyễn Thái Nhật Huy</article>
         </section>
       </Grid>
+      <Grid item md={6}>
+        <section className="student-item">
+          <article className="student-avatar">
+            <Avatar
+              src="https://www.w3schools.com/w3images/avatar6.png"
+              alt=""
+            />
+          </article>
+          <article className="student-name">Nguyễn Thái Nhật Huy</article>
+        </section>
+      </Grid>
+      <Grid item md={6}>
+        <section className="student-item">
+          <article className="student-avatar">
+            <Avatar
+              src="https://www.w3schools.com/w3images/avatar6.png"
+              alt=""
+            />
+          </article>
+          <article className="student-name">Nguyễn Thái Nhật Huy</article>
+        </section>
+      </Grid>
     </Grid>
   );
 };
