@@ -1,7 +1,7 @@
 const enviroment = {
   url: {
-    front_end: "http://localhost:3000",
-    back_end: "http://localhost:8000"
+    front_end: "https://navilearn-student-f.herokuapp.com/",
+    back_end: "https://navilearn-student-b.herokuapp.com/"
   }
 }
 
