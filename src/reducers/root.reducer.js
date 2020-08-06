@@ -11,6 +11,7 @@ import { infoClassReducer as infoClass } from './info-class.reducer';
 import { scheduleReducer as schedule } from './schedule.reducer';
 import { exercisesReducer as exercises } from './exercises.reducer';
 import { classIDReducer as classID } from './class-id.reducer';
+import { studentReducer as students } from './student.reducer';
 
 export default combineReducers({
   token,
@@ -24,5 +25,6 @@ export default combineReducers({
   infoClass,
   schedule,
   exercises,
-  classID
+  classID,
+  students
 });

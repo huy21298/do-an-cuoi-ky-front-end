@@ -1,4 +1,4 @@
-import { GET_STUDENTS } from '../actions/student.action.js';
+import { GET_STUDENTS } from '../actions/students.action.js';
 
 export const init = [{
   _id: "",
