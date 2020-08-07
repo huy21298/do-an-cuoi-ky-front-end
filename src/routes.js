@@ -49,7 +49,7 @@ const routes = [
   {
     path: "/bai-thi/:id",
     exact: true,
-    authen: false,
+    authen: true,
     render: () => <TestingPage />,
   },
 ];

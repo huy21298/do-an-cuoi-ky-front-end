@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import ReportIcon from '@material-ui/icons/Report';
 import SendIcon from '@material-ui/icons/Send';;
 
-const LeftSection = () => {
+const LeftSection = ({ questions }) => {
+  console.log('questions', questions)
   return (
     <div className="testing-page-left">
       <header className="header">
@@ -12,12 +13,7 @@ const LeftSection = () => {
       </header>
       <section className="body">
         <article className="question-list">
-          <a href="#q1" className="question-item">1</a>
-          <a href="#q2" className="question-item">1</a>
-          <a href="#q3" className="question-item">1</a>
-          <a href="#q4" className="question-item">1</a>
-          <a href="#q5" className="question-item">1</a>
-          
+          {loopQuestion(questions)}
         </article>
         <article className="button-group">
           <Button className="button send" startIcon={<SendIcon />}>Nộp bài</Button>
@@ -33,5 +29,9 @@ const LeftSection = () => {
     </div>
   );
 };
+
+const loopQuestion = questions => {
+  return questions.map((item, index) => <a href={`#q${index + 1}`} key={index} className="question-item">{index + 1}</a>)
+}
 
 export default LeftSection;

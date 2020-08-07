@@ -15,10 +15,6 @@ const TheTestingPage = () => {
     const dispatch = useDispatch();
     const examDetail = useSelector(state => state.examDetail);
     const { id } = useParams();
-    
-    console.log('id', id);
-
-    console.log('examDetail', examDetail)
 
     useEffect(() => {
         dispatch(actGetExamReq(id))
@@ -32,11 +28,11 @@ const TheTestingPage = () => {
     <Container component="section" className="testing-page">
       <Grid container component="section">
         <Grid item md={4} component="section">
-          <LeftSection />
+          <LeftSection time={examDetail.thoi_gian_thi} questions={examDetail.ds_cau_hoi} />
         </Grid>
 
         <Grid item md={8} component="section">
-          <RightSection />
+          <RightSection exam={examDetail} />
         </Grid>
       </Grid>
     </Container>

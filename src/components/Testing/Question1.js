@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AnswereItem from './AnswereItem';
 
-const Question = () => {
+const Question1 = ({ question, index }) => {
+    console.log('question', question)
+    const [currentQuestion, setcurrentQuestion] = useState(-1);
     return (
-        <section className="question-item" id="q1">
+        <section className="question-item" id={`q${index}`}>
             <div className="title">
                 <span className="question-number">Câu 1:</span>
                 <span className="score">(30đ)</span>
@@ -16,13 +18,16 @@ const Question = () => {
             </span>
             </div>
             <section className="answere type1">
-                <AnswereItem />
-                <AnswereItem />
-                <AnswereItem />
-                <AnswereItem />
+                {mapAnswere(question.cau_hoi_id.lua_chon)}
             </section>
         </section>
     )
 }
 
-export default Question;
+const mapAnswere = answeres => {
+    return answeres.map((item, index) => {
+        return <AnswereItem answere={item} key={index} />
+    })
+}
+
+export default Question1;
