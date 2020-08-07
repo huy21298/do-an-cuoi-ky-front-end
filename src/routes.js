@@ -10,6 +10,7 @@ import ClassRoomPage from "./pages/ClassRoomPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPwdPage from "./pages/ForgotPwdPage";
 import ResetPwdPage from "./pages/ResetPwdPage";
+import TestingPage from "./pages/TestingPage";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -46,10 +47,10 @@ const routes = [
     render: () => <ForgotPwdPage />,
   },
   {
-    path: "/lam-moi-mat-khau/:code/:email",
+    path: "/bai-thi/:id",
     exact: true,
     authen: false,
-    render: () => <ResetPwdPage />,
+    render: () => <TestingPage />,
   },
 ];
 

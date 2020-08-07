@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) =>
 const ClassRoomItem = ({ exam, loading }) => {
   const history = useHistory();
   const classes = useStyles();
+  console.log('exam', exam)
   const onRedirectToTesting = () => {
-    // history.push("/bai-thi/2");
+    history.push(`/bai-thi/${exam._id}`)
   };
   return (
     <Grid item xs={12} sm={12} md={4} lg={4} onClick={onRedirectToTesting}>
