@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import AnswereItem from './AnswereItem';
+import { actSetExamSend } from "../../actions/send-exam.action";
+import AnswereItem from "./AnswereItem";
 
 const Question1 = ({ question, index }) => {
-    console.log('question', question)
-    const [currentQuestion, setcurrentQuestion] = useState(-1);
-    return (
-        <section className="question-item" id={`q${index}`}>
-            <div className="title">
-                <span className="question-number">Câu 1:</span>
-                <span className="score">(30đ)</span>
-                <span className="content">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas sed
-                    est ullam. Id, magni placeat mollitia quod earum voluptatibus
-                    consequuntur? Tempore dignissimos velit corporis eaque quidem ut
-                    animi nemo amet.
-            </span>
-            </div>
-            <section className="answere type1">
-                {mapAnswere(question.cau_hoi_id.lua_chon)}
-            </section>
-        </section>
-    )
-}
+  const dispatch = useDispatch();
+  const [currentQuestion, setcurrentQuestion] = useState("");
+  const tick = (dap_an_id) => (e) => {
+    setcurrentQuestion(dap_an_id);
+    const sendQuestion = {
+      cau_hoi_id: question.cau_hoi_id._id,
+      loai: question.loai,
+      dap_an: dap_an_id,
+    };
+    dispatch(actSetExamSend(sendQuestion));
+  };
+  return (
+    <section className="question-item" id={`q${index}`}>
+      <div className="title">
+        <span className="question-number">Câu {index}:</span>
+        <span className="score">({question.cau_hoi_id.diem} điểm)</span>
+        <span className="content">{question.cau_hoi_id.noi_dung}</span>
+      </div>
+      <section className="answere type1">
+        {mapAnswere(question.cau_hoi_id.lua_chon, tick, currentQuestion)}
+      </section>
+    </section>
+  );
+};
 
-const mapAnswere = answeres => {
-    return answeres.map((item, index) => {
-        return <AnswereItem answere={item} key={index} />
-    })
-}
+const mapAnswere = (answeres, tick, currentQuestion) => {
+  return answeres.map((item, index) => {
+    return (
+      <AnswereItem
+        answere={item}
+        tick={tick}
+        key={index}
+        currentQuestion={currentQuestion}
+      />
+    );
+  });
+};
 
 export default Question1;

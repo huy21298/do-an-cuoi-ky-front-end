@@ -52,6 +52,12 @@ const routes = [
     authen: true,
     render: () => <TestingPage />,
   },
+  {
+    path: "/thong-tin-ca-nhan/:id",
+    exact: true,
+    authen: true,
+    render: () => <TestingPage />,
+  },
 ];
 
 const showRoutes = ({ path, exact, render, authen }, key) => {

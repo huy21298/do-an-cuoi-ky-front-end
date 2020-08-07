@@ -26,6 +26,7 @@ import { useParams } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
+import { actGetInfo, actSetInfoReq } from "../../actions/info.action";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -112,17 +113,18 @@ export default function Header() {
   const [state, setState] = React.useState(false);
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const { id } = useParams();
-  console.log('id header', id)
+  const dispatch = useDispatch();
 
   const displayTabNavigation = useSelector(
     (state) => state.displayTabNavigation
   );
-  const dispatch = useDispatch();
+  const info = useSelector(state => state.info);
+
+    console.log('info', info)
 
   useEffect(() => {
     dispatch(actGetIsDisplayTab());
+    dispatch(actSetInfoReq())
   }, []);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -181,7 +183,7 @@ export default function Header() {
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
+  const renderMobileMenu = avatar => (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -205,7 +207,7 @@ export default function Header() {
         >
           <Avatar
             className="avatar-custom"
-            src="https://i.pinimg.com/236x/3c/25/fe/3c25fe16eeba1633e6fe3fc5e12b4445.jpg"
+            src={avatar}
           />
         </IconButton>
         <p>Profile</p>
@@ -283,7 +285,7 @@ export default function Header() {
             >
               <Avatar
                 className="avatar-custom"
-                src="https://i.pinimg.com/236x/3c/25/fe/3c25fe16eeba1633e6fe3fc5e12b4445.jpg"
+                src={info.anh_dai_dien}
               />
             </IconButton>
           </div>
@@ -301,7 +303,7 @@ export default function Header() {
         </Toolbar>
         {displayTabNavigation && <TabsNavigation />}
       </AppBar>
-      {renderMobileMenu}
+      {renderMobileMenu(info.anh_dai_dien)}
       {renderMenu}
       <PopUpAddClass open={openPopup} onClosePopup={onClosePopup} />
     </div>

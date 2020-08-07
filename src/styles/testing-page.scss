@@ -1,5 +1,9 @@
 @import "./color.scss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .upper-case {
   text-transform: uppercase;
 }

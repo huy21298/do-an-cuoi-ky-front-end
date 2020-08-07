@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-const AnswereItem = () => {
-  const [tick, setTick] = useState(false);
-  const onTick = () => {
-    setTick(true);
-  };
-  const onUnTick = () => {
-    setTick(false);
-  };
+
+
+const AnswereItem = ({ answere, tick, currentQuestion }) => {
   return (
     <div className="answere-item">
       <span className="tick-icon">
-        {!tick && (
-          <RadioButtonUncheckedIcon className="un-tick" onClick={onTick} />
+        {currentQuestion === answere.id ? (
+          <CheckCircleOutlineIcon className="tick" onClick={tick(answere.id)} />
+        ) : (
+          <RadioButtonUncheckedIcon
+            className="un-tick"
+            onClick={tick(answere.id)}
+          />
         )}
-        {tick && <CheckCircleOutlineIcon className="tick" onClick={onUnTick} />}
       </span>
-      <span className="content">Guido Van rossum</span>
+      <span className="content">{answere.label}</span>
     </div>
   );
 };

@@ -20,15 +20,11 @@ const TheTestingPage = () => {
         dispatch(actGetExamReq(id))
     }, []);
 
-    useEffect(() => {
-        console.log('examDetail', examDetail)
-    }, [examDetail])
-
   return (
     <Container component="section" className="testing-page">
       <Grid container component="section">
         <Grid item md={4} component="section">
-          <LeftSection time={examDetail.thoi_gian_thi} questions={examDetail.ds_cau_hoi} />
+          <LeftSection time={examDetail.thoi_gian_thi} date={examDetail.ngay_thi} questions={examDetail.ds_cau_hoi} />
         </Grid>
 
         <Grid item md={8} component="section">

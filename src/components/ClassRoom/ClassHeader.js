@@ -23,7 +23,6 @@ const ClassRoomHeader = () => {
   const { id } = useParams();
   const infoClass = useSelector((state) => state.infoClass);
   const loading = useSelector((state) => state.loading);
-  console.log("infoClass", infoClass);
   useEffect(() => {
     dispatch(actGetInfoClassReq(id));
   }, []);

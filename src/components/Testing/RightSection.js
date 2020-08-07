@@ -7,6 +7,18 @@ import Question1 from "./Question1";
 import Question2 from "./Question2";
 
 const RightSection = ({ exam }) => {
+
+  const [examSend, setExamSend] = useState([]);
+
+  const handleExamSend = (exam) => {
+    const index = findIndex(exam._id, examSend);
+    if (index === -1) {
+      setExamSend([...examSend, exam])
+    } else {
+      
+    }
+  }
+
   return (
     <div className="testing-page-right">
       <Grid container className="header">
@@ -27,17 +39,19 @@ const RightSection = ({ exam }) => {
         <Grid item md={1} />
       </Grid>
       <section className="body">
-        {mapQuestions(exam.ds_cau_hoi)}
+        {mapQuestions(exam.ds_cau_hoi, handleExamSend)}
       </section>
     </div>
   );
 };
 
-const mapQuestions = (questions) => {
+const mapQuestions = (questions, handleExamSend) => {
   return questions.map((item, index) => {
     const Question = item.loai === "TracNghiem" ? Question1 : Question2
-    return <Question question={item} key={index} index={index + 1} />
+    return <Question question={item} key={index} handleExamSend={handleExamSend} index={index + 1} />
   })
 }
+
+const findIndex = (id, exam) =>  exam.findIndex(item => item.cau_hoi_id === id);
 
 export default RightSection;
