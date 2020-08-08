@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ClassRoomItem = ({ exam, loading }) => {
+const ExamItemFinish = ({ exam, loading }) => {
   const history = useHistory();
   const { id } = useParams();
   const classes = useStyles();
   const onRedirectToTesting = () => {
-    history.push(`/${id}/bai-thi/${exam._id}`)
+    history.push(`/${id}/bai-thi-hoan-thanh/${exam._id}`)
   };
   return (
     <Grid item xs={12} sm={12} md={4} lg={4} onClick={onRedirectToTesting}>
@@ -81,4 +81,4 @@ const getBtnAction = (loading) => {
   );
 };
 
-export default ClassRoomItem;
+export default ExamItemFinish;

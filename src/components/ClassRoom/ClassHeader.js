@@ -22,7 +22,7 @@ const ClassRoomHeader = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const infoClass = useSelector((state) => state.infoClass);
-  const loading = useSelector((state) => state.loading);
+  const loadingHeader = useSelector((state) => state.loadingHeader);
   useEffect(() => {
     dispatch(actGetInfoClassReq(id));
   }, []);
@@ -32,13 +32,13 @@ const ClassRoomHeader = () => {
       <Grid item lg={3} />
       <Grid item xs={12} sm={12} md={12} lg={9}>
         <section className="class-detail-header">
-          {getAvatar(loading, infoClass.nguoi_tao_id.anh_dai_dien, classes)}
+          {getAvatar(loadingHeader, infoClass.nguoi_tao_id.anh_dai_dien, classes)}
           <section className="class-detail-summary">
             <article className="class-detail-title">
-              {getTitle(loading, infoClass.tieu_de)}
+              {getTitle(loadingHeader, infoClass.tieu_de)}
             </article>
             <article className="class-detail-teacher-name">
-              {getTeacherName(loading, infoClass.nguoi_tao_id.hoten)}
+              {getTeacherName(loadingHeader, infoClass.nguoi_tao_id.hoten)}
             </article>
           </section>
         </section>

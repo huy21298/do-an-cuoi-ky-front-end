@@ -1,4 +1,4 @@
-import { GET_EXAM } from '../actions/exam.action';
+import { GET_EXAM, GET_EXAM_FINISH } from '../actions/exam.action';
 
 export const init = [{
   _id: "",
@@ -18,6 +18,9 @@ export const examReducer = (state = init, { type, exam }) => {
   switch (type) {
     case GET_EXAM: {
       return exam;
+    }
+    case GET_EXAM_FINISH: {
+      return exam
     }
     default:
       return state;

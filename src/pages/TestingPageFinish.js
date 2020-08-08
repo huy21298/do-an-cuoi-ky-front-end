@@ -27,46 +27,26 @@ const getDate = (time) => {
   return { days, hours, minutes, seconds };
 };
 
-const TheTestingPage = () => {
+const TestingPageFinish = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const examDetail = useSelector((state) => state.examDetail);
-  const errorTest = useSelector((state) => state.errorTest);
-  const [date, setDate] = useState(getDate(errorTest?.time || 0));
-  const [confirm, setConfirm] = useState(false);
   const { bai_thi_id, lop_hoc_id } = useParams();
 
   useEffect(() => {
     dispatch(actGetExamReq(bai_thi_id));
     dispatch(actGetCode());
-
-    errorTest.time && setDate(errorTest.time);
   }, []);
-
-  const directToTesting = e => {
-    setConfirm(true);
-  }
-
-  const cancel = e => {
-    history.goBack();
-  }
 
   return (
     <Container component="section" className="testing-page">
-      {errorTest.code === "SOON" && <div>SOON {date.seconds}</div>}
-      {errorTest.code === "LEFT" && <div>LEFT</div>}
-
-      {errorTest.code === "NONE" && confirm && (
-        <Testing
-          time={examDetail.thoi_gian_thi}
-          date={examDetail.ngay_thi_format}
-          questions={examDetail.ds_cau_hoi}
-          exam={examDetail}
-        />
-      )}
-      {errorTest.code === "NONE" && !confirm && <Confirm directToTesting={directToTesting} cancel={cancel} />}
+      <Testing
+        time={examDetail.thoi_gian_thi}
+        date={examDetail.ngay_thi_format}
+        questions={examDetail.ds_cau_hoi}
+        exam={examDetail}
+      />
     </Container>
   );
 };
 
-export default TheTestingPage;
+export default TestingPageFinish;

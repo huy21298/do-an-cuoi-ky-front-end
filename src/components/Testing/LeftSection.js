@@ -17,7 +17,7 @@ import DialogMessage from "../DialogMessage";
 
 const LeftSection = ({ questions, date }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { lop_hoc_id, bai_thi_id } = useParams();
   const info = useSelector((state) => state.info);
   const sendExam = useSelector((state) => state.sendExam);
   const { token } = getTokenFromLocal();
@@ -30,6 +30,7 @@ const LeftSection = ({ questions, date }) => {
     dispatch(actSetInfoReq());
     dispatch(actGetExamSend());
     dispatch(actGetIDClass());
+    console.log('lop_hoc_id', lop_hoc_id)
   }, []);
 
   const sendToExam = async (e) => {
@@ -44,11 +45,13 @@ const LeftSection = ({ questions, date }) => {
     } else {
       setLoading(true);
       const sendData = {
-        bai_thi_id: id,
+        bai_thi_id,
         sinh_vien_id: info._id,
+        lop_hoc_id,
         bai_thi_sinh_vien: sendExam,
       };
       const jsonData = JSON.stringify(sendData);
+      console.log('sendData', sendData)
       try {
         const { data } = await AxiosService.postAuth(
           "/v1/bai-thi/nop-bai",

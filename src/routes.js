@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import ForgotPwdPage from "./pages/ForgotPwdPage";
 import ResetPwdPage from "./pages/ResetPwdPage";
 import TestingPage from "./pages/TestingPage";
+import TestingPageFinish from "./pages/TestingPageFinish";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -47,10 +48,16 @@ const routes = [
     render: () => <ForgotPwdPage />,
   },
   {
-    path: "/bai-thi/:id",
+    path: "/:lop_hoc_id/bai-thi/:bai_thi_id",
     exact: true,
     authen: true,
     render: () => <TestingPage />,
+  },
+  {
+    path: "/:lop_hoc_id/bai-thi-hoan-thanh/:bai_thi_id",
+    exact: true,
+    authen: true,
+    render: () => <TestingPageFinish />,
   },
   {
     path: "/thong-tin-ca-nhan/:id",

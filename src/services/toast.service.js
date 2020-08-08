@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export function showToastSuccess({ msg, position, autoClose }) {
+export function showToastSuccess(msg, position = "top-right", autoClose = 2000) {
   toast.success(msg, {
     position,
     autoClose,
@@ -11,7 +11,7 @@ export function showToastSuccess({ msg, position, autoClose }) {
   });
 }
 
-export function showToastError({ msg, position = "top-right", autoClose = 2000 }) {
+export function showToastError(msg, position = "top-right", autoClose = 2000) {
   toast.error(msg, {
     position,
     autoClose,

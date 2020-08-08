@@ -32,7 +32,7 @@ const ClassRoomNotice = () => {
             isMessage={false}
             message={{
               notice: schedule[0].tieu_de,
-              time: schedule[0].ngay_thi,
+              time: schedule[0].ngay_thi_format,
             }}
           />
           <div className="mb-2" />
@@ -41,7 +41,7 @@ const ClassRoomNotice = () => {
             isMessage={false}
             message={{
               notice: schedule[1]?.tieu_de || "",
-              time: schedule[1]?.han_nop_bai || "",
+              time: schedule[1]?.han_nop_bai_format || "",
             }}
           />
         </section>

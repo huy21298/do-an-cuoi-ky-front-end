@@ -259,5 +259,15 @@
       background: $primary-color;
       color: $light-color;
     }
+    &.active {
+      cursor: not-allowed;
+      opacity: .6;
+    }
   }
+}
+
+.fab-filter {
+  right: 51px;
+  position: fixed !important;
+  bottom: 30px;
 }
