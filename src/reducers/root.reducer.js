@@ -15,6 +15,7 @@ import { studentReducer as students } from './student.reducer';
 import { examDetailReducer as examDetail } from './exam-detail.reducer';
 import { sendExamReducer as sendExam } from './send-exam.reducer';
 import { infoReducer as info } from './info.reducer';
+import { errorTestReducer as errorTest } from './error-test.reducer';
 
 export default combineReducers({
   token,
@@ -32,5 +33,6 @@ export default combineReducers({
   students,
   examDetail,
   sendExam,
-  info
+  info,
+  errorTest
 });

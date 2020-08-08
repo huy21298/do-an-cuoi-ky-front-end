@@ -68,10 +68,10 @@ html {
           &.send {
             border: 1px solid $red-color;
             color: $red-color;
-            &:hover {
-              background: $red-color;
-              color: $light-color
-            }
+          }
+          &.loading {
+            opacity: .4;
+            cursor: not-allowed;
           }
           &.report {
             border: 1px solid $yellow-color;

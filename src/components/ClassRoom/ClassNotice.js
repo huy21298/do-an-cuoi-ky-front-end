@@ -51,7 +51,6 @@ const ClassRoomNotice = () => {
 };
 
 const mapNotice = schedules => {
-  console.log('schedule', schedules);
   return schedules.map((item, index) => <ClassRoomNoticeClassList message={item} isMessage={false} key={index} />)
 }
 

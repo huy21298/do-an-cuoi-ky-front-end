@@ -76,7 +76,6 @@ const ResetPwd = (props) => {
         }
       })
       .catch((error) => {
-        console.log('error :>> ', error);
         setIsLoading(false);
         setOpenDialog(true);
         if (error.status === 403) {

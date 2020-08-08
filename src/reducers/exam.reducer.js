@@ -4,6 +4,7 @@ export const init = [{
   _id: "",
   tieu_de: "",
   ngay_thi: "00/00/00",
+  ngay_thi_format: "",
   nguoi_tao_id: {
     _id: "",
     anh_dai_dien: "",

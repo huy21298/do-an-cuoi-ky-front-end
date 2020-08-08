@@ -8,7 +8,9 @@ import { actGetClassesReq } from "../actions/classes.action";
 import { actGetLoading } from "../actions/loading.action";
 import { actGetMessage } from "../actions/error-message.action";
 
-import { showToastError } from '../services/toast.service';
+import { showToastError, showToastSuccess } from '../services/toast.service';
+
+import { toast } from 'react-toastify';
 
 import "../styles/class-room.scss";
 
@@ -16,7 +18,6 @@ const ClassRoomPage = () => {
   const classes = useSelector((state) => state.classes);
   const loading = useSelector((state) => state.loading);
   const errorMessage = useSelector((state) => state.errorMessage);
-  console.log('classes :>> ', classes);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actGetLoading());

@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) =>
 const ClassRoomItem = ({ exam, loading }) => {
   const history = useHistory();
   const classes = useStyles();
-  console.log('exam', exam)
   const onRedirectToTesting = () => {
     history.push(`/bai-thi/${exam._id}`)
   };
@@ -30,7 +29,7 @@ const ClassRoomItem = ({ exam, loading }) => {
         <CardHeader
           avatar={getIcon(loading)}
           title={getTitle(loading, exam.tieu_de)}
-          subheader={getDeadline(loading, exam.ngay_thi)}
+          subheader={getDeadline(loading, exam.ngay_thi_format)}
         />
         <CardActions disableSpacing>
           {getBtnAction(loading)}

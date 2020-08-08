@@ -8,16 +8,8 @@ import Question2 from "./Question2";
 
 const RightSection = ({ exam }) => {
 
-  const [examSend, setExamSend] = useState([]);
 
-  const handleExamSend = (exam) => {
-    const index = findIndex(exam._id, examSend);
-    if (index === -1) {
-      setExamSend([...examSend, exam])
-    } else {
-      
-    }
-  }
+
 
   return (
     <div className="testing-page-right">
@@ -39,7 +31,7 @@ const RightSection = ({ exam }) => {
         <Grid item md={1} />
       </Grid>
       <section className="body">
-        {mapQuestions(exam.ds_cau_hoi, handleExamSend)}
+        {mapQuestions(exam.ds_cau_hoi)}
       </section>
     </div>
   );
@@ -51,6 +43,23 @@ const mapQuestions = (questions, handleExamSend) => {
     return <Question question={item} key={index} handleExamSend={handleExamSend} index={index + 1} />
   })
 }
+
+// function startTimer(duration, display) {
+//   var timer = duration, minutes, seconds;
+//   setInterval(function () {
+//       minutes = parseInt(timer / 60, 10);
+//       seconds = parseInt(timer % 60, 10);
+
+//       minutes = minutes < 10 ? "0" + minutes : minutes;
+//       seconds = seconds < 10 ? "0" + seconds : seconds;
+
+//       display.textContent = minutes + ":" + seconds;
+
+//       if (--timer < 0) {
+//           timer = duration;
+//       }
+//   }, 1000);
+// }
 
 const findIndex = (id, exam) =>  exam.findIndex(item => item.cau_hoi_id === id);
 

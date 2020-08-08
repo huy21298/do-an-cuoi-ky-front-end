@@ -12,7 +12,6 @@ const ClassRoomItemsList = () => {
   const exam = useSelector((state) => state.exam);
   const loading = useSelector((state) => state.loading);
   const { id } = useParams();
-  console.log("exam", exam);
 
   useEffect(() => {
     dispatch(actGetExamsReq(id));

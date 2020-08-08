@@ -57,7 +57,6 @@ const PopupUploadAvatar = ({ open, handleClose }) => {
   const uploadImage = () => {
     if (null !== refInputFile) {
       (refInputFile).current.click();
-      console.log((refInputFile).current.file)
     }
   };
   return (

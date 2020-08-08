@@ -119,9 +119,6 @@ export default function Header() {
     (state) => state.displayTabNavigation
   );
   const info = useSelector(state => state.info);
-
-    console.log('info', info)
-
   useEffect(() => {
     dispatch(actGetIsDisplayTab());
     dispatch(actSetInfoReq())

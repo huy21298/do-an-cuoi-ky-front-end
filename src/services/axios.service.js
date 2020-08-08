@@ -32,7 +32,6 @@ class AxiosService {
   }
 
   getAuth(endpoint, token) {
-    console.log('token1', token)
     return this._instance.get(endpoint, {
       headers: {
         Authorization: `Bearer ${token}`,

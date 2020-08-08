@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ExerciseItem = ({ exercise, loading }) => {
-  console.log("exercise", exercise);
   const [openExercise, setOpenExercise] = useState(false);
   const classes = useStyles();
   const handleClose = () => {

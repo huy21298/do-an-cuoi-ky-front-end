@@ -15,7 +15,6 @@ export const actGetClassesReq = () => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { token } = getTokenFromLocal();
-    console.log('token', token)
     const response = await AxiosService.getAuth("/v1/lop-hoc", token);
     if (response) {
       dispatch(actGetClasses(response.data.data.lopHoc.ds_lop_hoc));

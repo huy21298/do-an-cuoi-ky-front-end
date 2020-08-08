@@ -38,7 +38,6 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const infoClass = useSelector(state => state.infoClass);
-  console.log('infoClass', infoClass);
   return (
     <div>
       <Dialog

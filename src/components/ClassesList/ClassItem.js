@@ -22,7 +22,7 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
     <Grid item xs={12} sm={6} md={4} lg={4}>
       <Card className="class-item" elevation={2}>
         <CardHeader
-          avatar={getAvatar(isLoading, classItem.danh_dai_dien)}
+          avatar={getAvatar(isLoading, classItem.anh_dai_dien)}
           title={getTitle(isLoading, classItem.tieu_de_format)}
           subheader={getSubTitle(isLoading, classItem.nguoi_tao_id.hoten)}
           onClick={goToClassRoom(classItem.id)}

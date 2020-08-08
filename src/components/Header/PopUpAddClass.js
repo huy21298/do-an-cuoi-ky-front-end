@@ -45,7 +45,6 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
         dispatch(actAddClass(lop_hoc));
         setIsLoading(false);
         setMessageBtn("Tham gia");
-        console.log('response.data', response.data)
         const { success, msg } = response.data;
         if (success) {
           showToastSuccess({msg});
