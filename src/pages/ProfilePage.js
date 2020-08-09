@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import SaveIcon from "@material-ui/icons/Save";
@@ -9,11 +9,30 @@ import ProfileItemDate from "../components/ClassRoom/ProfileItemDate";
 import ProfileItemRadio from "../components/ClassRoom/ProfileItemRadio";
 import ProfileItemPwd from "../components/ClassRoom/ProfileItemPwd";
 import PopupUploadAvatar from "../components/ClassRoom/PopupUploadAvatar";
+import DialogConfirm from '../components/ClassRoom/DialogConfirm';
+import { useSelector, useDispatch } from 'react-redux';
+
+
+import { actGetInfo } from '../actions/info.action';
+import { actGetInfoSend, actUpdateInfoSend } from '../actions/info-send.action';
 
 import "../styles/profile-page.scss";
 
 const ProfileStudentPage = () => {
   const [openPopup, setOpenPopup] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const dispatch = useDispatch();
+  const info = useSelector(state => state.info);
+  const infoSend = useSelector(state => state.infoSend);
+
+  const changeInfo = field => {
+    dispatch(actUpdateInfoSend(field));
+  }
+
+  useEffect(() => {
+    dispatch(actGetInfo());
+    dispatch(actGetInfoSend());
+  }, []);
 
   const handleClickOpen = () => {
     setOpenPopup(true);
@@ -21,6 +40,14 @@ const ProfileStudentPage = () => {
   const handleClose = () => {
     setOpenPopup(false);
   };
+
+  const handleOpenConfirm = () => {
+    setOpenConfirm(true);
+  }
+
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  }
   return (
     <Container component="section">
       <Grid
@@ -37,9 +64,10 @@ const ProfileStudentPage = () => {
               <h2 className="profile-detail-title">Hồ sơ</h2>
               <section className="profile-detail-content">
                 <ProfileItemAvatar handleClickOpen={handleClickOpen} />
-                <ProfileItem type="text" label="Tên" element="Nguyễn Huy" />
-                <ProfileItemDate />
-                <ProfileItemRadio />
+                <ProfileItem alias="ho" changeInfo={changeInfo} type="text" label="Họ" element={infoSend.ho} />
+                <ProfileItem alias="ten" changeInfo={changeInfo} type="text" label="Tên" element={infoSend.ten} />
+                <ProfileItemDate element={infoSend.ngay_sinh} changeInfo={changeInfo} element_format={infoSend.ngay_sinh_format} />
+                <ProfileItemRadio element={infoSend.gioi_tinh} changeInfo={changeInfo} element_format={infoSend.gioi_tinh_format} />
                 <ProfileItemPwd password="******" />
               </section>
             </section>
@@ -48,8 +76,8 @@ const ProfileStudentPage = () => {
             <section className="profile-detail contact">
               <h2 className="profile-detail-title">Thông tin liên hệ</h2>
               <section className="profile-detail-content">
-                <ProfileItem label="Email" element="huy@test.com" />
-                <ProfileItem label="Liên hệ" element="0397821183" />
+                <ProfileItem alias="email" changeInfo={changeInfo} label="Email" element={infoSend.email} />
+                <ProfileItem alias="sdt" changeInfo={changeInfo} label="Liên hệ" element={infoSend.sdt} />
               </section>
             </section>
             <article className="profile-detail-save">
@@ -58,6 +86,7 @@ const ProfileStudentPage = () => {
                 color="primary"
                 size="medium"
                 startIcon={<SaveIcon />}
+                onClick={handleOpenConfirm}
               >
                 Lưu thay đổi
               </Button>
@@ -66,6 +95,7 @@ const ProfileStudentPage = () => {
         </Grid>
       </Grid>
       <PopupUploadAvatar handleClose={handleClose} open={openPopup} />
+      <DialogConfirm open={openConfirm} handleCloseConfirm={handleCloseConfirm} info={infoSend} />
     </Container>
   );
 };

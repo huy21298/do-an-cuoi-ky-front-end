@@ -16,6 +16,7 @@ import { studentReducer as students } from "./student.reducer";
 import { examDetailReducer as examDetail } from "./exam-detail.reducer";
 import { sendExamReducer as sendExam } from "./send-exam.reducer";
 import { infoReducer as info } from "./info.reducer";
+import { infoSendReducer as infoSend } from "./info-send.reducer";
 import { errorTestReducer as errorTest } from "./error-test.reducer";
 import { loadingHeaderReducer as loadingHeader } from "./loading-header-classroom.reducer";
 import { error403Reducer as error403 } from "./errors/403.reducer";
@@ -48,5 +49,6 @@ export default combineReducers({
   error500,
   error401,
   exercisesFinish,
-  exercisesNotFinish
+  exercisesNotFinish,
+  infoSend
 });

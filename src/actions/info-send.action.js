@@ -2,24 +2,25 @@ import AxiosService from "../services/axios.service";
 import { getTokenFromLocal } from "../reducers/token.reducer";
 
 import { actSetLoading } from "./loading.action";
-import { actSetInfoSend } from "./info-send.action";
 import { dispatchError } from "./dispatch-error";
 
-export const GET_INFO = "GET_INFO";
-export const SET_INFO = "SET_INFO";
+export const GET_INFO_SEND = "GET_INFO_SEND";
+export const SET_INFO_SEND = "SET_INFO_SEND";
+export const UPDATE_INFO_SEND = "UPDATE_INFO_SEND";
 
 const { token } = getTokenFromLocal();
 
-export const actGetInfo = () => ({ type: GET_INFO });
+export const actGetInfoSend = () => ({ type: GET_INFO_SEND });
 
-export const actSetInfo = (info) => ({ type: SET_INFO, payload: { info } });
+export const actSetInfoSend = (info) => ({ type: SET_INFO_SEND, payload: { info } });
+
+export const actUpdateInfoSend = (info) => ({ type: UPDATE_INFO_SEND, payload: { info } });
 
 export const actSetInfoReq = () => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { data } = await AxiosService.getAuth("/v1/sinh-vien", token);
     if (data.success) {
-      dispatch(actSetInfo(data.data.thongTinSinhVien));
       dispatch(actSetInfoSend(data.data.thongTinSinhVien));
       dispatch(actSetLoading(false));
     }

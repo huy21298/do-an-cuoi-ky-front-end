@@ -4,11 +4,11 @@ import { actSetLoadingHeader } from "./loading-header-classroom.action";
 import { actSetIDClass } from "./class-id.action";
 import { dispatchError } from "./dispatch-error";
 
-export const GET_INFO = "GET_INFO";
+export const GET_INFO_CLASS = "GET_INFO_CLASS";
 
 const { token } = getTokenFromLocal();
 
-const actGetInfoClass = (info) => ({ type: GET_INFO, info });
+const actGetInfoClass = (info) => ({ type: GET_INFO_CLASS, info });
 
 export const actGetInfoClassReq = (id) => async (dispatch) => {
   try {

@@ -1,4 +1,4 @@
-import { GET_INFO, SET_INFO } from "../actions/info.action.js";
+import { GET_INFO_SEND, SET_INFO_SEND, UPDATE_INFO_SEND } from "../actions/info-send.action.js";
 
 export const init = {
   anh_dai_dien: "",
@@ -15,13 +15,16 @@ export const init = {
   gioi_tinh_format: ""
 };
 
-export const infoReducer = (state = init, { type, payload }) => {
+export const infoSendReducer = (state = init, { type, payload }) => {
   switch (type) {
-    case GET_INFO: {
+    case GET_INFO_SEND: {
       return state;
     }
-    case SET_INFO: {
+    case SET_INFO_SEND: {
       return payload.info
+    }
+    case UPDATE_INFO_SEND: {
+      return {...state, ...payload.info};
     }
     default:
       return state;
