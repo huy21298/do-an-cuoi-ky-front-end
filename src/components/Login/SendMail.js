@@ -1,7 +1,11 @@
 import React from 'react';
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
-const SendMail = (props) => {
+const SendMail = ({ changeForm }) => {
+
+  const sendMailAgain = e => {
+    changeForm("forgot-pwd")
+  }
 
   return (
     <div className="send-mail" style={{height: "100%"}}>
@@ -15,7 +19,7 @@ const SendMail = (props) => {
         </div>
       </div>
       <footer className="footer-forgot-password send-mail">
-        Không nhận được mail? <span className="recieve-mail">Gửi lại</span>
+        Không nhận được mail? <span className="recieve-mail" onClick={sendMailAgain}>Gửi lại</span>
       </footer>
     </div>
   );

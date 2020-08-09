@@ -7,6 +7,8 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 
+import { actGetError403 } from '../../actions/errors/403.action';
+
 import AxiosService from "../../services/axios.service";
 
 import "../../styles/forgot-pwd.scss";
@@ -64,7 +66,7 @@ const ForgotPassword = ({ changeForm }) => {
       })
       .catch((error) => {
         setIsLoading(false);
-        setError("email", { message: error.data.msg });
+        setError("email", { message: error.data.errors[0].msg });
       });
   };
 

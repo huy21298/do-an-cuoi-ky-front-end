@@ -47,7 +47,7 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
         setMessageBtn("Tham gia");
         const { success, msg } = response.data;
         if (success) {
-          showToastSuccess({msg});
+          showToastSuccess(msg);
           onClosePopup();
         }
       })
@@ -56,7 +56,7 @@ const PopUpAddClass = ({ open, onClosePopup }) => {
         setMessageBtn("Tham gia");
         if (error.status === 403) {
           console.log('error', error);
-          setError('code', { message: error.data.msg})
+          setError('code', { message: error.data.errors[0].msg})
         }
       })
   };

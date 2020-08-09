@@ -2,6 +2,7 @@ import AxiosService from "../services/axios.service";
 import { getTokenFromLocal } from "../reducers/token.reducer";
 import { actSetLoadingHeader } from "./loading-header-classroom.action";
 import { actSetIDClass } from "./class-id.action";
+import { dispatchError } from "./dispatch-error";
 
 export const GET_INFO = "GET_INFO";
 
@@ -21,8 +22,9 @@ export const actGetInfoClassReq = (id) => async (dispatch) => {
       dispatch(actSetIDClass(data.lop_hoc._id))
       dispatch(actSetLoadingHeader(false));
     }
-  } catch {
-    dispatch(actSetLoadingHeader(false));
+  } catch (error) {
+    console.log("error", error);
+    dispatchError(error.status, error.data, dispatch);
   } finally {
     dispatch(actSetLoadingHeader(false));
   }

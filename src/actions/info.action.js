@@ -2,6 +2,7 @@ import AxiosService from "../services/axios.service";
 import { getTokenFromLocal } from "../reducers/token.reducer";
 
 import { actSetLoading } from "./loading.action";
+import { dispatchError } from "./dispatch-error";
 
 export const GET_INFO = "GET_INFO";
 export const SET_INFO = "SET_INFO";
@@ -20,8 +21,10 @@ export const actSetInfoReq = () => async (dispatch) => {
       dispatch(actSetInfo(data.data.thongTinSinhVien));
       dispatch(actSetLoading(false));
     }
-  } catch {
+  } catch (error) {
     dispatch(actSetLoading(false));
+    console.log("error", error);
+    dispatchError(error.status, error.data, dispatch);
   } finally {
     dispatch(actSetLoading(false));
   }

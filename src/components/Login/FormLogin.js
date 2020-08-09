@@ -12,11 +12,8 @@ import {
   actGetTokenFromLocal,
   actSetTokenToLocalReq,
 } from "../../actions/token.action";
-import {
-  actGetMessages,
-  actSetMessages,
-} from "../../actions/message-login.action";
 import { actGetLoading } from "../../actions/loading.action";
+import { actGetError403 } from '../../actions/errors/403.action';
 
 export const useStyles = makeStyles((theme) =>
   createStyles({
@@ -54,42 +51,33 @@ export const useStyles = makeStyles((theme) =>
   })
 );
 
-const FormLogin = ({ changeForm }) => {
+const FormLogin = () => {
   const classes = useStyles();
-  const { register, handleSubmit, errors, setError } = useForm();
-  const errorMessages = useSelector((state) => state.messageLogin);
-  const isLoading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-
+  const { register, handleSubmit, errors, setError } = useForm();
+  const isLoading = useSelector((state) => state.loading);
+  const error403 = useSelector((state) => state.error403);
   useEffect(() => {
     dispatch(actGetTokenFromLocal());
-    dispatch(actGetMessages());
+    dispatch(actGetError403());
     dispatch(actGetLoading());
   }, []);
 
   useEffect(() => {
-    if (errorMessages[0].param === "email") {
+    if (error403.errors[0].param === "email") {
       setError("email", {
-        message: errorMessages[0].msg,
+        message: error403.errors[0].msg,
       });
     }
-    if (errorMessages[0].param === "mat_khau") {
+    if (error403.errors[0].param === "mat_khau") {
       setError("mat_khau", {
-        message: errorMessages[0].msg,
+        message: error403.errors[0].msg,
       });
     }
-  }, [errorMessages]);
+  }, [error403]);
 
   const handleSubmitLogin = (values) => {
     dispatch(actSetTokenToLocalReq(values));
-    dispatch(
-      actSetMessages([
-        {
-          msg: "",
-          param: "",
-        },
-      ])
-    );
   };
 
   return (

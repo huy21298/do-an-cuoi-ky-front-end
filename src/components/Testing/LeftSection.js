@@ -13,8 +13,6 @@ import { getTokenFromLocal } from "../../reducers/token.reducer";
 import DialogAgree from "./DialogAgree";
 import DialogMessage from "../DialogMessage";
 
-// import AxiosServ
-
 const LeftSection = ({ questions, date }) => {
   const dispatch = useDispatch();
   const { lop_hoc_id, bai_thi_id } = useParams();

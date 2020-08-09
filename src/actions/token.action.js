@@ -1,7 +1,7 @@
 import AxiosService from "../services/axios.service";
-import { actSetMessages } from './message-login.action';
 import { actSetLoading } from './loading.action';
 import { actSetAuthenticate } from './authenticate.action';
+import { dispatchError } from './dispatch-error';
 
 export const GET_TOKEN = "GET_TOKEN";
 export const SET_TOKEN = "SET_TOKEN";
@@ -25,7 +25,13 @@ export const actSetTokenToLocalReq = (payload) => (dispatch) => {
     dispatch(actSetAuthenticate(true))
   })
   .catch((error) => {
-    dispatch(actSetMessages(error.data.errors));
+    console.log('error', error);
+    dispatch(actSetLoading(false));
+    dispatchError(error.status, error.data, dispatch)
+  })
+  .finally(() => {
     dispatch(actSetLoading(false));
   });
 }
+
+

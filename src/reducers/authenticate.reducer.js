@@ -1,8 +1,8 @@
 import { GET_IS_AUTHENTICATE, SET_IS_AUTHENTICATE } from '../actions/authenticate.action';
 
-export const initLoading = false;
+export const init = false;
 
-export const authenticateReducer = (state = initLoading, { type, authenticate }) => {
+export const authenticateReducer = (state = init, { type, authenticate }) => {
   switch (type) {
     case GET_IS_AUTHENTICATE: {
       state = getTokenFromLocal();

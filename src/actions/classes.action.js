@@ -5,6 +5,8 @@ import { actSetAuthenticate } from "./authenticate.action";
 import { actSetLoading } from "./loading.action";
 import { initToken, setTokenToLocal} from '../reducers/token.reducer';
 
+import { dispatchError } from "./dispatch-error";
+
 export const GET_CLASSES = "GET_CLASSES";
 export const ADD_CLASS = "ADD_CLASS";
 
@@ -21,14 +23,9 @@ export const actGetClassesReq = () => async (dispatch) => {
       dispatch(actSetLoading(false));
     }
   } catch (error) {
-    console.log('error', error);
     dispatch(actSetLoading(false));
-    // if (error.status === 403) {
-    //   dispatch(actSetAuthenticate(false));
-    //   setTokenToLocal(initToken);
-    //   dispatch(actSetMessage(error?.data?.msg))
-    // } else {
-    //   dispatch(actSetMessage(error?.data?.msg || error))
-    // }
+    dispatchError(error.status, error.data, dispatch);
+  } finally {
+    dispatch(actSetLoading(false));
   }
 };
