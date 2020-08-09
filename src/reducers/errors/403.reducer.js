@@ -10,6 +10,7 @@ export const error403Reducer = (state = init, { type, error }) => {
       return state;
     }
     case SET_ERROR_403: {
+      console.log('error', error)
       return error;
     }
     default:
