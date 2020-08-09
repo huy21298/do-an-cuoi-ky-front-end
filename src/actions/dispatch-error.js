@@ -5,6 +5,7 @@ import { actSetError401 } from './errors/401.action';
 export const dispatchError = (code, errors, dispatch) => {
   const list = {
     401: actSetError401,
+    402: actSetError401,
     403: actSetError403,
     500: actSetError500
   }
