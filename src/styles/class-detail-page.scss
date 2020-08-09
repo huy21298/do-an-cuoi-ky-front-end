@@ -271,3 +271,15 @@
   position: fixed !important;
   bottom: 30px;
 }
+
+.status {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  &.in-process {
+    color: $red-color;
+  }
+  &.done {
+    color: $green-color;
+  }
+}

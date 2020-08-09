@@ -49,9 +49,9 @@ const LeftSection = ({ questions, date }) => {
         sinh_vien_id: info._id,
         lop_hoc_id,
         bai_thi_sinh_vien: sendExam,
+        da_cham: false
       };
       const jsonData = JSON.stringify(sendData);
-      console.log('sendData', sendData)
       try {
         const { data } = await AxiosService.postAuth(
           "/v1/bai-thi/nop-bai",

@@ -10,10 +10,10 @@ const { token } = getTokenFromLocal();
 
 const actGetExam = (exam) => ({ type: GET_EXAM_DETAIL, exam });
 
-export const actGetExamReq = (id) => async (dispatch) => {
+export const actGetExamReq = (id_bai_thi) => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
-    const { data } = await AxiosService.getAuth(`/v1/bai-thi/${id}`, token);
+    const { data } = await AxiosService.getAuth(`/v1/bai-thi/chi-tiet-bai-thi/${id_bai_thi}`, token);
     if (data.success) {
       dispatch(actGetExam(data.data.bai_thi));
       dispatch(actSetLoading(false));

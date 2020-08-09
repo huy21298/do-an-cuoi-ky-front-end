@@ -1,4 +1,4 @@
-import { GET_TOKEN, SET_TOKEN } from '../actions/token.action';
+import { GET_TOKEN, SET_TOKEN, RESET_TOKEN } from '../actions/token.action';
 
 export const initToken = {
   token: "",
@@ -15,6 +15,11 @@ export const tokenReducer = (state = initToken, { type, authenticate }) => {
     }
     case SET_TOKEN: {
       setTokenToLocal(authenticate);
+      state = getTokenFromLocal();
+      return state;
+    }
+    case RESET_TOKEN: {
+      setTokenToLocal(initToken);
       state = getTokenFromLocal();
       return state;
     }

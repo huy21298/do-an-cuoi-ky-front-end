@@ -5,6 +5,7 @@ import { actSetAuthenticate } from './authenticate.action';
 
 export const GET_TOKEN = "GET_TOKEN";
 export const SET_TOKEN = "SET_TOKEN";
+export const RESET_TOKEN = "RESET_TOKEN";
 
 export const actGetTokenFromLocal = () => ({ type: GET_TOKEN });
 
@@ -12,6 +13,8 @@ export const actSetTokenToLocal = (authenticate) => ({
   type: SET_TOKEN,
   authenticate,
 });
+
+export const actResetToken = () => ({ type: RESET_TOKEN})
 
 export const actSetTokenToLocalReq = (payload) => (dispatch) => {
   dispatch(actSetLoading(true));

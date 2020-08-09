@@ -22,11 +22,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { TabsNavigation } from "./TabsNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpAddClass from "./PopUpAddClass";
-import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 import { actGetInfo, actSetInfoReq } from "../../actions/info.action";
+import { actResetToken } from '../../actions/token.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -109,16 +110,17 @@ const useStyles = makeStyles((theme) =>
 
 export default function Header() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [state, setState] = React.useState(false);
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const dispatch = useDispatch();
-
+  const info = useSelector(state => state.info);
   const displayTabNavigation = useSelector(
     (state) => state.displayTabNavigation
   );
-  const info = useSelector(state => state.info);
+
   useEffect(() => {
     dispatch(actGetIsDisplayTab());
     dispatch(actSetInfoReq())
@@ -126,6 +128,11 @@ export default function Header() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const logout = e => {
+    dispatch(actResetToken());
+    history.push("/dang-nhap")
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -175,7 +182,7 @@ export default function Header() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Thông tin tài khoản</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Đăng xuất</MenuItem>
+      <MenuItem onClick={logout}>Đăng xuất</MenuItem>
     </Menu>
   );
 
@@ -207,7 +214,6 @@ export default function Header() {
             src={avatar}
           />
         </IconButton>
-        <p>Profile</p>
       </MenuItem>
     </Menu>
   );

@@ -6,11 +6,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import ExerciseItem from "./ExerciseItem";
 import { actGetExercisesReq } from "../../actions/exercises.action";
 
-const ClassRoomItemsList = () => {
+const ClassRoomItemsList = ({ type }) => {
   const dispatch = useDispatch();
   const loading = useSelector(state => state.loading)
   const exercises = useSelector(state => state.exercises);
   const { id } = useParams();
+
+  const actBaiTap = {
+    "sap-toi": actGetExercisesReq,
+    "hoan-thanh": null,
+    "khong-hoan-thanh": null,
+  }
 
   useEffect(() => {
     dispatch(actGetExercisesReq(id));

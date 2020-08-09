@@ -67,7 +67,7 @@ const getDeadline = (loading, deadline) => {
   return loading ? (
     <Skeleton animation="wave" height={25} width="40%" />
   ) : (
-    deadline
+    "Ngày thi " + deadline
   );
 };
 

@@ -7,6 +7,7 @@ import { displayTabNavigationReducer as displayTabNavigation} from './display-ta
 import { classesReducer as classes} from './classes.reducer';
 import { errorMessageReducer as errorMessage } from './error-message.reducer';
 import { examReducer as exam } from './exam.reducer';
+import { examFinishReducer as examFinish } from './exam-finish.reducer';
 import { infoClassReducer as infoClass } from './info-class.reducer';
 import { scheduleReducer as schedule } from './schedule.reducer';
 import { exercisesReducer as exercises } from './exercises.reducer';
@@ -36,5 +37,6 @@ export default combineReducers({
   sendExam,
   info,
   errorTest,
-  loadingHeader
+  loadingHeader,
+  examFinish
 });

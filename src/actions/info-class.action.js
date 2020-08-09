@@ -16,7 +16,6 @@ export const actGetInfoClassReq = (id) => async (dispatch) => {
       `/v1/lop-hoc/${id}/thong-tin-lop-hoc`,
       token
     );
-    console.log('data', data)
     if (data.success) {
       dispatch(actGetInfoClass(data.lop_hoc));
       dispatch(actSetIDClass(data.lop_hoc._id))

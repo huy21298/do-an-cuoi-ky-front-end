@@ -28,6 +28,7 @@ const ClassDetailPage = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [typeExam, setTypeExam] = React.useState("sap-toi");
+  const [typeExercie, setTypeExercie] = React.useState("sap-toi");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,10 +38,30 @@ const ClassDetailPage = () => {
     setAnchorEl(null);
     setTypeExam("hoan-thanh")
   };
-  const loadBaiThiSapThoi = () => {
+  const loadBaiThiSapToi = () => {
     setAnchorEl(null);
     setTypeExam("sap-toi")
   }
+
+  const loadBaiThiKhongHoanThanh = () => {
+    setAnchorEl(null);
+    setTypeExam("khong-hoan-thanh")
+  }
+
+  const loadBaiTapHoanThanh = () => {
+    setAnchorEl(null);
+    setTypeExercie("hoan-thanh")
+  };
+  const loadBaiTapSapToi = () => {
+    setAnchorEl(null);
+    setTypeExercie("sap-toi")
+  }
+
+  const loadBaiTapKhongHoanThanh = () => {
+    setAnchorEl(null);
+    setTypeExercie("khong-hoan-thanh")
+  }
+
   useEffect(() => {
     dispatch(actSetIsDisplayTab(true));
   });
@@ -51,7 +72,7 @@ const ClassDetailPage = () => {
         <ClassNotice />
         <Grid item md={9} lg={9}>
           {alias === "bai-thi" && <ExamList typeExam={typeExam} />}
-          {alias === "bai-tap" && <ExercisesList />}
+          {alias === "bai-tap" && <ExercisesList type={typeExercie} />}
           {alias === "danh-sach-sinh-vien" && <StudentList />}
         </Grid>
       </Grid>
@@ -72,9 +93,9 @@ const ClassDetailPage = () => {
           open={Boolean(anchorEl)}
           onClose={loadBaiThiHoanThanh}
         >
-          <MenuItem onClick={loadBaiThiSapThoi}>Bài tập sắp tới</MenuItem>
-          <MenuItem onClick={loadBaiThiHoanThanh}>Bài tập đã hoàn thành</MenuItem>
-          <MenuItem onClick={loadBaiThiHoanThanh}>Bài tập chưa hoàn thành</MenuItem>
+          <MenuItem onClick={loadBaiTapSapToi}>Bài tập sắp tới</MenuItem>
+          <MenuItem onClick={loadBaiTapHoanThanh}>Bài tập đã hoàn thành</MenuItem>
+          <MenuItem onClick={loadBaiTapKhongHoanThanh}>Bài tập chưa hoàn thành</MenuItem>
         </Menu>
       )}
       {alias === "bai-thi" && (
@@ -85,9 +106,9 @@ const ClassDetailPage = () => {
           open={Boolean(anchorEl)}
           onClose={loadBaiThiHoanThanh}
         >
-          <MenuItem onClick={loadBaiThiSapThoi}>Bài thi sắp tới</MenuItem>
+          <MenuItem onClick={loadBaiThiSapToi}>Bài thi sắp tới</MenuItem>
           <MenuItem onClick={loadBaiThiHoanThanh}>Bài thi đã hoàn thành</MenuItem>
-          <MenuItem onClick={loadBaiThiHoanThanh}>Bài thi chưa hoàn thành</MenuItem>
+          <MenuItem onClick={loadBaiThiKhongHoanThanh}>Bài thi chưa hoàn thành</MenuItem>
         </Menu>
       )}
     </Container>
