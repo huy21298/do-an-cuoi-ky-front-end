@@ -11,8 +11,6 @@ import ClassNotice from "../components/ClassRoom/ClassNotice";
 import StudentList from "../components/ClassRoom/StudentList";
 import ExamList from "../components/ClassRoom/ExamList";
 import ExercisesList from "../components/ClassRoom/ExercisesList";
-import MenuBaiTap from "../components/ClassRoom/MenuBaiTap";
-import MenuBaiThi from "../components/ClassRoom/MenuBaiThi";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";

@@ -27,12 +27,10 @@ const ExamItemFinish = ({ exam, loading }) => {
     done: baiThi.da_cham_diem,
     "in-process": !baiThi.da_cham_diem
   })
-  console.log('exam', exam);
   const history = useHistory();
   const { id } = useParams();
   const classes = useStyles();
   const onRedirectToTesting = () => {
-    console.log('baiThi', baiThi)
     if (baiThi.da_cham_diem) {
     } else {
       showToastError("Bài thi chưa được chấm!")
@@ -47,7 +45,7 @@ const ExamItemFinish = ({ exam, loading }) => {
           subheader={getDeadline(loading, baiThi.ngay_thi_format)}
         />
         <CardActions disableSpacing>
-          <span className={statusStyle}>{baiThi.da_cham_diem ? "Đã chấm điểm" : "Chưa chấm điểm"}</span>
+          {getActive(loading, statusStyle, baiThi.da_cham_diem)}
         </CardActions>
       </Card>
     </Grid>
@@ -85,13 +83,11 @@ const getDeadline = (loading, deadline) => {
   );
 };
 
-const getBtnAction = (loading) => {
+const getActive = (loading, statusStyle, active) => {
   return loading ? (
     <Skeleton animation="wave" height={30} width="50%" />
   ) : (
-    <Button size="large" color="primary">
-      Đi đến bài thi
-    </Button>
+    <span className={statusStyle}>{active ? "Đã chấm điểm" : "Chưa chấm điểm"}</span>
   );
 };
 

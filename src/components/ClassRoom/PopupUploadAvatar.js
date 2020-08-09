@@ -64,7 +64,7 @@ const PopupUploadAvatar = ({ open, handleClose }) => {
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={true}
+        open={open}
         fullWidth={fullWidth}
         maxWidth={maxWidth}
       >

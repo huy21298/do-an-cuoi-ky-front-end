@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import classnames from 'classnames';
 
 import ExerciseDetail from "./ExerciseDetail";
 
@@ -19,9 +20,15 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ExerciseItem = ({ exercise, loading }) => {
-  const [openExercise, setOpenExercise] = useState(false);
+const ExerciseItemFinish = ({ exercise, loading }) => {
   const classes = useStyles();
+  const { bai_tap_id: baiTap } = exercise;
+  const [openExercise, setOpenExercise] = useState(false);
+  const styleStatus = classnames({
+    'exercise-status': true,
+    'done': exercise.da_cham_diem,
+    'in-process': !exercise.da_cham_diem
+  })
   const handleClose = () => {
     setOpenExercise(false);
   };
@@ -35,13 +42,12 @@ const ExerciseItem = ({ exercise, loading }) => {
           <div></div>
           <CardHeader
             avatar={getIcon(loading)}
-            title={getTitle(loading, exercise.tieu_de)}
-            subheader={getDeadline(loading, exercise.han_nop_bai_format)}
+            title={getTitle(loading, baiTap.tieu_de)}
+            subheader={getDeadline(loading, baiTap.han_nop_bai_format)}
           />
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {getContent(loading, exercise.noi_dung)}
-            </Typography>
+            
+              {getContent(loading, exercise.da_cham_diem, styleStatus)}
           </CardContent>
           <Divider />
         </Card>
@@ -82,12 +88,14 @@ const getDeadline = (loading, deadline) => {
   );
 };
 
-const getContent = (loading, content) => {
+const getContent = (loading, active, styleStatus) => {
   return loading ? (
-    <Skeleton animation="wave" height={30} width="60%" />
+    <Skeleton animation="wave" width="60%" />
   ) : (
-    content
+    <span className={styleStatus}>
+      {active ? "Đã chấm điểm" : "Chưa chấm điểm"}
+    </span>
   );
 };
 
-export default ExerciseItem;
+export default ExerciseItemFinish;

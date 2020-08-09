@@ -5,6 +5,9 @@ import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import ProfileItem from "../components/ClassRoom/ProfileItem";
 import ProfileItemAvatar from "../components/ClassRoom/ProfileItemAvatar";
+import ProfileItemDate from "../components/ClassRoom/ProfileItemDate";
+import ProfileItemRadio from "../components/ClassRoom/ProfileItemRadio";
+import ProfileItemPwd from "../components/ClassRoom/ProfileItemPwd";
 import PopupUploadAvatar from "../components/ClassRoom/PopupUploadAvatar";
 
 import "../styles/profile-page.scss";
@@ -12,7 +15,7 @@ import "../styles/profile-page.scss";
 const ProfileStudentPage = () => {
   const [openPopup, setOpenPopup] = useState(false);
 
-  const handleClickOpen = ()=> {
+  const handleClickOpen = () => {
     setOpenPopup(true);
   };
   const handleClose = () => {
@@ -20,11 +23,8 @@ const ProfileStudentPage = () => {
   };
   return (
     <Container component="section">
-      {/* <Grid item md={3} xs={2} sm={2} /> */}
       <Grid
         item
-        // xs={8}
-        // sm={8}
         md={12}
         lg={12}
         component="section"
@@ -37,10 +37,10 @@ const ProfileStudentPage = () => {
               <h2 className="profile-detail-title">Hồ sơ</h2>
               <section className="profile-detail-content">
                 <ProfileItemAvatar handleClickOpen={handleClickOpen} />
-                <ProfileItem label="Tên" element="Nguyễn Huy" />
-                <ProfileItem label="Ngày sinh" element="21/02/1998" />
-                <ProfileItem label="Giới tính" element="Nam" />
-                <ProfileItem label="Mật khẩu" element="****" />
+                <ProfileItem type="text" label="Tên" element="Nguyễn Huy" />
+                <ProfileItemDate />
+                <ProfileItemRadio />
+                <ProfileItemPwd password="******" />
               </section>
             </section>
           </Grid>

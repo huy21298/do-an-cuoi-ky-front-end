@@ -9,8 +9,6 @@ import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 
-import ExerciseDetail from "./ExerciseDetail";
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -19,24 +17,17 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ExerciseItem = ({ exercise, loading }) => {
-  const [openExercise, setOpenExercise] = useState(false);
+const ExerciseItemNotFinish = ({ exercise, loading }) => {
   const classes = useStyles();
-  const handleClose = () => {
-    setOpenExercise(false);
-  };
-  const handleOpen = () => {
-    setOpenExercise(true);
-  };
   return (
     <React.Fragment>
-      <Grid item xs={12} sm={12} md={4} lg={4} onClick={handleOpen}>
+      <Grid item xs={12} sm={12} md={4} lg={4}>
         <Card className={classes.root} elevation={3}>
           <div></div>
           <CardHeader
             avatar={getIcon(loading)}
             title={getTitle(loading, exercise.tieu_de)}
-            subheader={getDeadline(loading, exercise.han_nop_bai_format)}
+            subheader={getDeadline(loading, exercise.han_nop_bai)}
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -46,7 +37,6 @@ const ExerciseItem = ({ exercise, loading }) => {
           <Divider />
         </Card>
       </Grid>
-      <ExerciseDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
     </React.Fragment>
   );
 };
@@ -90,4 +80,4 @@ const getContent = (loading, content) => {
   );
 };
 
-export default ExerciseItem;
+export default ExerciseItemNotFinish;

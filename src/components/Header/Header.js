@@ -22,7 +22,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { TabsNavigation } from "./TabsNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpAddClass from "./PopUpAddClass";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
@@ -181,7 +181,7 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Thông tin tài khoản</MenuItem>
+      <MenuItem component={Link} to="/thong-tin-ca-nhan">Thông tin tài khoản</MenuItem>
       <MenuItem onClick={logout}>Đăng xuất</MenuItem>
     </Menu>
   );

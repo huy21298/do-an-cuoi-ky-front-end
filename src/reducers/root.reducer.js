@@ -21,6 +21,8 @@ import { loadingHeaderReducer as loadingHeader } from "./loading-header-classroo
 import { error403Reducer as error403 } from "./errors/403.reducer";
 import { error500Reducer as error500 } from "./errors/500.reducer";
 import { error401Reducer as error401 } from "./errors/401.reducer";
+import { exercisesFinishReducer as exercisesFinish } from "./exercises-finish.reducer";
+import { exercisesNotFinishReducer as exercisesNotFinish } from "./exercises-not-finish.reducer";
 
 export default combineReducers({
   token,
@@ -44,5 +46,7 @@ export default combineReducers({
   examFinish,
   error403,
   error500,
-  error401
+  error401,
+  exercisesFinish,
+  exercisesNotFinish
 });

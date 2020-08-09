@@ -12,6 +12,7 @@ import ForgotPwdPage from "./pages/ForgotPwdPage";
 import ResetPwdPage from "./pages/ResetPwdPage";
 import TestingPage from "./pages/TestingPage";
 import TestingPageFinish from "./pages/TestingPageFinish";
+import ProfilePage from "./pages/ProfilePage";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -60,10 +61,10 @@ const routes = [
     render: () => <TestingPageFinish />,
   },
   {
-    path: "/thong-tin-ca-nhan/:id",
+    path: "/thong-tin-ca-nhan",
     exact: true,
     authen: true,
-    render: () => <TestingPage />,
+    render: () => <ProfilePage />,
   },
 ];
 
