@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import { actGetAuthenticate } from "./actions/authenticate.action";
 import { actGetError401 } from "./actions/errors/401.action";
 import { actGetError500 } from "./actions/errors/500.action";
+import { actGetError403 } from "./actions/errors/403.action";
 import { actResetToken } from "./actions/token.action";
 import { showToastError } from './services/toast.service';
 
@@ -17,16 +18,18 @@ function App() {
   const history = useHistory();
   const authenticate = useSelector((state) => state.authenticate);
   const error401 = useSelector((state) => state.error401);
+  const error403 = useSelector((state) => state.error403);
   const error500 = useSelector((state) => state.error500);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actGetAuthenticate());
     dispatch(actGetError401());
     dispatch(actGetError500());
+    dispatch(actGetError403());
   }, []);
 
   useEffect(() => {
-    if (error401.msg.length < 1 && error401.active) {
+    if (error401.msg.length > 0 && error401.active) {
       dispatch(actResetToken());
       // history.push("/dang-nhap");
       showToastError(error401.msg)
@@ -34,6 +37,10 @@ function App() {
 
     if (error500.msg.length > 0) {
       showToastError(error500.msg)
+    }
+
+    if (error403.errors[0].msg.length > 0) {
+      showToastError(error403.errors[0].msg)
     }
   }, []);
 

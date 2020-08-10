@@ -23,9 +23,11 @@ export const actGetExamsReq = (id) => async (dispatch) => {
       dispatch(actSetLoading(false));
     }
   } catch (error) {
-    dispatch(actSetLoading(false));
-    console.log("error", error);
-    dispatchError(error.status, error.data, dispatch);
+    console.log('error', error);
+    if (error?.status) {
+      dispatch(actSetLoading(false));
+      dispatchError(error.status, error.data, dispatch)
+    }
   } finally {
     dispatch(actSetLoading(false));
   }

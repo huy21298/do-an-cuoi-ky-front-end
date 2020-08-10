@@ -23,8 +23,10 @@ export const actGetInfoClassReq = (id) => async (dispatch) => {
       dispatch(actSetLoadingHeader(false));
     }
   } catch (error) {
-    console.log("error", error);
-    dispatchError(error.status, error.data, dispatch);
+    console.log('error', error);
+    if (error?.status) {
+      dispatchError(error.status, error.data, dispatch)
+    }
   } finally {
     dispatch(actSetLoadingHeader(false));
   }
