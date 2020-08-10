@@ -211,6 +211,7 @@
       }
       .score {
         margin-right: 1rem;
+        color: $red-color
       }
     }
   }
@@ -294,4 +295,8 @@
   &.done {
     color: $green-color;
   }
+}
+
+.exercise-done {
+  color: $green-color;
 }

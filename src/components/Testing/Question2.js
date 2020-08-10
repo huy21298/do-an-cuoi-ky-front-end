@@ -18,14 +18,14 @@ const Question2 = ({ question, index }) => {
 
   return (
     <section className="question-item" id={`q${index}`}>
-      <div className="title">
-        <span className="question-number">Câu {index}:</span>
-        <span className="score">({question.cau_hoi_id.diem} điểm)</span>
-        <span className="content">{question.cau_hoi_id.noi_dung}</span>
+      <div className="title" id={`title-${index}`}>
+        <span className="question-number" id={`question-number-${index}`}>Câu {index}:</span>
+        <span className="score" id={`score-${index}`}>({question.cau_hoi_id.diem} điểm)</span>
+        <span className="content" id={`content-${index}`}>{question.cau_hoi_id.noi_dung}</span>
       </div>
-      <section className="answere type1">
+      <section className="answere type1" id={`answere-a ${index}`}>
         <TextField
-          id="outlined-multiline-static"
+          id={`outlined-multiline-static id-${index}`}
           label="Đáp án"
           multiline
           rows={4}

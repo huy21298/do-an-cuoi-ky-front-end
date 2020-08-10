@@ -20,7 +20,7 @@ import AxiosService from "../../services/axios.service";
 import { getTokenFromLocal } from "../../reducers/token.reducer";
 import { actGetExercisesReq } from "../../actions/exercises.action";
 
-import { showToastSuccess } from '../../services/toast.service';
+import { showToastSuccess } from "../../services/toast.service";
 
 const { token } = getTokenFromLocal();
 
@@ -45,32 +45,37 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
   const dispatch = useDispatch();
   const infoClass = useSelector((state) => state.infoClass);
   const [active, setActive] = React.useState(false);
-  
-  const nopBaiTap = async (e) => {
-    setActive(true);
-    try {
-      const { data } = await AxiosService.postAuth(
-        `/v1/bai-tap/nop-bai`,
-        { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
-        token
-      );
-      if (data.success) {
-        showToastSuccess(data.msg)
-        dispatch(actGetExercisesReq(infoClass._id));
-        handleClose();
-      }
-    } catch {
-      setActive(false);
-    } finally {
-      setActive(false);
-    }
-  };
 
-  const styleButton = classnames({
-    button: true,
-    confirm: true,
-    active,
-  });
+  const { ex_id: baiTap, lop_hoc_id: lopHoc } = exercise;
+
+  // const nopBaiTap = async (e) => {
+  //   console.log("infoClass", infoClass);
+  //   console.log("exercise", exercise);
+  //   setActive(true);
+
+  //   try {
+  //     const { data } = await AxiosService.postAuth(
+  //       `/v1/bai-tap/nop-bai`,
+  //       { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
+  //       token
+  //     );
+  //     if (data.success) {
+  //       showToastSuccess(data.msg)
+  //       dispatch(actGetExercisesReq(infoClass._id));
+  //       handleClose();
+  //     }
+  //   } catch {
+  //     setActive(false);
+  //   } finally {
+  //     setActive(false);
+  //   }
+  // };
+
+  // const styleButton = classnames({
+  //   button: true,
+  //   confirm: true,
+  //   active,
+  // });
 
   return (
     <div>
@@ -91,7 +96,7 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              {infoClass.tieu_de}
+              {lopHoc.tieu_de}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -101,23 +106,25 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
             <Grid container spacing={4}>
               <Grid item md={8}>
                 <div className="header">
-                  <div className="title">{exercise.tieu_de}</div>
+                  <div className="title">{baiTap.tieu_de}</div>
                   <div className="sub-title">
-                    {exercise.nguoi_tao_id?.hoten} - {exercise.createdAt}
+                    {baiTap.nguoi_tao_id?.hoten} - {baiTap.createdAt}
                   </div>
                   <div className="sub-sub-title">
-                    <div className="score">Đến hạn: {exercise.han_nop_bai}</div>
-                    <div className="deadline"></div>
+                    <div className="deadline">
+                      Đến hạn: {baiTap.han_nop_bai_format}
+                    </div>
+                    <div className="score">{exercise.diem} điểm</div>
                   </div>
                 </div>
                 <div className="border"></div>
-                <div className="content">{exercise.noi_dung}</div>
+                <div className="content">{baiTap.noi_dung}</div>
               </Grid>
               <Grid item md={4}>
                 <Paper elevation={4} className="send-exercise">
                   <div className="header">
                     <div className="title">Bài tập của bạn</div>
-                    <div className="status empty">Thiếu</div>
+                    <div className="status exercise-done">Đã nộp</div>
                   </div>
                   <input
                     accept="image/*"
@@ -126,7 +133,7 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     multiple
                     type="file"
                   />
-                  <label htmlFor="contained-button-file">
+                  {/* <label htmlFor="contained-button-file">
                     <Button
                       className="button send"
                       component="span"
@@ -134,15 +141,15 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     >
                       Nộp bài tập
                     </Button>
-                  </label>
-                  <Button
+                  </label> */}
+                  {/* <Button
                     className={styleButton}
                     onClick={nopBaiTap}
                     disabled={active}
                   >
                     {" "}
                     Nộp{" "}
-                  </Button>
+                  </Button> */}
                 </Paper>
               </Grid>
             </Grid>

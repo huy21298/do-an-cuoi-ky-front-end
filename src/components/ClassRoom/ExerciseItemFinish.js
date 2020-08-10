@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,8 +9,13 @@ import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import classnames from 'classnames';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ExerciseDetail from "./ExerciseDetail";
+import ExerciseFinishDetail from "./ExerciseFinishDetail";
+
+import { actGetExamsFinishReq } from '../../actions/exercise-finish-detail.action';
+import { actGetTokenFromLocal } from '../../actions/token.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -21,14 +26,27 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ExerciseItemFinish = ({ exercise, loading }) => {
+  console.log('exercise', exercise);
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const exerciseFinishDetail = useSelector(state => state.exerciseFinishDetail);
+  const token = useSelector(state => state.token);
+
   const { bai_tap_id: baiTap } = exercise;
   const [openExercise, setOpenExercise] = useState(false);
+
   const styleStatus = classnames({
     'exercise-status': true,
     'done': exercise.da_cham_diem,
     'in-process': !exercise.da_cham_diem
   })
+
+  useEffect(() => {
+    dispatch(actGetTokenFromLocal());
+    dispatch(actGetExamsFinishReq(baiTap._id, token.token));
+  }, [])
+
   const handleClose = () => {
     setOpenExercise(false);
   };
@@ -52,7 +70,7 @@ const ExerciseItemFinish = ({ exercise, loading }) => {
           <Divider />
         </Card>
       </Grid>
-      <ExerciseDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
+      <ExerciseFinishDetail open={openExercise} exercise={exerciseFinishDetail} handleClose={handleClose} />
     </React.Fragment>
   );
 };

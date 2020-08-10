@@ -17,13 +17,13 @@ const Question1 = ({ question, index }) => {
     dispatch(actSetExamSend(sendQuestion));
   };
   return (
-    <section className="question-item" id={`q${index}`}>
-      <div className="title">
-        <span className="question-number">Câu {index}:</span>
-        <span className="score">({question.cau_hoi_id.diem} điểm)</span>
-        <span className="content">{question.cau_hoi_id.noi_dung}</span>
+    <section className="question-item" id={`q-${index}`}>
+      <div className="title" id={`q${index}-title`}>
+        <span className="question-number" id={`q${index}-question-number`}>Câu {index}:</span>
+        <span className="score" id={`q${index}-score`}>({question.cau_hoi_id.diem} điểm)</span>
+        <span className="content" id={`q${index}-content`}>{question.cau_hoi_id.noi_dung}</span>
       </div>
-      <section className="answere type1">
+      <section className="answere type1" id={`q${index}answere`}>
         {mapAnswere(question.cau_hoi_id.lua_chon, tick, currentQuestion)}
       </section>
     </section>
@@ -37,6 +37,7 @@ const mapAnswere = (answeres, tick, currentQuestion) => {
         answere={item}
         tick={tick}
         key={index}
+        index={index}
         currentQuestion={currentQuestion}
       />
     );

@@ -24,6 +24,9 @@ import { error500Reducer as error500 } from "./errors/500.reducer";
 import { error401Reducer as error401 } from "./errors/401.reducer";
 import { exercisesFinishReducer as exercisesFinish } from "./exercises-finish.reducer";
 import { exercisesNotFinishReducer as exercisesNotFinish } from "./exercises-not-finish.reducer";
+import { examTimeReducer as examTime } from "./exam-time.reducer";
+import { isShowMessageReducer as isShowMessage } from "./is-show-message.reducer";
+import { exerciseFinishDetailReducer as exerciseFinishDetail } from "./exercise-finish-detail.reducer";
 
 export default combineReducers({
   token,
@@ -50,5 +53,8 @@ export default combineReducers({
   error401,
   exercisesFinish,
   exercisesNotFinish,
-  infoSend
+  infoSend,
+  examTime,
+  isShowMessage,
+  exerciseFinishDetail
 });

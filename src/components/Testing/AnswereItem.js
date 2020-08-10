@@ -3,20 +3,21 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 
-const AnswereItem = ({ answere, tick, currentQuestion }) => {
+const AnswereItem = ({ answere, tick, currentQuestion, index }) => {
   return (
-    <div className="answere-item">
-      <span className="tick-icon">
+    <div className="answere-item" id={`answere-item${index}`}>
+      <span className="tick-icon" id={`tick-icon${index}`}>
         {currentQuestion === answere.id ? (
-          <CheckCircleOutlineIcon className="tick" onClick={tick(answere.id)} />
+          <CheckCircleOutlineIcon className="tick" id={`tick${index}`} onClick={tick(answere.id)} />
         ) : (
           <RadioButtonUncheckedIcon
             className="un-tick"
+            id={`un-tick${index}`}
             onClick={tick(answere.id)}
           />
         )}
       </span>
-      <span className="content">{answere.label}</span>
+      <span className="content" id={`content${index}`}>{answere.label}</span>
     </div>
   );
 };
