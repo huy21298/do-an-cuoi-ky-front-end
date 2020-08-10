@@ -26,8 +26,10 @@ export const actSetTokenToLocalReq = (payload) => (dispatch) => {
   })
   .catch((error) => {
     console.log('error', error);
-    dispatch(actSetLoading(false));
-    dispatchError(error.status, error.data, dispatch)
+    if (error?.status) {
+      dispatch(actSetLoading(false));
+      dispatchError(error.status, error.data, dispatch)
+    }
   })
   .finally(() => {
     dispatch(actSetLoading(false));
