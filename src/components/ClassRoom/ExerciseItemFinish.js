@@ -26,14 +26,12 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ExerciseItemFinish = ({ exercise, loading }) => {
-  console.log('exercise', exercise);
+  // console.log('exercise finish', exercise);
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const exerciseFinishDetail = useSelector(state => state.exerciseFinishDetail);
-  const token = useSelector(state => state.token);
-
   const { bai_tap_id: baiTap } = exercise;
+  console.log('exercise item', exercise);
   const [openExercise, setOpenExercise] = useState(false);
 
   const styleStatus = classnames({
@@ -41,11 +39,6 @@ const ExerciseItemFinish = ({ exercise, loading }) => {
     'done': exercise.da_cham_diem,
     'in-process': !exercise.da_cham_diem
   })
-
-  useEffect(() => {
-    dispatch(actGetTokenFromLocal());
-    dispatch(actGetExamsFinishReq(baiTap._id, token.token));
-  }, [])
 
   const handleClose = () => {
     setOpenExercise(false);
@@ -70,7 +63,7 @@ const ExerciseItemFinish = ({ exercise, loading }) => {
           <Divider />
         </Card>
       </Grid>
-      <ExerciseFinishDetail open={openExercise} exercise={exerciseFinishDetail} handleClose={handleClose} />
+      <ExerciseFinishDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
     </React.Fragment>
   );
 };

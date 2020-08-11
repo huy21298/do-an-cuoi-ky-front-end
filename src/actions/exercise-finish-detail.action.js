@@ -14,6 +14,7 @@ export const actGetExamsFinishReq = (id, token) => async (dispatch) => {
       `/v1/bai-tap/xem-diem/${id}`,
       token
     );
+    console.log('data', data);
     if (data.success) {
       dispatch(actGetExerciseDetailFinish(data.bai_tap));
       dispatch(actSetLoading(false));

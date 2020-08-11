@@ -24,8 +24,11 @@ const ClassRoomItemsList = ({ type }) => {
     "khong-hoan-thanh": actGetExercisesNotFinishReq,
   };
 
+  console.log('exercisesFinish', exercisesFinish)
+
   useEffect(() => {
     const actGet = actBaiTap[type];
+    console.log('actGet', actGet)
     dispatch(actGet(id));
     dispatch(actGetLoading());
   }, [type]);
@@ -47,6 +50,7 @@ const mapDataExercises = (exercises, loading, type) => {
     "hoan-thanh": ExerciseItemFinish,
     "khong-hoan-thanh": ExerciseItemNotFinish,
   };
+  console.log('exercises list', exercises);
   const Item = typeList[type];
   return exercises.map((item, index) => (
     <Item key={index} exercise={item} loading={loading} />

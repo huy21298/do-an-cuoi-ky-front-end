@@ -47,39 +47,11 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
   const [active, setActive] = React.useState(false);
 
   const { ex_id: baiTap, lop_hoc_id: lopHoc } = exercise;
-
-  // const nopBaiTap = async (e) => {
-  //   console.log("infoClass", infoClass);
-  //   console.log("exercise", exercise);
-  //   setActive(true);
-
-  //   try {
-  //     const { data } = await AxiosService.postAuth(
-  //       `/v1/bai-tap/nop-bai`,
-  //       { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
-  //       token
-  //     );
-  //     if (data.success) {
-  //       showToastSuccess(data.msg)
-  //       dispatch(actGetExercisesReq(infoClass._id));
-  //       handleClose();
-  //     }
-  //   } catch {
-  //     setActive(false);
-  //   } finally {
-  //     setActive(false);
-  //   }
-  // };
-
-  // const styleButton = classnames({
-  //   button: true,
-  //   confirm: true,
-  //   active,
-  // });
+  console.log('exercise detail', exercise)
 
   return (
     <div>
-      <Dialog
+      {/* <Dialog
         fullScreen
         open={open}
         onClose={handleClose}
@@ -133,30 +105,31 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     multiple
                     type="file"
                   />
-                  {/* <label htmlFor="contained-button-file">
-                    <Button
-                      className="button send"
-                      component="span"
-                      startIcon={<CloudUploadIcon />}
-                    >
-                      Nộp bài tập
-                    </Button>
-                  </label> */}
-                  {/* <Button
-                    className={styleButton}
-                    onClick={nopBaiTap}
-                    disabled={active}
-                  >
-                    {" "}
-                    Nộp{" "}
-                  </Button> */}
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
           <Grid item md={2} />
         </Grid>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
+
+// /* <label htmlFor="contained-button-file">
+//                     <Button
+//                       className="button send"
+//                       component="span"
+//                       startIcon={<CloudUploadIcon />}
+//                     >
+//                       Nộp bài tập
+//                     </Button>
+//                   </label> */}
+//                   {/* <Button
+//                     className={styleButton}
+//                     onClick={nopBaiTap}
+//                     disabled={active}
+//                   >
+//                     {" "}
+//                     Nộp{" "}
+//                   </Button> */
