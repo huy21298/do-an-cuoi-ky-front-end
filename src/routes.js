@@ -66,6 +66,12 @@ const routes = [
     authen: true,
     render: () => <ProfilePage />,
   },
+  {
+    path: "/lam-moi-mat-khau/:code/:email",
+    exact: true,
+    authen: false,
+    render: () => <ResetPwdPage />,
+  }
 ];
 
 const showRoutes = ({ path, exact, render, authen }, key) => {
