@@ -4,13 +4,11 @@ import { getTokenFromLocal } from "../reducers/token.reducer";
 import { actSetLoading } from "./loading.action";
 import { dispatchError } from "./dispatch-error";
 
-const { token } = getTokenFromLocal();
-
 export const GET_STUDENTS = "GET_STUDENTS";
 
 const actGetStudents = (students) => ({ type: GET_STUDENTS, students });
 
-export const actGetStudentsReq = (id) => async (dispatch) => {
+export const actGetStudentsReq = (id, token) => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { data } = await AxiosService.getAuth(

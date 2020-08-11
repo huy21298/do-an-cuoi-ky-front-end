@@ -16,6 +16,7 @@ import ExerciseFinishDetail from "./ExerciseFinishDetail";
 
 import { actGetExamsFinishReq } from '../../actions/exercise-finish-detail.action';
 import { actGetTokenFromLocal } from '../../actions/token.action';
+import { actGetLoadingData } from '../../actions/loading-data.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -26,25 +27,39 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ExerciseItemFinish = ({ exercise, loading }) => {
-  // console.log('exercise finish', exercise);
+  console.log('exercise finish', exercise);
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const token = useSelector(state => state.token);
+  const exerciseFinishDetail = useSelector(state => state.exerciseFinishDetail);
+  const loadingData = useSelector(state => state.loadingData);
+
   const { bai_tap_id: baiTap } = exercise;
-  console.log('exercise item', exercise);
   const [openExercise, setOpenExercise] = useState(false);
 
   const styleStatus = classnames({
     'exercise-status': true,
     'done': exercise.da_cham_diem,
     'in-process': !exercise.da_cham_diem
-  })
+  });
+
+  useEffect(() => {
+    dispatch(actGetTokenFromLocal());
+    dispatch(actGetLoadingData());
+  }, []);
 
   const handleClose = () => {
     setOpenExercise(false);
   };
   const handleOpen = () => {
-    setOpenExercise(true);
+    dispatch(actGetExamsFinishReq(exercise.bai_tap_id.id, token.token));
+    // setOpenExercise(true);
+
+    if (loadingData === false) {
+      setOpenExercise(true);
+      console.log('openExercise')
+    }
   };
   return (
     <React.Fragment>
@@ -63,7 +78,7 @@ const ExerciseItemFinish = ({ exercise, loading }) => {
           <Divider />
         </Card>
       </Grid>
-      <ExerciseFinishDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
+      <ExerciseFinishDetail open={openExercise} loading={loadingData} exercise={exerciseFinishDetail} handleClose={handleClose} />
     </React.Fragment>
   );
 };

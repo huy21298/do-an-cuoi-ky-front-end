@@ -7,6 +7,7 @@ import moment from "moment";
 
 import Confirm from "../components/Testing/Confirm";
 import Testing from "../components/Testing/Testing";
+import CounDown from '../components/Testing/CountDown';
 
 import { actGetExamReq } from "../actions/exam-detail.action";
 
@@ -53,7 +54,7 @@ const TheTestingPage = () => {
 
   return (
     <Container component="section" className="testing-page">
-      {errorTest.code === "SOON" && <div>SOON {date.seconds}</div>}
+      {errorTest.code === "SOON" && <CounDown />}
       {errorTest.code === "LEFT" && <div>LEFT</div>}
 
       {errorTest.code === "NONE" && confirm && (

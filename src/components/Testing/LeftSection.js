@@ -68,7 +68,7 @@ const LeftSection = ({ questions, date, time }) => {
           sinh_vien_id: info._id,
           lop_hoc_id,
           bai_thi_sinh_vien: sendExam,
-          da_cham: false,
+          da_cham_diem: false,
         };
         console.log('sendData', sendData)
         const jsonData = JSON.stringify(sendData);
@@ -109,7 +109,7 @@ const LeftSection = ({ questions, date, time }) => {
         sinh_vien_id: info._id,
         lop_hoc_id,
         bai_thi_sinh_vien: sendExam,
-        da_cham: false,
+        da_cham_diem: false,
       };
       const jsonData = JSON.stringify(sendData);
       try {

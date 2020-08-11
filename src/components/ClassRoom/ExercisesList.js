@@ -10,12 +10,14 @@ import { actGetExercisesReq } from "../../actions/exercises.action";
 import { actGetExercisesFinishReq } from "../../actions/exercises-finish.action";
 import { actGetExercisesNotFinishReq } from "../../actions/exercises-not-finish.action";
 import { actGetLoading } from "../../actions/loading.action";
+import { actGetTokenFromLocal } from '../../actions/token.action';
 
 const ClassRoomItemsList = ({ type }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
   const exercises = useSelector((state) => state.exercises);
   const exercisesFinish = useSelector((state) => state.exercisesFinish);
+  const { token } = useSelector((state) => state.token);
   const { id } = useParams();
 
   const actBaiTap = {
@@ -24,14 +26,12 @@ const ClassRoomItemsList = ({ type }) => {
     "khong-hoan-thanh": actGetExercisesNotFinishReq,
   };
 
-  console.log('exercisesFinish', exercisesFinish)
-
   useEffect(() => {
     const actGet = actBaiTap[type];
-    console.log('actGet', actGet)
-    dispatch(actGet(id));
+    dispatch(actGetTokenFromLocal());
+    dispatch(actGet(id, token));
     dispatch(actGetLoading());
-  }, [type]);
+  }, [type, token]);
 
   return (
     <section className="class-detail-notice-list">
@@ -50,7 +50,6 @@ const mapDataExercises = (exercises, loading, type) => {
     "hoan-thanh": ExerciseItemFinish,
     "khong-hoan-thanh": ExerciseItemNotFinish,
   };
-  console.log('exercises list', exercises);
   const Item = typeList[type];
   return exercises.map((item, index) => (
     <Item key={index} exercise={item} loading={loading} />

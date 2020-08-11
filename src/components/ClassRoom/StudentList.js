@@ -5,23 +5,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { actGetStudentsReq } from '../../actions/students.action';
+import { actGetTokenFromLocal } from '../../actions/token.action';
 import { actGetLoading } from '../../actions/loading.action';
 
 import StudentItem from './StudentItem';
 
 const ClassRoomNotice = () => {
+  const dispatch = useDispatch();
   const students = useSelector(state => state.students);
   const loading = useSelector(state => state.loading);
-  const dispatch = useDispatch();
+  const { token } = useSelector(state => state.token);
   const { id } = useParams();
 
   useEffect(() => {
+    dispatch(actGetTokenFromLocal());
+    dispatch(actGetStudentsReq(id, token));
+    dispatch(actGetLoading());
 
-    dispatch(actGetStudentsReq(id));
-
-  }, []);
-
-  console.log('students', students);
+  }, [token]);
 
   return (
     <Grid

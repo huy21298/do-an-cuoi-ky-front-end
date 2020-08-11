@@ -14,7 +14,7 @@ export const actGetInfo = () => ({ type: GET_INFO });
 
 export const actSetInfo = (info) => ({ type: SET_INFO, payload: { info } });
 
-export const actSetInfoReq = () => async (dispatch) => {
+export const actSetInfoReq = (token) => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { data } = await AxiosService.getAuth("/v1/sinh-vien", token);

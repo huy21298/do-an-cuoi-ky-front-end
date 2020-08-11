@@ -7,11 +7,9 @@ import { dispatchError } from "./dispatch-error";
 export const GET_EXAM = "GET_EXAM";
 export const GET_EXAM_FINISH = "GET_EXAM_FINISH";
 
-const { token } = getTokenFromLocal();
-
 const actGetExams = (exam) => ({ type: GET_EXAM, exam });
 
-export const actGetExamsReq = (id) => async (dispatch) => {
+export const actGetExamsReq = (id, token) => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { data } = await AxiosService.getAuth(

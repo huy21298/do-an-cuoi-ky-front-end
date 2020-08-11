@@ -13,6 +13,7 @@ import ResetPwdPage from "./pages/ResetPwdPage";
 import TestingPage from "./pages/TestingPage";
 import TestingPageFinish from "./pages/TestingPageFinish";
 import ProfilePage from "./pages/ProfilePage";
+import ErrorPage from "./pages/ErrorPage";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -71,6 +72,10 @@ const routes = [
     exact: true,
     authen: false,
     render: () => <ResetPwdPage />,
+  },
+  {
+    path: "*",
+    render: () => <ErrorPage />,
   }
 ];
 

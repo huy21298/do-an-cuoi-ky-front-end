@@ -17,7 +17,8 @@ export default function DialogConfirm({ open, handleCloseConfirm, info }) {
   const { token } = getTokenFromLocal();
   const confirmChange = async (value) => {
     setLoading(true);
-    const thong_tin = JSON.stringify({ ...value, thong_tin_sua: { ...info } });
+    const thong_tin = JSON.stringify({ ...value, thong_tin_sua: { ...info }, loai: "SinhVien" });
+    console.log('thong_tin', thong_tin);
     try {
       const { data } = await AxiosService.postAuth(
         "/v1/sinh-vien/sua-thong-tin",

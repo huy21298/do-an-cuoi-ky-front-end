@@ -27,7 +27,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 import { actGetInfo, actSetInfoReq } from "../../actions/info.action";
-import { actResetToken } from '../../actions/token.action';
+import { actResetToken, actGetTokenFromLocal } from '../../actions/token.action';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -120,11 +120,13 @@ export default function Header() {
   const displayTabNavigation = useSelector(
     (state) => state.displayTabNavigation
   );
+  const { token } = useSelector(state => state.token)
 
   useEffect(() => {
+    dispatch(actGetTokenFromLocal());
     dispatch(actGetIsDisplayTab());
-    dispatch(actSetInfoReq())
-  }, []);
+    dispatch(actSetInfoReq(token));
+  }, [token]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -218,60 +220,13 @@ export default function Header() {
     </Menu>
   );
 
-  const list = () => (
-    <div
-      className={clsx(classes.list)}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <div className={classes.drawerHeader}>
-        <IconButton onClick={toggleDrawer(false)}>
-          <ChevronLeftIcon />
-        </IconButton>
-      </div>
-      <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon onClick={toggleDrawer(true)} />
-            <Drawer anchor={"left"} open={state} onClose={toggleDrawer(false)}>
-              {list()}
-            </Drawer>
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            NaviLearn
+            <Link to="/" style={{ textDecoration: "none", color: "white"}}>NaviLearn</Link>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

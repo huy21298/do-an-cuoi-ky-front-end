@@ -1,6 +1,7 @@
 import AxiosService from "../services/axios.service";
 
-import { actSetLoading } from "./loading.action";
+import { actSetLoadingData } from "./loading-data.action";
+// import { } from
 import { dispatchError } from "./dispatch-error";
 
 export const GET_EXERCISE__DETAIL_FINISH = "GET_EXERCISE__DETAIL_FINISH";
@@ -9,7 +10,7 @@ const actGetExerciseDetailFinish = (exercise) => ({ type: GET_EXERCISE__DETAIL_F
 
 export const actGetExamsFinishReq = (id, token) => async (dispatch) => {
   try {
-    dispatch(actSetLoading(true));
+    dispatch(actSetLoadingData(true));
     const { data } = await AxiosService.getAuth(
       `/v1/bai-tap/xem-diem/${id}`,
       token
@@ -17,13 +18,12 @@ export const actGetExamsFinishReq = (id, token) => async (dispatch) => {
     console.log('data', data);
     if (data.success) {
       dispatch(actGetExerciseDetailFinish(data.bai_tap));
-      dispatch(actSetLoading(false));
+      dispatch(actSetLoadingData(false));
     }
   } catch (error) {
-    dispatch(actSetLoading(false));
-    console.log("error", error);
+    dispatch(actSetLoadingData(false));
     dispatchError(error.status, error.data, dispatch);
   } finally {
-    dispatch(actSetLoading(false));
+    dispatch(actSetLoadingData(false));
   }
 };

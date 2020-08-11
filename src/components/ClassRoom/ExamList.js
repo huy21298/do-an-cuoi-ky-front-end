@@ -8,12 +8,14 @@ import ExamItemFinish from "./ExamItemFinish";
 import { actGetExamsReq } from "../../actions/exam.action";
 import { actGetExamsFinishReq } from "../../actions/exam-finish.action";
 import { actGetLoading } from "../../actions/loading.action";
+import { actGetTokenFromLocal } from '../../actions/token.action';
 
 const ClassRoomItemsList = ({ typeExam }) => {
   const dispatch = useDispatch();
   const exam = useSelector((state) => state.exam);
   const examFinish = useSelector((state) => state.examFinish);
   const loading = useSelector((state) => state.loading);
+  const { token } = useSelector((state) => state.token);
   const { id } = useParams();
   
   const actBaiThi = {
@@ -24,9 +26,10 @@ const ClassRoomItemsList = ({ typeExam }) => {
 
   useEffect(() => {
     const actGet = actBaiThi[typeExam];
-    dispatch(actGet(id));
+    dispatch(actGetTokenFromLocal());
+    dispatch(actGet(id, token));
     dispatch(actGetLoading());
-  }, [typeExam]);
+  }, [typeExam, token]);
 
   return (
     <section className="class-detail-notice-list">

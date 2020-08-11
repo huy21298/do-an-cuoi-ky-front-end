@@ -27,6 +27,7 @@ import { exercisesNotFinishReducer as exercisesNotFinish } from "./exercises-not
 import { examTimeReducer as examTime } from "./exam-time.reducer";
 import { isShowMessageReducer as isShowMessage } from "./is-show-message.reducer";
 import { exerciseFinishDetailReducer as exerciseFinishDetail } from "./exercise-finish-detail.reducer";
+import { loadingDataReducer as loadingData } from "./loading-data.reducer";
 
 export default combineReducers({
   token,
@@ -56,5 +57,6 @@ export default combineReducers({
   infoSend,
   examTime,
   isShowMessage,
-  exerciseFinishDetail
+  exerciseFinishDetail,
+  loadingData
 });
