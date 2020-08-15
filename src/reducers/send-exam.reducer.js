@@ -1,4 +1,4 @@
-import { GET_EXAM_IS_SEND, SET_EXAM_IS_SEND, SEND_EXAM } from '../actions/send-exam.action.js';
+import { GET_EXAM_IS_SEND, SET_EXAM_IS_SEND, SEND_EXAM, CHANGE_EXAM_SEND } from '../actions/send-exam.action.js';
 
 export const init = [];
 
@@ -13,6 +13,7 @@ export const sendExamReducer = (state = init, { type, payload }) => {
     }
     case SET_EXAM_IS_SEND: {
       const { question } = payload;
+      console.log('state', state);
       const index = getIndex(state, question.cau_hoi_id);
       if (state.length <= 0) {
         state.push(question);
@@ -21,9 +22,20 @@ export const sendExamReducer = (state = init, { type, payload }) => {
       } else {
         state[index] = question;
       }
+      console.log('state', state)
       return state;
     }
     case SEND_EXAM: {
+      return state;
+    }
+    case CHANGE_EXAM_SEND: {
+      const { questions } = payload;
+      questions.forEach(item => {
+        const { _id: cau_hoi_id} = item.cau_hoi_id;
+        const { loai } = item;
+        const dap_an = "-999";
+        state.push({cau_hoi_id, loai, dap_an});
+      })
       return state;
     }
     default:

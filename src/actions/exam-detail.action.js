@@ -4,6 +4,7 @@ import { getTokenFromLocal } from "../reducers/token.reducer";
 import { actSetLoading } from "./loading.action";
 import { actSetCode } from "./error-test.action";
 import { actSetExamTime } from './exam-time.action';
+import { actChangeExamSend } from './send-exam.action';
 
 import { dispatchError } from "./dispatch-error";
 
@@ -21,6 +22,7 @@ export const actGetExamReq = (id_bai_thi) => async (dispatch) => {
       token
     );
     if (data.success) {
+      dispatch(actChangeExamSend(data.data.bai_thi.ds_cau_hoi));
       dispatch(actGetExam(data.data.bai_thi));
       dispatch(actSetLoading(false));
       dispatch(actSetCode({ code: "NONE" }));

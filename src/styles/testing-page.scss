@@ -4,18 +4,26 @@ html {
   scroll-behavior: smooth;
 }
 
+
+
 .upper-case {
   text-transform: uppercase;
 }
 
+.mr-1 {
+  margin-right: 10px !important
+}
+
 .testing-page {
   margin-top: 1.3em;
-
   &-left {
     margin-right: 20px;
     background: $light-color;
     border-radius: 8px;
     box-shadow: 2px 3px 10px #c2c2c2 !important;
+    position: fixed;
+    width: 350px;
+    height: 465px;
     .header,
     .body {
       margin: 0 30px;
@@ -54,6 +62,22 @@ html {
           border: 1px solid $primary-color;
           transition: all .225s cubic-bezier(0.645, 0.045, 0.355, 1);
           text-decoration: none;
+          &.wrong {
+            border: 1px solid $red-color;
+            color: $red-color;
+            &:hover {
+              background: $red-color;
+              color: $light-color;
+            }
+          }
+          &.exact {
+            border: 1px solid $green-color;
+            color: $green-color;
+            &:hover {
+              background: $green-color;
+              color: $light-color
+            }
+          }
           &:hover {
             border: 1px solid $light-color;
             color: $light-color;
@@ -149,6 +173,12 @@ html {
   font-size: 17px;
   user-select: none;
   box-shadow: 2px 3px 10px #c2c2c2 !important;
+  &.wrong {
+    border: 2px solid $red-color
+  }
+  &.exact {
+    border: 2px solid $green-color
+  }
   .title {
     .question-number, .score {
       color: $red-color;
@@ -170,13 +200,23 @@ html {
       .tick-icon {
         margin-right: 10px;
         cursor: pointer;
+        &.finish {
+          cursor: "default"
+        }
         .tick {
           color: $green-color;
         }
         .un-tick {
           color: $color-title
         }
+        .wrong {
+          color: $red-color
+        }
       }
     }
   }
+}
+
+.text-error {
+  border: 1px solid red
 }

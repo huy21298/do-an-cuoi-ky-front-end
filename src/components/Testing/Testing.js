@@ -4,7 +4,8 @@ import RightSection from "./RightSection";
 import Grid from "@material-ui/core/Grid";
 
 const Testing = ({ time, date, questions, exam }) => {
-  console.log('question', questions)
+  console.log('question', questions);
+  console.log('exam', exam);
   return (
     <Grid container component="section">
       <Grid item md={4} component="section">

@@ -31,7 +31,6 @@ const LeftSection = ({ questions, date, time }) => {
   const history = useHistory();
   const { token } = getTokenFromLocal();
   const { lop_hoc_id, bai_thi_id } = useParams();
-  console.log('lop_hoc_id', lop_hoc_id)
   const info = useSelector((state) => state.info);
   const sendExam = useSelector((state) => state.sendExam);
   const examTime = useSelector((state) => state.examTime);
@@ -60,8 +59,8 @@ const LeftSection = ({ questions, date, time }) => {
         dispatch(actDecreaseExamTime(examTime - 1));
       }, 1000);
     } else {
-      setOpenDialogDirect(true);
       setMsg("Đã hết giờ làm bài, bài thi đã được gửi cho giáo viên");
+      setOpenDialogDirect(true);
       async function sendBaiThi() {
         const sendData = {
           bai_thi_id,
@@ -70,7 +69,6 @@ const LeftSection = ({ questions, date, time }) => {
           bai_thi_sinh_vien: sendExam,
           da_cham_diem: false,
         };
-        console.log('sendData', sendData)
         const jsonData = JSON.stringify(sendData);
         try {
           const { data } = await AxiosService.postAuth(
@@ -97,9 +95,8 @@ const LeftSection = ({ questions, date, time }) => {
     const countBaiThi = questions.length;
     const baiThiSinhVien = sendExam.length;
 
-    const blank = sendExam.some((item) => item.dap_an.length < 1);
-
-    if (countBaiThi > baiThiSinhVien || blank) {
+    const blank = sendExam.some((item) => item.dap_an.length < 1 || item.dap_an === "-999");
+    if (blank) {
       setOpenDialog(true);
       setMsg("Bài thi chưa được hoàn thành, hãy điền đáp án và thử lại");
     } else {

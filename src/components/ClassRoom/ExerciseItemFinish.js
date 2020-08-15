@@ -18,6 +18,8 @@ import { actGetExamsFinishReq } from '../../actions/exercise-finish-detail.actio
 import { actGetTokenFromLocal } from '../../actions/token.action';
 import { actGetLoadingData } from '../../actions/loading-data.action';
 
+import { showToastError } from '../../services/toast.service';
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -53,13 +55,16 @@ const ExerciseItemFinish = ({ exercise, loading }) => {
     setOpenExercise(false);
   };
   const handleOpen = () => {
-    dispatch(actGetExamsFinishReq(exercise.bai_tap_id.id, token.token));
     // setOpenExercise(true);
-
-    if (loadingData === false) {
-      setOpenExercise(true);
-      console.log('openExercise')
+    if (exercise.da_cham_diem) {
+      dispatch(actGetExamsFinishReq(exercise.bai_tap_id.id, token.token));
+      if (loadingData === false) {
+        setOpenExercise(true);
+      }
+    } else {
+      showToastError("Bài tập chưa được chấm điểm")
     }
+    
   };
   return (
     <React.Fragment>

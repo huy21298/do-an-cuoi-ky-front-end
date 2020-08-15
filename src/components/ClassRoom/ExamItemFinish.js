@@ -24,14 +24,16 @@ const ExamItemFinish = ({ exam, loading }) => {
   const { bai_thi_id: baiThi } = exam;
   const statusStyle = classnames({
     status: true,
-    done: baiThi.da_cham_diem,
-    "in-process": !baiThi.da_cham_diem
-  })
+    done: exam.da_cham_diem,
+    "in-process": !exam.da_cham_diem
+  });
   const history = useHistory();
-  const { id } = useParams();
+  const {id: bai_thi_id } = baiThi;
+  const {id: lop_hoc_id} = useParams();
   const classes = useStyles();
   const onRedirectToTesting = () => {
-    if (baiThi.da_cham_diem) {
+    if (exam.da_cham_diem) {
+      history.push(`/lop-hoc/${lop_hoc_id}/bai-thi/${bai_thi_id}/xem-diem`)
     } else {
       showToastError("Bài thi chưa được chấm!")
     }
@@ -45,7 +47,7 @@ const ExamItemFinish = ({ exam, loading }) => {
           subheader={getDeadline(loading, baiThi.ngay_thi_format)}
         />
         <CardActions disableSpacing>
-          {getActive(loading, statusStyle, baiThi.da_cham_diem)}
+          {getActive(loading, statusStyle, exam.da_cham_diem)}
         </CardActions>
       </Card>
     </Grid>
