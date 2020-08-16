@@ -31,6 +31,7 @@ const ExamFinishPage = () => {
   const loading = useSelector((state) => state.loading);
   const { bai_thi: baiThi, ct_bai_thi: ctBaiThi } = examFinishDetail;
 
+  console.log('examFinishDetail', examFinishDetail);
 
   useEffect(() => {
     dispatch(actGetTokenFromLocal());
@@ -125,7 +126,9 @@ const soCauSai = baiThi => {
 }
 
 const mapCauHoi = (baiThi, loading) => {
+  console.log('baiThi', baiThi);
   return baiThi.map((item, index) => {
+    console.log('item', item)
     const CauHoi = item.loai === "TracNghiem" ? Question1 : Question2;
     return <CauHoi cauHoi={item} key={index} index={index + 1} loading={loading} />
   })

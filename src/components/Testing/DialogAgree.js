@@ -70,7 +70,7 @@ export default function DialogAgree({ open, handleClose, msg }) {
           <Typography gutterBottom>{msg}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => history.goBack()} color="primary">
+          <Button autoFocus onClick={() => history.push("/")} color="primary">
             Xác nhận
           </Button>
         </DialogActions>

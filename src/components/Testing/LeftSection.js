@@ -120,6 +120,7 @@ const LeftSection = ({ questions, date, time }) => {
           setLoading(false);
           setOpen(true);
           setMsg(data.msg);
+          document.exitFullscreen();
         }
       } catch (e) {
         console.log("e", e);

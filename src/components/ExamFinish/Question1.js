@@ -13,7 +13,6 @@ const Question1 = ({ cauHoi, index, loading }) => {
     cau_tra_loi: cauTraLoi,
   } = cauHoi;
   const { dap_an: dapAn } = ctCauHoi;
-  console.log("loading", loading);
   const questionItemStyle = classnames({
     "question-item": true,
     wrong: dungSai === false,
@@ -53,7 +52,7 @@ const Question1 = ({ cauHoi, index, loading }) => {
         )}
       </div>
       <section className="answere type1" id={`qanswere`}>
-        {mapLuaChon(ctCauHoi.lua_chon, dungSai, cauTraLoi, dapAn.id)}
+        {mapLuaChon(ctCauHoi.lua_chon, dungSai, cauTraLoi, dapAn?.id ?? "-1")}
       </section>
     </section>
   );

@@ -17,7 +17,7 @@ const Question1 = ({ question, index }) => {
     dispatch(actSetExamSend(sendQuestion));
   };
   return (
-    <section className="question-item" id={`q-${index}`}>
+    <section className="question-item" id={`q${index}`}>
       <div className="title" id={`q${index}-title`}>
         <span className="question-number" id={`q${index}-question-number`}>Câu {index}:</span>
         <span className="score" id={`q${index}-score`}>({question.cau_hoi_id.diem} điểm)</span>

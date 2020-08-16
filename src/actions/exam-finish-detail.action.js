@@ -22,6 +22,7 @@ export const actGetExamFinishDetailReq = (idLopHoc, idBaiThi, token) => async (
     );
     dispatch(actSetLoading(false));
     if (data.success) {
+      // console.log('data', data);
       dispatch(actSetExamFinishDetail(data.data));
     }
   } catch (error) {

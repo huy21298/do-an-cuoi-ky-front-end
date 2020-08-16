@@ -71,10 +71,13 @@ const init = {
 export const examFinishDetailReducer = (state = init, { type, payload }) => {
   switch (type) {
     case GET_EXAM_FINISH_DETAIL: {
-      return payload.exam;
+      // return payload.exam;
+      return state;
     }
     case SET_EXAM_FINISH_DETAIL: {
+      // console.log(' set payload.exam', payload.exam);
       return payload.exam
+      // return state;
     }
     default:
       return state;

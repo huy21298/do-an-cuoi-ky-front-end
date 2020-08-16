@@ -77,8 +77,8 @@ const ProfileStudentPage = () => {
             <section className="profile-detail contact">
               <h2 className="profile-detail-title">Thông tin liên hệ</h2>
               <section className="profile-detail-content">
-                <ProfileItem alias="email" changeInfo={changeInfo} label="Email" element={infoSend.email} />
-                <ProfileItem alias="sdt" changeInfo={changeInfo} label="Liên hệ" element={infoSend.sdt} />
+                <ProfileItem alias="email" changeInfo={changeInfo} label="Email" type="email" element={infoSend.email} />
+                <ProfileItem alias="sdt" changeInfo={changeInfo} label="Liên hệ" type="phone" element={infoSend.sdt} />
               </section>
             </section>
             <article className="profile-detail-save">

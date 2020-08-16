@@ -17,32 +17,6 @@ const ProfileItem = ({ label, element, alias , type, changeInfo }) => {
     setIsEdit(false);
     changeInfo(value)
   };
-
-  const validation = (type, label) => {
-    if (type === 'email') {
-      return register({
-        required: `${label} không được để trống`,
-        pattern: {
-          value: /^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/,
-          message: "Email không đúng định dạng",
-        }
-      })
-    }
-    if (type === "phone") {
-      return register({
-        required: `${label} không được để trống`,
-        pattern: {
-          value: /(09|01[2|6|8|9])+([0-9]{8})\b/,
-          message: "Số điện thoại không đúng định dạng",
-        }
-      })
-    } else {
-      return register({
-        required: `${label} không được để trống`
-      })
-    }
-  }
-
   return (
     <Grid container className="profile-detail-item" component="section">
       <Grid item xs={3} sm={3} md={4}>
@@ -62,7 +36,9 @@ const ProfileItem = ({ label, element, alias , type, changeInfo }) => {
               variant="outlined"
               fullWidth={true}
               type={type}
-              inputRef={validation(type, label)}
+              inputRef={register({
+                required: `${label} không được để trống`
+              })}
               helperText={errors[alias]?.message}
               // type="datetime-local"
             />
