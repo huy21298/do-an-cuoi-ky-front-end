@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import enviroment from '../../environments/enviroment';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-const ProfileItemAvatar = ({handleClickOpen }) => {
+const ProfileItemAvatar = ({handleClickOpen, value }) => {
   const classes = useStyles();
   return (
     <Grid container className="profile-detail-item" component="section" onClick={handleClickOpen}>
@@ -23,7 +24,7 @@ const ProfileItemAvatar = ({handleClickOpen }) => {
 
       <Grid item xs={7} sm={7} md={6}>
         <Avatar
-          src="https://www.w3schools.com/howto/img_avatar.png"
+          src={`${enviroment.url.back_end}/avatar/${value}`}
           className={classes.large}
         />
       </Grid>

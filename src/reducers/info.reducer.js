@@ -1,4 +1,4 @@
-import { GET_INFO, SET_INFO } from "../actions/info.action.js";
+import { GET_INFO, SET_INFO, CHANGE_AVATAR } from "../actions/info.action.js";
 
 export const init = {
   anh_dai_dien: "",
@@ -22,6 +22,10 @@ export const infoReducer = (state = init, { type, payload }) => {
     }
     case SET_INFO: {
       return payload.info
+    }
+    case CHANGE_AVATAR: {
+      const { anh_dai_dien } = payload;
+      return {...state, anh_dai_dien};
     }
     default:
       return state;

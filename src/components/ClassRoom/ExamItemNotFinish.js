@@ -1,11 +1,9 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Tooltip from '@material-ui/core/Tooltip';
@@ -18,16 +16,12 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ClassRoomItem = ({ exam, loading }) => {
+const ExamItemNotFinish = ({ exam, loading }) => {
   console.log('exam', exam);
-  const history = useHistory();
-  const { id } = useParams();
   const classes = useStyles();
-  const onRedirectToTesting = () => {
-    history.push(`/${id}/bai-thi/${exam._id}`)
-  };
+  
   return (
-    <Grid item xs={12} sm={12} md={4} lg={4} onClick={onRedirectToTesting}>
+    <Grid item xs={12} sm={12} md={4} lg={4}>
       <Tooltip title={exam.tieu_de}>
         <Card className={classes.root} elevation={3}>
           <CardHeader
@@ -36,7 +30,7 @@ const ClassRoomItem = ({ exam, loading }) => {
             subheader={getDeadline(loading, exam.ngay_thi_format)}
           />
           <CardActions disableSpacing>
-            {getBtnAction(loading)}
+            {getActive(loading, "test")}
           </CardActions>
         </Card>
       </Tooltip>
@@ -75,14 +69,12 @@ const getDeadline = (loading, deadline) => {
   );
 };
 
-const getBtnAction = (loading) => {
+const getActive = (loading, active) => {
   return loading ? (
     <Skeleton animation="wave" height={30} width="50%" />
   ) : (
-    <Button size="large" color="primary">
-      Đi đến bài thi
-    </Button>
+    <span className="done exam-not-finish">Chưa hoàn thành</span>
   );
 };
 
-export default ClassRoomItem;
+export default ExamItemNotFinish;

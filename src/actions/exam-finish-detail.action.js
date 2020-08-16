@@ -14,11 +14,13 @@ export const actSetExamFinishDetail = (exam) => ({
 export const actGetExamFinishDetailReq = (idLopHoc, idBaiThi, token) => async (
   dispatch
 ) => {
+  dispatch(actSetLoading(true))
   try {
     const { data } = await AxiosService.getAuth(
       `/v1/bai-thi/xem-diem?lop_hoc_id=${idLopHoc}&bai_thi_id=${idBaiThi}`,
       token
     );
+    dispatch(actSetLoading(false));
     if (data.success) {
       dispatch(actSetExamFinishDetail(data.data));
     }

@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Skeleton from "@material-ui/lab/Skeleton";
 import classnames from 'classnames';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { showToastError } from '../../services/toast.service';
 
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) =>
 
 const ExamItemFinish = ({ exam, loading }) => {
   const { bai_thi_id: baiThi } = exam;
+  console.log('baiThi', baiThi)
   const statusStyle = classnames({
     status: true,
     done: exam.da_cham_diem,
@@ -40,16 +42,18 @@ const ExamItemFinish = ({ exam, loading }) => {
   };
   return (
     <Grid item xs={12} sm={12} md={4} lg={4} onClick={onRedirectToTesting}>
-      <Card className={classes.root} elevation={3}>
-        <CardHeader
-          avatar={getIcon(loading)}
-          title={getTitle(loading, baiThi.tieu_de)}
-          subheader={getDeadline(loading, baiThi.ngay_thi_format)}
-        />
-        <CardActions disableSpacing>
-          {getActive(loading, statusStyle, exam.da_cham_diem)}
-        </CardActions>
-      </Card>
+      <Tooltip title={baiThi.tieu_de}>
+        <Card className={classes.root} elevation={3}>
+          <CardHeader
+            avatar={getIcon(loading)}
+            title={getTitle(loading, baiThi.tieu_de_format)}
+            subheader={getDeadline(loading, baiThi.ngay_thi_format)}
+          />
+          <CardActions disableSpacing>
+            {getActive(loading, statusStyle, exam.da_cham_diem)}
+          </CardActions>
+        </Card>
+      </Tooltip>
     </Grid>
   );
 };

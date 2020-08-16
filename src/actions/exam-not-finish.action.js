@@ -1,24 +1,21 @@
 import AxiosService from "../services/axios.service";
-import { getTokenFromLocal } from "../reducers/token.reducer";
 
 import { actSetLoading } from "./loading.action";
 import { dispatchError } from "./dispatch-error";
 
 export const GET_EXAM_NOT_FINISH = "GET_EXAM_NOT_FINISH";
 
-const { token } = getTokenFromLocal();
+const actGetExamsNotFinish = (exam) => ({ type: GET_EXAM_NOT_FINISH, exam });
 
-const actGetExamsFinish = (exam) => ({ type: GET_EXAM_NOT_FINISH, exam });
-
-export const actGetExamsFinishReq = (id) => async (dispatch) => {
+export const actGetExamsNotFinishReq = (id_lop_hoc, token) => async (dispatch) => {
   try {
     dispatch(actSetLoading(true));
     const { data } = await AxiosService.getAuth(
-      `/v1/lop-hoc/${id}/bai-thi-hoan-thanh`,
+      `/v1/lop-hoc/${id_lop_hoc}/bai-thi-khong-hoan-thanh`,
       token
     );
     if (data.success) {
-      dispatch(actGetExamsFinish(data.bai_thi));
+      dispatch(actGetExamsNotFinish(data.bai_thi))
       dispatch(actSetLoading(false));
     }
   } catch (error) {

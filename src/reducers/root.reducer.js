@@ -29,6 +29,7 @@ import { isShowMessageReducer as isShowMessage } from "./is-show-message.reducer
 import { exerciseFinishDetailReducer as exerciseFinishDetail } from "./exercise-finish-detail.reducer";
 import { loadingDataReducer as loadingData } from "./loading-data.reducer";
 import { examFinishDetailReducer as examFinishDetail } from "./exam-finish-detail.reducer";
+import { examNotFinishReducer as examNotFinish } from "./exam-not-finish.reducer";
 
 export default combineReducers({
   token,
@@ -60,5 +61,6 @@ export default combineReducers({
   isShowMessage,
   exerciseFinishDetail,
   loadingData,
-  examFinishDetail
+  examFinishDetail,
+  examNotFinish
 });

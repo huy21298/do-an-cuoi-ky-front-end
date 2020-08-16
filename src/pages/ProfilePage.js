@@ -12,7 +12,6 @@ import PopupUploadAvatar from "../components/ClassRoom/PopupUploadAvatar";
 import DialogConfirm from '../components/ClassRoom/DialogConfirm';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 import { actGetInfo } from '../actions/info.action';
 import { actGetInfoSend, actUpdateInfoSend } from '../actions/info-send.action';
 
@@ -63,7 +62,7 @@ const ProfileStudentPage = () => {
             <section className="profile-detail">
               <h2 className="profile-detail-title">Hồ sơ</h2>
               <section className="profile-detail-content">
-                <ProfileItemAvatar handleClickOpen={handleClickOpen} />
+                <ProfileItemAvatar handleClickOpen={handleClickOpen} value={info.anh_dai_dien} />
                 <ProfileItem alias="ho" changeInfo={changeInfo} type="text" label="Họ" element={infoSend.ho} />
                 <ProfileItem alias="ten" changeInfo={changeInfo} type="text" label="Tên" element={infoSend.ten} />
                 <ProfileItemDate element={infoSend.ngay_sinh} changeInfo={changeInfo} element_format={infoSend.ngay_sinh_format} />
@@ -94,7 +93,7 @@ const ProfileStudentPage = () => {
           </Grid>
         </Grid>
       </Grid>
-      <PopupUploadAvatar handleClose={handleClose} open={openPopup} />
+      <PopupUploadAvatar value={info.anh_dai_dien} handleClose={handleClose} open={openPopup} />
       <DialogConfirm open={openConfirm} handleCloseConfirm={handleCloseConfirm} info={infoSend} />
     </Container>
   );

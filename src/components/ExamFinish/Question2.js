@@ -1,25 +1,37 @@
 import React from "react";
-import classnames from 'classnames';
-
+import classnames from "classnames";
 import TextField from "@material-ui/core/TextField";
-const Question2 = ({ cauHoi, index}) => {
-  const {dung_sai: dungSai, cau_tra_loi: cauTraLoi, cau_hoi_id: ctCauHoi} = cauHoi;
+import Skeleton from "@material-ui/lab/Skeleton";
+
+const Question2 = ({ cauHoi, index, loading }) => {
+  const {
+    dung_sai: dungSai,
+    cau_tra_loi: cauTraLoi,
+    cau_hoi_id: ctCauHoi,
+  } = cauHoi;
   const questionItemStyle = classnames({
     "question-item": true,
-    "wrong": dungSai === false,
-    "exact": dungSai === true
-  })
+    wrong: dungSai === false,
+    exact: dungSai === true,
+  });
   return (
     <section className={questionItemStyle} id={`q${index}`}>
       <div className="title" id={`title-$`}>
-        <span className="question-number" id={`question-number-`}>
-          Câu {index}:
-        </span>
+        {loading ? (
+          <Skeleton
+            animation="wave"
+            height={30}
+            width="60%"
+            style={{ marginBottom: 6 }}
+          />
+        ) : (
+          "Câu" + index
+        )}
         <span className="score" id={`score-`}>
           {ctCauHoi.diem} điểm
         </span>
         <span className="content" id={`content-`}>
-        {ctCauHoi.noi_dung}
+          {ctCauHoi.noi_dung}
         </span>
       </div>
       <section className="answere type1" id={`answere-a `}>

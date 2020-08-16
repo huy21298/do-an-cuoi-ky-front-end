@@ -4,7 +4,8 @@ export const init = [{
   _id: "",
   ho: "",
   ten: "",
-  hoten: ""
+  hoten: "",
+  anh_dai_dien: ""
 }]
 
 export const studentReducer = (state = init, { type, students }) => {

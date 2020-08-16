@@ -6,20 +6,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import MailIcon from "@material-ui/icons/Mail";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
-import clsx from "clsx";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { TabsNavigation } from "./TabsNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import PopUpAddClass from "./PopUpAddClass";
 import { useHistory, Link } from 'react-router-dom';
@@ -28,6 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 import { actGetInfo, actSetInfoReq } from "../../actions/info.action";
 import { actResetToken, actGetTokenFromLocal } from '../../actions/token.action';
+import { TabsNavigation } from "./TabsNavigation";
+import enviroment from '../../environments/enviroment';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -116,6 +106,7 @@ export default function Header() {
   const [state, setState] = React.useState(false);
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
   const info = useSelector(state => state.info);
   const displayTabNavigation = useSelector(
     (state) => state.displayTabNavigation
@@ -125,6 +116,7 @@ export default function Header() {
   useEffect(() => {
     dispatch(actGetTokenFromLocal());
     dispatch(actGetIsDisplayTab());
+    dispatch(actGetInfo());
     dispatch(actSetInfoReq(token));
   }, [token]);
 
@@ -159,17 +151,6 @@ export default function Header() {
 
   const onOpenPopup = () => {
     setOpenPopup(true);
-  };
-
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState(open);
   };
 
   const menuId = "primary-search-account-menu";
@@ -213,7 +194,7 @@ export default function Header() {
         >
           <Avatar
             className="avatar-custom"
-            src={avatar}
+            src={`${enviroment.url.back_end}/avatar/${info.anh_dai_dien}`}
           />
         </IconButton>
       </MenuItem>
@@ -243,7 +224,7 @@ export default function Header() {
             >
               <Avatar
                 className="avatar-custom"
-                src={info.anh_dai_dien}
+                src={`${enviroment.url.back_end}/avatar/${info.anh_dai_dien}`}
               />
             </IconButton>
           </div>

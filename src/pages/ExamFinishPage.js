@@ -85,7 +85,7 @@ const ExamFinishPage = () => {
               <Grid item md={1} />
             </Grid>
             <section className="body">
-              {mapCauHoi(baiThi.chi_tiet_bai_lam)}
+              {mapCauHoi(baiThi.chi_tiet_bai_lam, loading)}
             </section>
           </div>
         </Grid>
@@ -116,10 +116,10 @@ const soCauSai = baiThi => {
   return baiThi.filter(item => item.dung_sai === false).length;
 }
 
-const mapCauHoi = baiThi => {
+const mapCauHoi = (baiThi, loading) => {
   return baiThi.map((item, index) => {
     const CauHoi = item.loai === "TracNghiem" ? Question1 : Question2;
-    return <CauHoi cauHoi={item} key={index} index={index + 1} />
+    return <CauHoi cauHoi={item} key={index} index={index + 1} loading={loading} />
   })
 }
 
