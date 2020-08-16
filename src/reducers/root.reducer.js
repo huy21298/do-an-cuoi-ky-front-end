@@ -30,6 +30,7 @@ import { exerciseFinishDetailReducer as exerciseFinishDetail } from "./exercise-
 import { loadingDataReducer as loadingData } from "./loading-data.reducer";
 import { examFinishDetailReducer as examFinishDetail } from "./exam-finish-detail.reducer";
 import { examNotFinishReducer as examNotFinish } from "./exam-not-finish.reducer";
+import { displayHeaderReducer as displayHeader } from "./display-header.reducer";
 
 export default combineReducers({
   token,
@@ -62,5 +63,6 @@ export default combineReducers({
   exerciseFinishDetail,
   loadingData,
   examFinishDetail,
-  examNotFinish
+  examNotFinish,
+  displayHeader
 });

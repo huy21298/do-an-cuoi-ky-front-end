@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { actGetInfo } from '../actions/info.action';
 import { actGetInfoSend, actUpdateInfoSend } from '../actions/info-send.action';
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
 
 import "../styles/profile-page.scss";
 
@@ -31,6 +32,7 @@ const ProfileStudentPage = () => {
   useEffect(() => {
     dispatch(actGetInfo());
     dispatch(actGetInfoSend());
+    dispatch(actSetIsDisplayHeader(true));
   }, []);
 
   const handleClickOpen = () => {

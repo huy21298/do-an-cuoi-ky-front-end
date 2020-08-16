@@ -15,6 +15,7 @@ import TestingPageFinish from "./pages/TestingPageFinish";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
 import ExamFinishPage from "./pages/ExamFinishPage";
+import TimeLeftPage from "./pages/TimeLeftPage";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -77,8 +78,8 @@ const routes = [
   {
     path: "/test",
     exact: true,
-    authen: true,
-    render: () => <ExamFinishPage />
+    authen: false,
+    render: () => <TimeLeftPage />
   },
   {
     path: "/lop-hoc/:lop_hoc_id/bai-thi/:bai_thi_id/xem-diem",

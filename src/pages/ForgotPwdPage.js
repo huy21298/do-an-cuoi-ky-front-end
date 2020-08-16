@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import ForgotPassword from "../components/Login/ForgotPassword";
 import SendMail from "../components/Login/SendMail";
 import { actGetAuthenticate } from "../actions/authenticate.action";
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
 
 import "../styles/login-page.scss";
 
@@ -20,6 +21,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     dispatch(actGetAuthenticate());
+    dispatch(actSetIsDisplayHeader(false));
   }, []);
   return authenticate ? (
     <Redirect to="/danh-sach-lop-hoc" />

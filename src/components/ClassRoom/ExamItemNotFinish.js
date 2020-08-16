@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ExamItemNotFinish = ({ exam, loading }) => {
-  console.log('exam', exam);
   const classes = useStyles();
   
   return (

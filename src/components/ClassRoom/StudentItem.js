@@ -5,7 +5,6 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import enviroment from '../../environments/enviroment';
 
 const StudentItem = ({ student, loading }) => {
-    console.log("student", student);
   return (
     <Grid item md={6}>
       <section className="student-item">

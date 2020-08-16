@@ -47,23 +47,24 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
   const [active, setActive] = React.useState(false);
   
   const nopBaiTap = async (e) => {
-    setActive(true);
-    try {
-      const { data } = await AxiosService.postAuth(
-        `/v1/bai-tap/nop-bai`,
-        { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
-        token
-      );
-      if (data.success) {
-        showToastSuccess(data.msg)
-        dispatch(actGetExercisesReq(infoClass._id));
-        handleClose();
-      }
-    } catch {
-      setActive(false);
-    } finally {
-      setActive(false);
-    }
+    console.log(e);
+    // setActive(true);
+    // try {
+    //   const { data } = await AxiosService.postAuth(
+    //     `/v1/bai-tap/nop-bai`,
+    //     { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
+    //     token
+    //   );
+    //   if (data.success) {
+    //     showToastSuccess(data.msg)
+    //     dispatch(actGetExercisesReq(infoClass._id));
+    //     handleClose();
+    //   }
+    // } catch {
+    //   setActive(false);
+    // } finally {
+    //   setActive(false);
+    // }
   };
 
   const styleButton = classnames({
@@ -139,6 +140,7 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     className={styleButton}
                     onClick={nopBaiTap}
                     disabled={active}
+                    style={{ height: "40px"}}
                   >
                     {" "}
                     Nộp{" "}

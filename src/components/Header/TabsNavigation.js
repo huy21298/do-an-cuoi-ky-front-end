@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { actGetIDClass } from '../../actions/class-id.action';
 
-export function TabsNavigation() {
+export default function TabsNavigation() {
   const [value, setValue] = React.useState(0);
   const classID = useSelector(state => state.classID);
   const dispatch = useDispatch();
@@ -34,25 +34,5 @@ export function TabsNavigation() {
         <Tab label='Bạn học cùng lớp' component={Link} to={`/lop-hoc/${classID}/danh-sach-sinh-vien`} />
       </Tabs>
     </>
-  );
-}
-
-export function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      aria-labelledby={`nav-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
   );
 }

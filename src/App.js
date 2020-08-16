@@ -5,11 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/Header/Header";
 
-import { actGetAuthenticate } from "./actions/authenticate.action";
 import { actGetError401 } from "./actions/errors/401.action";
 import { actGetError500 } from "./actions/errors/500.action";
 import { actGetError403 } from "./actions/errors/403.action";
-import { actResetToken } from "./actions/token.action";
+import { actGetIsDisplayHeader } from "./actions/display-header.action";
 import { showToastError } from './services/toast.service';
 
 import "react-toastify/dist/ReactToastify.css";
@@ -24,18 +23,17 @@ function usePrevious(value) {
 
 function App() {
   const history = useHistory();
-  const authenticate = useSelector((state) => state.authenticate);
+  const displayHeader = useSelector(state => state.displayHeader)
   const error401 = useSelector((state) => state.error401);
   const error403 = useSelector((state) => state.error403);
   const error500 = useSelector((state) => state.error500);
   const prevError500 = usePrevious(error500)
-  // console.log('error500', error500)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actGetAuthenticate());
     dispatch(actGetError401());
     dispatch(actGetError500());
     dispatch(actGetError403());
+    dispatch(actGetIsDisplayHeader());
   }, []);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ function App() {
 
   return (
     <div className="App">
-      {authenticate && <Header />}
+      {displayHeader && <Header />}
       <ToastContainer />
       <Routes />
     </div>

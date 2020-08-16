@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const ClassRoomItem = ({ exam, loading }) => {
-  console.log('exam', exam);
   const history = useHistory();
   const { id } = useParams();
   const classes = useStyles();
@@ -49,7 +48,7 @@ const getIcon = (loading) => {
     <Skeleton animation="wave" variant="circle" width={55} height={55} />
   ) : (
     <div className="wrap-icon">
-      <AssignmentIcon class="icon-exam" />
+      <AssignmentIcon className="icon-exam" />
     </div>
   );
 };

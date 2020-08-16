@@ -16,22 +16,30 @@ import Question2 from "../components/ExamFinish/Question2";
 import { actGetTokenFromLocal } from "../actions/token.action";
 import { actGetExamFinishDetailReq } from "../actions/exam-finish-detail.action";
 import { actGetLoading } from "../actions/loading.action";
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
+import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
+import { actSetIDClass } from "../actions/class-id.action";
 
 import "../styles/testing-page.scss";
 
 const ExamFinishPage = () => {
   const dispatch = useDispatch();
   const { lop_hoc_id, bai_thi_id } = useParams();
+
   const { token } = useSelector((state) => state.token);
   const examFinishDetail = useSelector((state) => state.examFinishDetail);
   const loading = useSelector((state) => state.loading);
   const { bai_thi: baiThi, ct_bai_thi: ctBaiThi } = examFinishDetail;
 
+
   useEffect(() => {
     dispatch(actGetTokenFromLocal());
     dispatch(actGetExamFinishDetailReq(lop_hoc_id, bai_thi_id, token));
     dispatch(actGetLoading());
-  }, []);
+    dispatch(actSetIsDisplayTab(true));
+    dispatch(actSetIsDisplayHeader(true))
+    dispatch(actSetIDClass(lop_hoc_id));
+  }, [token]);
 
   return (
     <Container component="section" className="testing-page">

@@ -5,6 +5,7 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import FormLogin from "../components/Login/FormLogin";
 import { actGetAuthenticate } from "../actions/authenticate.action";
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
 
 import "../styles/login-page.scss";
 
@@ -15,6 +16,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     dispatch(actGetAuthenticate());
+    dispatch(actSetIsDisplayHeader(false));
   }, []);
   
   return authenticate ? (

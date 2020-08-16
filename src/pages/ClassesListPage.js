@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 // import ClassItem from '../components/ClassesList/ClassItem';
 import ClassItem from "../components/ClassesList/ClassItem";
@@ -7,10 +7,10 @@ import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
 import { actGetClassesReq } from "../actions/classes.action";
 import { actGetLoading } from "../actions/loading.action";
 import { actGetMessage } from "../actions/error-message.action";
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
 
-import { showToastError, showToastSuccess } from '../services/toast.service';
+import { showToastError } from '../services/toast.service';
 
-import { toast } from 'react-toastify';
 
 import "../styles/class-room.scss";
 
@@ -22,8 +22,9 @@ const ClassRoomPage = () => {
   useEffect(() => {
     dispatch(actGetLoading());
     dispatch(actGetClassesReq());
-    dispatch(actSetIsDisplayTab(false));
     dispatch(actGetMessage());
+    dispatch(actSetIsDisplayTab(false));
+    dispatch(actSetIsDisplayHeader(true))
   }, []);
 
   useEffect(() => {

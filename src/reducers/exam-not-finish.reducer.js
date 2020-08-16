@@ -15,7 +15,6 @@ export const init = [
 export const examNotFinishReducer = (state = init, { type, exam }) => {
   switch (type) {
     case GET_EXAM_NOT_FINISH: {
-      console.log('type', type);
       return exam;
     }
     default:

@@ -16,7 +16,8 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import { actSetIsDisplayTab } from "../actions/display-tab-navigation.action";
-import { actGetExamsFinishReq } from "../actions/exam.action";
+import { actSetIsDisplayHeader } from "../actions/display-header.action";
+import { actSetIDClass } from "../actions/class-id.action";
 
 import "../styles/class-detail-page.scss";
 import "../styles/common.scss";
@@ -62,6 +63,8 @@ const ClassDetailPage = () => {
 
   useEffect(() => {
     dispatch(actSetIsDisplayTab(true));
+    dispatch(actSetIsDisplayHeader(true));
+    dispatch(actSetIDClass(id));
   });
   return (
     <Container className="class-detail">

@@ -1,9 +1,6 @@
 import AxiosService from "../services/axios.service";
 import { getTokenFromLocal } from "../reducers/token.reducer";
-import { actSetMessage } from "./error-message.action";
-import { actSetAuthenticate } from "./authenticate.action";
 import { actSetLoading } from "./loading.action";
-import { initToken, setTokenToLocal} from '../reducers/token.reducer';
 
 import { dispatchError } from "./dispatch-error";
 

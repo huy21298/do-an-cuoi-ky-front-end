@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) =>
 
 const ExamItemFinish = ({ exam, loading }) => {
   const { bai_thi_id: baiThi } = exam;
-  console.log('baiThi', baiThi)
   const statusStyle = classnames({
     status: true,
     done: exam.da_cham_diem,

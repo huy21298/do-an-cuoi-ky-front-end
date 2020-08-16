@@ -28,8 +28,8 @@ export const actGetExamReq = (id_bai_thi) => async (dispatch) => {
       dispatch(actSetCode({ code: "NONE" }));
       dispatch(actSetExamTime(data.data.bai_thi.thoi_gian_thi))
     } else {
-      const { code, thoi_gian_con_lai } = data;
-      const payload = { code, time: thoi_gian_con_lai };
+      const { code, thoi_gian_con_lai, ngay_thi } = data;
+      const payload = { code, time: thoi_gian_con_lai, ngay_thi };
       dispatch(actSetCode(payload));
       dispatch(actSetLoading(false));
     }

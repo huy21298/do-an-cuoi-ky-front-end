@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actGetIsDisplayTab } from "../../actions/display-tab-navigation.action";
 import { actGetInfo, actSetInfoReq } from "../../actions/info.action";
 import { actResetToken, actGetTokenFromLocal } from '../../actions/token.action';
-import { TabsNavigation } from "./TabsNavigation";
+import TabsNavigation from "./TabsNavigation";
 import enviroment from '../../environments/enviroment';
 
 const useStyles = makeStyles((theme) =>
@@ -103,7 +103,6 @@ export default function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [state, setState] = React.useState(false);
   const [openPopup, setOpenPopup] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 

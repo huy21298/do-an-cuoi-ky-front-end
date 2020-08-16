@@ -27,8 +27,6 @@ const ClassRoomItemsList = ({ typeExam }) => {
     "khong-hoan-thanh": actGetExamsNotFinishReq,
   };
 
-  console.log('examNotFinish', examNotFinish);
-  console.log('typeExam', typeExam);
 
   useEffect(() => {
     const actGet = actBaiThi[typeExam];
