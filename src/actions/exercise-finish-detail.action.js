@@ -21,8 +21,10 @@ export const actGetExamsFinishReq = (id, token) => async (dispatch) => {
       dispatch(actSetLoadingData(false));
     }
   } catch (error) {
-    dispatch(actSetLoadingData(false));
-    dispatchError(error.status, error.data, dispatch);
+    if (error?.status) {
+      dispatch(actSetLoadingData(false));
+      dispatchError(error.status, error.data, dispatch);
+    }
   } finally {
     dispatch(actSetLoadingData(false));
   }

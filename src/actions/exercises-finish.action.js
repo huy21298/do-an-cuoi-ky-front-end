@@ -1,12 +1,13 @@
 import AxiosService from "../services/axios.service";
-import { getTokenFromLocal } from "../reducers/token.reducer";
 
 import { actSetLoading } from "./loading.action";
 import { dispatchError } from "./dispatch-error";
 
 export const GET_EXERCISES_FINISH = "GET_EXERCISES_FINISH";
+export const DELETE_BAI_TAP = "DELETE_BAI_TAP";
 
-const actGetExercisesFinish = (exercises) => ({ type: GET_EXERCISES_FINISH, exercises });
+const actGetExercisesFinish = (exercises) => ({ type: GET_EXERCISES_FINISH, payload: {exercises} });
+export const actDeleteBaiTap = (id) => ({ type: DELETE_BAI_TAP, payload: { id } });
 
 export const actGetExercisesFinishReq = (id, token) => async (dispatch) => {
   try {

@@ -1,4 +1,4 @@
-import { GET_EXERCISES_FINISH } from "../actions/exercises-finish.action.js";
+import { GET_EXERCISES_FINISH, DELETE_BAI_TAP } from "../actions/exercises-finish.action.js";
 
 export const init = [
   {
@@ -16,10 +16,20 @@ export const init = [
   },
 ];
 
-export const exercisesFinishReducer = (state = init, { type, exercises }) => {
+const findIndex = (baiTap, id) => baiTap.findIndex(item => item.bai_tap_id._id === id)
+
+export const exercisesFinishReducer = (state = init, { type, payload }) => {
   switch (type) {
     case GET_EXERCISES_FINISH: {
-      return exercises;
+      return payload.exercises;
+    }
+    case DELETE_BAI_TAP: {
+      const index = findIndex(state, payload.id);
+      const newState = [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ]
+      return newState;
     }
     default:
       return state;

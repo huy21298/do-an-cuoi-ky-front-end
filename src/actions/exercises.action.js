@@ -1,12 +1,14 @@
 import AxiosService from "../services/axios.service";
-import { getTokenFromLocal } from "../reducers/token.reducer";
 
 import { actSetLoading } from "./loading.action";
 import { dispatchError } from "./dispatch-error";
 
 export const GET_EXERCISES = "GET_EXERCISES";
+export const SEND_EXERCISE = "SEND_EXERCISE";
 
-const actGetExercises = (exercises) => ({ type: GET_EXERCISES, exercises });
+const actGetExercises = (exercises) => ({ type: GET_EXERCISES, payload: {exercises} });
+
+export const actSentExercise = (id) => ({ type: SEND_EXERCISE, payload: {id}})
 
 export const actGetExercisesReq = (id, token) => async (dispatch) => {
   try {

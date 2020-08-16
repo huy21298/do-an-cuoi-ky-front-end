@@ -1,5 +1,5 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,17 +12,17 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import classnames from "classnames";
-import { toast } from "react-toastify";
+import ReactFileReader from "react-file-reader";
+import { useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from "react-redux";
 import {} from "../../actions/info-class.action";
 import AxiosService from "../../services/axios.service";
-import { getTokenFromLocal } from "../../reducers/token.reducer";
-import { actGetExercisesReq } from "../../actions/exercises.action";
+import { actGetTokenFromLocal } from "../../actions/token.action";
+import { actSentExercise } from "../../actions/exercises.action";
 
-import { showToastSuccess } from '../../services/toast.service';
-
-const { token } = getTokenFromLocal();
+import { showToastSuccess, showToastError } from "../../services/toast.service";
+import { dispatchError } from "../../actions/dispatch-error";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -43,28 +43,48 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ExerciseDetail({ open, handleClose, exercise }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [file, setFile] = useState(null);
   const infoClass = useSelector((state) => state.infoClass);
-  const [active, setActive] = React.useState(false);
-  
+  const { token } = useSelector((state) => state.token);
+  const [active, setActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { id: lop_hoc_id } = useParams();
+  const {_id: bai_tap_id} = exercise;
+
+  useEffect(() => {
+    dispatch(actGetTokenFromLocal());
+  }, [])
+
+  const handleFiles = (files) => {
+    setFile(files.fileList[0]);
+  };
+
   const nopBaiTap = async (e) => {
-    console.log(e);
-    // setActive(true);
-    // try {
-    //   const { data } = await AxiosService.postAuth(
-    //     `/v1/bai-tap/nop-bai`,
-    //     { lop_hoc_id: infoClass._id, bai_tap_id: exercise._id },
-    //     token
-    //   );
-    //   if (data.success) {
-    //     showToastSuccess(data.msg)
-    //     dispatch(actGetExercisesReq(infoClass._id));
-    //     handleClose();
-    //   }
-    // } catch {
-    //   setActive(false);
-    // } finally {
-    //   setActive(false);
-    // }
+    try {
+      if (file) {
+        setLoading(false);
+        const formData = new FormData();
+        formData.append("bai_tap", file);
+        formData.append("lop_hoc_id", lop_hoc_id);
+        formData.append("bai_tap_id", bai_tap_id);
+        const { data } = await AxiosService.postAuth(`/v1/bai-tap/nop-bai`, formData, token);
+        if (data.success) {
+          dispatch(actSentExercise(bai_tap_id));
+          setLoading(false);
+          showToastSuccess(data.msg);
+          handleClose();
+        } else {
+          showToastError("Nộp bài tập thất bại, vui lòng thử lại sau")
+        }
+      } else {
+        showToastError("Chưa có tệp nào được tải lên")
+      }
+    } catch (error) {
+      setLoading(false);
+      dispatchError(error.status, error.data, dispatch)
+    } finally {
+      setLoading(false);
+    }
   };
 
   const styleButton = classnames({
@@ -107,7 +127,7 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     {exercise.nguoi_tao_id?.hoten} - {exercise.createdAt}
                   </div>
                   <div className="sub-sub-title">
-                    <div className="score">Đến hạn: {exercise.han_nop_bai}</div>
+                    <div className="score">Đến hạn: {exercise.han_nop_bai_format}</div>
                     <div className="deadline"></div>
                   </div>
                 </div>
@@ -127,20 +147,25 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
                     multiple
                     type="file"
                   />
-                  <label htmlFor="contained-button-file">
+                  <ReactFileReader
+                    base64={true}
+                    handleFiles={handleFiles}
+                  >
                     <Button
                       className="button send"
                       component="span"
                       startIcon={<CloudUploadIcon />}
                     >
-                      Nộp bài tập
+                      { file ? getFileNameFormat(file.name) : "Nộp bài tập"}
                     </Button>
-                  </label>
+                  </ReactFileReader>
+
                   <Button
                     className={styleButton}
                     onClick={nopBaiTap}
                     disabled={active}
-                    style={{ height: "40px"}}
+                    style={{ height: "40px" }}
+                    disabled={loading}
                   >
                     {" "}
                     Nộp{" "}
@@ -154,4 +179,11 @@ export default function ExerciseDetail({ open, handleClose, exercise }) {
       </Dialog>
     </div>
   );
+}
+
+const getFileNameFormat = name => {
+  if (name.length < 12) {
+    return name;
+  }
+  return name.slice(0, 12) + "..."
 }

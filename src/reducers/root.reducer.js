@@ -31,6 +31,7 @@ import { loadingDataReducer as loadingData } from "./loading-data.reducer";
 import { examFinishDetailReducer as examFinishDetail } from "./exam-finish-detail.reducer";
 import { examNotFinishReducer as examNotFinish } from "./exam-not-finish.reducer";
 import { displayHeaderReducer as displayHeader } from "./display-header.reducer";
+import { baiTapChuaCham } from "./bai-tap-chua-cham.reducer";
 
 export default combineReducers({
   token,
@@ -64,5 +65,6 @@ export default combineReducers({
   loadingData,
   examFinishDetail,
   examNotFinish,
-  displayHeader
+  displayHeader,
+  baiTapChuaCham
 });
