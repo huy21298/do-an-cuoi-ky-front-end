@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import ExerciseDetail from "./ExerciseDetail";
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) =>
 
 const ExerciseItem = ({ exercise, loading }) => {
   const [openExercise, setOpenExercise] = useState(false);
+  console.log("exercise", exercise);
   const classes = useStyles();
   const handleClose = () => {
     setOpenExercise(false);
@@ -31,22 +33,28 @@ const ExerciseItem = ({ exercise, loading }) => {
   return (
     <React.Fragment>
       <Grid item xs={12} sm={12} md={4} lg={4} onClick={handleOpen}>
-        <Card className={classes.root} elevation={3}>
-          <div></div>
-          <CardHeader
-            avatar={getIcon(loading)}
-            title={getTitle(loading, exercise.tieu_de)}
-            subheader={getDeadline(loading, exercise.han_nop_bai_format)}
-          />
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {getContent(loading, exercise.noi_dung)}
-            </Typography>
-          </CardContent>
-          <Divider />
-        </Card>
+        <Tooltip title={exercise.tieu_de}>
+          <Card className={classes.root} elevation={3}>
+            <div></div>
+            <CardHeader
+              avatar={getIcon(loading)}
+              title={getTitle(loading, exercise.tieu_de_format)}
+              subheader={getDeadline(loading, exercise.han_nop_bai_format)}
+            />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {getContent(loading, exercise.noi_dung)}
+              </Typography>
+            </CardContent>
+            <Divider />
+          </Card>
+        </Tooltip>
       </Grid>
-      <ExerciseDetail open={openExercise} exercise={exercise} handleClose={handleClose} />
+      <ExerciseDetail
+        open={openExercise}
+        exercise={exercise}
+        handleClose={handleClose}
+      />
     </React.Fragment>
   );
 };

@@ -33,6 +33,7 @@ const ProfileStudentPage = () => {
     dispatch(actGetInfo());
     dispatch(actGetInfoSend());
     dispatch(actSetIsDisplayHeader(true));
+    document.title = "Thông tin cá nhân"
   }, []);
 
   const handleClickOpen = () => {

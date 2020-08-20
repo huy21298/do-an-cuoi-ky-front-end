@@ -11,7 +11,6 @@ const Testing = ({ time, date, questions, exam }) => {
 
   useEffect(() => {
     dispatch(actSetIsDisplayHeader(false));
-    document.documentElement.requestFullscreen();
   }, [])
 
   return (

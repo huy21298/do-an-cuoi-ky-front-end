@@ -66,7 +66,8 @@ const ForgotPassword = ({ changeForm }) => {
       })
       .catch((error) => {
         setIsLoading(false);
-        setError("email", { message: error.data.errors[0].msg });
+        console.log('error', error)
+        setError("email", { message: error?.data?.errors[0]?.msg });
       });
   };
 

@@ -22,6 +22,7 @@ const LoginPage = () => {
   useEffect(() => {
     dispatch(actGetAuthenticate());
     dispatch(actSetIsDisplayHeader(false));
+    document.title = "Quên mật khẩu"
   }, []);
   return authenticate ? (
     <Redirect to="/danh-sach-lop-hoc" />

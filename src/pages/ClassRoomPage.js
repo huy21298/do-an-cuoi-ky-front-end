@@ -35,36 +35,37 @@ const ClassDetailPage = () => {
 
   const loadBaiThiHoanThanh = () => {
     setAnchorEl(null);
-    setTypeExam("hoan-thanh")
+    setTypeExam("hoan-thanh");
   };
   const loadBaiThiSapToi = () => {
     setAnchorEl(null);
-    setTypeExam("sap-toi")
-  }
+    setTypeExam("sap-toi");
+  };
 
   const loadBaiThiKhongHoanThanh = () => {
     setAnchorEl(null);
-    setTypeExam("khong-hoan-thanh")
-  }
+    setTypeExam("khong-hoan-thanh");
+  };
 
   const loadBaiTapHoanThanh = () => {
     setAnchorEl(null);
-    setTypeExercie("hoan-thanh")
+    setTypeExercie("hoan-thanh");
   };
   const loadBaiTapSapToi = () => {
     setAnchorEl(null);
-    setTypeExercie("sap-toi")
-  }
+    setTypeExercie("sap-toi");
+  };
 
   const loadBaiTapKhongHoanThanh = () => {
     setAnchorEl(null);
-    setTypeExercie("khong-hoan-thanh")
-  }
+    setTypeExercie("khong-hoan-thanh");
+  };
 
   useEffect(() => {
     dispatch(actSetIsDisplayTab(true));
     dispatch(actSetIsDisplayHeader(true));
     dispatch(actSetIDClass(id));
+    document.title = "Lớp học"
   });
   return (
     <Container className="class-detail">
@@ -77,14 +78,16 @@ const ClassDetailPage = () => {
           {alias === "danh-sach-sinh-vien" && <StudentList />}
         </Grid>
       </Grid>
-      <Fab
-        color="secondary"
-        className="fab-filter"
-        aria-label="add"
-        onClick={handleClick}
-      >
-        <SearchIcon />
-      </Fab>
+      {alias !== "danh-sach-sinh-vien" && (
+        <Fab
+          color="secondary"
+          className="fab-filter"
+          aria-label="add"
+          onClick={handleClick}
+        >
+          <SearchIcon />
+        </Fab>
+      )}
 
       {alias === "bai-tap" && (
         <Menu
@@ -95,8 +98,12 @@ const ClassDetailPage = () => {
           onClose={loadBaiThiHoanThanh}
         >
           <MenuItem onClick={loadBaiTapSapToi}>Bài tập sắp tới</MenuItem>
-          <MenuItem onClick={loadBaiTapHoanThanh}>Bài tập đã hoàn thành</MenuItem>
-          <MenuItem onClick={loadBaiTapKhongHoanThanh}>Bài tập chưa hoàn thành</MenuItem>
+          <MenuItem onClick={loadBaiTapHoanThanh}>
+            Bài tập đã hoàn thành
+          </MenuItem>
+          <MenuItem onClick={loadBaiTapKhongHoanThanh}>
+            Bài tập chưa hoàn thành
+          </MenuItem>
         </Menu>
       )}
       {alias === "bai-thi" && (
@@ -108,8 +115,12 @@ const ClassDetailPage = () => {
           onClose={loadBaiThiHoanThanh}
         >
           <MenuItem onClick={loadBaiThiSapToi}>Bài thi sắp tới</MenuItem>
-          <MenuItem onClick={loadBaiThiHoanThanh}>Bài thi đã hoàn thành</MenuItem>
-          <MenuItem onClick={loadBaiThiKhongHoanThanh}>Bài thi chưa hoàn thành</MenuItem>
+          <MenuItem onClick={loadBaiThiHoanThanh}>
+            Bài thi đã hoàn thành
+          </MenuItem>
+          <MenuItem onClick={loadBaiThiKhongHoanThanh}>
+            Bài thi chưa hoàn thành
+          </MenuItem>
         </Menu>
       )}
     </Container>

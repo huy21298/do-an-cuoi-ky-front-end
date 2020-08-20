@@ -19,12 +19,14 @@ const ClassRoomPage = () => {
   const loading = useSelector((state) => state.loading);
   const errorMessage = useSelector((state) => state.errorMessage);
   const dispatch = useDispatch();
+  console.log('classes', classes);
   useEffect(() => {
     dispatch(actGetLoading());
     dispatch(actGetClassesReq());
     dispatch(actGetMessage());
     dispatch(actSetIsDisplayTab(false));
-    dispatch(actSetIsDisplayHeader(true))
+    dispatch(actSetIsDisplayHeader(true));
+    document.title = "Danh sách lớp học"
   }, []);
 
   useEffect(() => {

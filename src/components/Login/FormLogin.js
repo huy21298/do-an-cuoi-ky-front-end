@@ -91,7 +91,6 @@ const FormLogin = () => {
           error={errors.email?.message.length > 0}
           fullWidth
           label="Email"
-          id="outlined-start-adornment"
           className={clsx(classes.margin, classes.marginBottom)}
           variant="outlined"
           name="email"
@@ -109,7 +108,6 @@ const FormLogin = () => {
           type="password"
           fullWidth
           label="Mật khẩu"
-          id="outlined-start-adornment"
           className={clsx(classes.margin, classes.marginBottom)}
           variant="outlined"
           name="mat_khau"

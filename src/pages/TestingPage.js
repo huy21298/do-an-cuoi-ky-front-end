@@ -47,6 +47,8 @@ const TheTestingPage = () => {
     dispatch(actSetIsDisplayTab(true));
     errorTest.time && setDate(errorTest.time);
     dispatch(actSetIDClass(lop_hoc_id));
+
+    document.title = "Kiểm tra"
   }, []);
 
   const directToTesting = e => {

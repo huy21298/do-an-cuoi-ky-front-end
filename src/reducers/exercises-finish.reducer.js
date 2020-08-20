@@ -11,6 +11,7 @@ export const init = [
       han_nop_bai_format: "",
       trang_thai_format: "",
       id: "",
+      tieu_de_format: "",
     },
     id: "",
   },

@@ -11,6 +11,7 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Tooltip from "@material-ui/core/Tooltip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Divider from "@material-ui/core/Divider";
+import { Link } from 'react-router-dom';
 
 const ClassRoomItem = ({ classItem, isLoading }) => {
   const history = useHistory();
@@ -22,7 +23,7 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
     <Grid item xs={12} sm={6} md={4} lg={4}>
       <Card className="class-item" elevation={2}>
         <CardHeader
-          avatar={getAvatar(isLoading, classItem.anh_dai_dien)}
+          avatar={getAvatar(isLoading, classItem.nguoi_tao_id.anh_dai_dien)}
           title={getTitle(isLoading, classItem.tieu_de_format)}
           subheader={getSubTitle(isLoading, classItem.nguoi_tao_id.hoten)}
           onClick={goToClassRoom(classItem.id)}
@@ -31,7 +32,7 @@ const ClassRoomItem = ({ classItem, isLoading }) => {
         <Grid container>
           <Grid item md={10}>
             <CardActions disableSpacing>
-              {getButtonsAction(isLoading)}
+              {getButtonsAction(isLoading, classItem.id)}
             </CardActions>
           </Grid>
         </Grid>
@@ -46,7 +47,7 @@ const getAvatar = (isLoading, avatar) => {
   ) : (
     <Avatar
       aria-label="recipe"
-      src={avatar}
+      src={`http://anstudying.herokuapp.com/api/file/avatar/${avatar}`}
     />
   );
 };
@@ -72,7 +73,7 @@ const getSubTitle = (isLoading, teacherName) => {
   );
 };
 
-const getButtonsAction = (isLoading, _id) => {
+const getButtonsAction = (isLoading, lopHocID) => {
   return isLoading ? (
     <React.Fragment>
       <Skeleton animation="wave" height={50} width="15%" />
@@ -86,14 +87,18 @@ const getButtonsAction = (isLoading, _id) => {
   ) : (
     <React.Fragment>
       <Tooltip title="Đi đến bài tập trong lớp">
-        <IconButton>
-          <CalendarTodayIcon />
-        </IconButton>
+        <Link to={`/lop-hoc/${lopHocID}/bai-tap`}>
+          <IconButton>
+            <CalendarTodayIcon />
+          </IconButton>
+        </Link>
       </Tooltip>
       <Tooltip title="Đi đến danh sách bạn học">
-        <IconButton>
-          <GroupIcon />
-        </IconButton>
+        <Link to={`/lop-hoc/${lopHocID}/danh-sach-sinh-vien`}>
+          <IconButton>
+            <GroupIcon />
+          </IconButton>
+        </Link>
       </Tooltip>
     </React.Fragment>
   );

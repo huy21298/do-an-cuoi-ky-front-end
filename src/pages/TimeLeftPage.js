@@ -14,6 +14,8 @@ const TimeLeftPage = (props) => {
   useEffect(() => {
     dispatch(actSetIsDisplayHeader(true));
     dispatch(actSetIsDisplayTab(true));
+
+    document.title = "Chưa tới giờ thi"
   }, []);
   const history = useHistory();
   return (

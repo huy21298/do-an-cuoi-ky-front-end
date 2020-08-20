@@ -31,8 +31,6 @@ const ExamFinishPage = () => {
   const loading = useSelector((state) => state.loading);
   const { bai_thi: baiThi, ct_bai_thi: ctBaiThi } = examFinishDetail;
 
-  console.log('examFinishDetail', examFinishDetail);
-
   useEffect(() => {
     dispatch(actGetTokenFromLocal());
     dispatch(actGetExamFinishDetailReq(lop_hoc_id, bai_thi_id, token));
@@ -40,6 +38,8 @@ const ExamFinishPage = () => {
     dispatch(actSetIsDisplayTab(true));
     dispatch(actSetIsDisplayHeader(true))
     dispatch(actSetIDClass(lop_hoc_id));
+
+    document.title = "Xem điểm bài thi"
   }, [token]);
 
   return (
@@ -56,9 +56,6 @@ const ExamFinishPage = () => {
                 {mapSoCau(baiThi.chi_tiet_bai_lam)}
               </article>
               <article className="button-group">
-                <Button className="button report" startIcon={<ReportIcon />}>
-                  Khiếu nại
-                </Button>
               </article>
             </section>
             <footer className="footer">

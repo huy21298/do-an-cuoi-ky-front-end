@@ -17,6 +17,7 @@ const LoginPage = () => {
   useEffect(() => {
     dispatch(actGetAuthenticate());
     dispatch(actSetIsDisplayHeader(false));
+    document.title = "Đăng nhập"
   }, []);
   
   return authenticate ? (

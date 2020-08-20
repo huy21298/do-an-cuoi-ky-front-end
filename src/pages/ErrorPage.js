@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import "../styles/error-page.scss";
 
 const ErrorPage = (props) => {
   const history = useHistory();
+
+  useEffect(() => {
+    document.title = "Không tìm thấy trang"
+  }, [])
+
   return (
     <>
       <div id="particles-js"></div>

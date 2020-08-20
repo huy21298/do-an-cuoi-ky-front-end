@@ -7,6 +7,7 @@ export const init = [
     noi_dung: "",
     han_nop_bai_format: "",
     trang_thai_format: "",
+    tieu_de_format: ""
   },
 ];
 

@@ -11,6 +11,7 @@ const ResetPwdPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actSetIsDisplayHeader(false));
+    document.title = "Thay đổi mật khẩu"
   }, []);
   return (
     <Grid container className="login-page" component="article">

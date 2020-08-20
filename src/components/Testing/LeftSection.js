@@ -92,8 +92,6 @@ const LeftSection = ({ questions, date, time }) => {
   }, [examTime]);
 
   const sendToExam = async (e) => {
-    const countBaiThi = questions.length;
-    const baiThiSinhVien = sendExam.length;
 
     const blank = sendExam.some((item) => item.dap_an.length < 1 || item.dap_an === "-999");
     if (blank) {
@@ -115,12 +113,10 @@ const LeftSection = ({ questions, date, time }) => {
           { bai_thi: jsonData },
           token
         );
-        console.log("data", data);
         if (data.success) {
           setLoading(false);
           setOpen(true);
           setMsg(data.msg);
-          document.exitFullscreen();
         }
       } catch (e) {
         console.log("e", e);
@@ -156,9 +152,6 @@ const LeftSection = ({ questions, date, time }) => {
               disabled={isLoading}
             >
               Nộp bài
-            </Button>
-            <Button className="button report" startIcon={<ReportIcon />}>
-              Báo cáo
             </Button>
           </article>
         </section>

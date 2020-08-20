@@ -17,8 +17,11 @@ const ClassRoomItemsList = ({ type }) => {
   const loading = useSelector((state) => state.loading);
   const exercises = useSelector((state) => state.exercises);
   const exercisesFinish = useSelector((state) => state.exercisesFinish);
+  const exercisesNotFinish = useSelector((state) => state.exercisesNotFinish);
   const { token } = useSelector((state) => state.token);
   const { id } = useParams();
+
+  console.log('exercisesNotFinish', exercisesNotFinish);
 
   const actBaiTap = {
     "sap-toi": actGetExercisesReq,

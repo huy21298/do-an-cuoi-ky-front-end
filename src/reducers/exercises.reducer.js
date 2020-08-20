@@ -7,6 +7,7 @@ export const init = [{
   noi_dung: "",
   anh_dai_dien: "",
   han_nop_bai_format: "",
+  tieu_de_format: "",
 }];
 
 const findIndex = (baiTap, id) => baiTap.findIndex(item => item.id === id);

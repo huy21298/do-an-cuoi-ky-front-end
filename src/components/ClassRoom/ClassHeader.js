@@ -23,6 +23,7 @@ const ClassRoomHeader = () => {
   const { id } = useParams();
   const infoClass = useSelector((state) => state.infoClass);
   const loadingHeader = useSelector((state) => state.loadingHeader);
+  console.log('infoClass', infoClass);
   useEffect(() => {
     dispatch(actGetInfoClassReq(id));
   }, []);
@@ -51,7 +52,7 @@ const getAvatar = (loading, avatar, classes) => {
   return loading ? (
     <Skeleton animation="wave" variant="circle" width={78} height={78} />
   ) : (
-    <Avatar src={avatar} className={classes.large} />
+    <Avatar src={`http://anstudying.herokuapp.com/api/file/avatar/${avatar}`} className={classes.large} />
   );
 };
 
